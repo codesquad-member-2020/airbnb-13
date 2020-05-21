@@ -10,11 +10,14 @@ export type ButtonProps = {
   fontSize: 'small' | 'medium' | 'big';
   width: string | number;
   disabled?: boolean;
+  circle?: boolean;
 };
 
-const Button = ({ children, theme, fontSize, width, disabled }: ButtonProps) => {
+const Button = ({ children, theme, fontSize, width, disabled, circle }: ButtonProps) => {
   return (
-    <button css={[style, themes[theme], fontSizes[fontSize], { width }]} disabled={disabled}>
+    <button
+      css={[style, themes[theme], fontSizes[fontSize], { width }, makeCircleStyle(circle, width)]}
+      disabled={disabled}>
       {children}
     </button>
   );
@@ -71,6 +74,18 @@ const fontSizes = {
   big: css`
     font-size: 1.15rem;
   `
+};
+
+const makeCircleStyle = (circle: boolean | undefined, width: number | string) => {
+  if (circle) {
+    return css`
+      width: ${width};
+      height: ${width};
+      border-radius: 50%;
+      border: 1px solid #7b7b7b;
+    `;
+  }
+  return css``;
 };
 
 export default Button;

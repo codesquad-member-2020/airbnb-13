@@ -32,6 +32,14 @@ export const tertiary = () => {
   );
 };
 
+export const circle = () => {
+  return (
+    <Button theme={'primary'} fontSize={'big'} width={'70px'} circle={true}>
+      Button
+    </Button>
+  );
+};
+
 export const button = () => {
   const label = text('children', 'BUTTON');
   const fontSize = select('fontSize', ['small', 'medium', 'big'], 'medium');
