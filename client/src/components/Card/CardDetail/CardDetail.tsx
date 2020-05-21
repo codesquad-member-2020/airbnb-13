@@ -3,6 +3,7 @@ import React from 'react';
 import { jsx, css } from '@emotion/core';
 import FlexLayout from '../../custom/FlexLayout/FlexLayout';
 import Button from '../../custom/Button/Button';
+import Icon from '../../../Icon/Icon';
 
 const CardDetail = () => {
   return (
@@ -13,7 +14,7 @@ const CardDetail = () => {
           <span>프랑스</span>
         </div>
         <div>
-          <span>별</span>
+          <Icon icon="star" color="#ff5a5f" size={'10px'} />
           <span>4.89</span>
         </div>
       </FlexLayout>
