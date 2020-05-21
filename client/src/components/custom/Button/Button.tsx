@@ -2,8 +2,6 @@ import React, { ReactChild, ReactFragment, ReactPortal } from 'react';
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
 
-type ReactNode = ReactChild | ReactFragment | ReactPortal | boolean | null | undefined;
-
 export type ButtonProps = {
   children: React.ReactNode;
   theme: 'primary' | 'secondary' | 'nooutline' | 'subtle';

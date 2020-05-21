@@ -8,6 +8,7 @@ export default {
   component: Hello,
   decorators: [withKnobs]
 };
+
 export const hello = () => {
   const big = boolean('big', false);
   const name = text('name', 'Storybook');
