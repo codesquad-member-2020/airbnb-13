@@ -6,7 +6,7 @@ type ReactNode = ReactChild | ReactFragment | ReactPortal | boolean | null | und
 
 export type ButtonProps = {
   children: React.ReactNode;
-  theme: 'primary' | 'secondary' | 'tertiary';
+  theme: 'primary' | 'secondary' | 'nooutline' | 'subtle';
   fontSize: 'small' | 'medium' | 'big';
   width: string | number;
   disabled?: boolean;
@@ -16,7 +16,7 @@ export type ButtonProps = {
 const Button = ({ children, theme, fontSize, width, disabled, circle }: ButtonProps) => {
   return (
     <button
-      css={[style, themes[theme], fontSizes[fontSize], { width }, makeCircleStyle(circle, width)]}
+      css={[style, makeCircleStyle(circle, width), themes[theme], fontSizes[fontSize], { width }]}
       disabled={disabled}>
       {children}
     </button>
@@ -54,12 +54,26 @@ const themes = {
       background: #7b7b7b;
     }
   `,
-  tertiary: css`
+  nooutline: css`
     background: none;
     color: #484848;
     text-decoration: underline;
     &:hover:enabled {
       color: #7b7b7b;
+    }
+  `,
+  subtle: css`
+    background: #ffffff;
+    border-color: #999999;
+    color: #4b4b4b;
+    svg {
+      fill: #999999;
+    }
+    &:disabled {
+      color: #cccccc;
+      svg {
+        fill: #cccccc;
+      }
     }
   `
 };

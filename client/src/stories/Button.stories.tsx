@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from '../components/custom/Button/Button';
 import { withKnobs, text, boolean, select } from '@storybook/addon-knobs';
+import Icon from '../Icon/Icon';
 import { action } from '@storybook/addon-actions';
 
 export default {
@@ -8,6 +9,7 @@ export default {
   component: Button,
   decorators: [withKnobs]
 };
+
 export const primary = () => {
   return (
     <Button theme={'primary'} fontSize={'small'} width="100%" disabled={true}>
@@ -24,9 +26,9 @@ export const secondary = () => {
   );
 };
 
-export const tertiary = () => {
+export const nooutline = () => {
   return (
-    <Button theme={'tertiary'} fontSize={'big'} width={100}>
+    <Button theme={'nooutline'} fontSize={'big'} width={100}>
       Button
     </Button>
   );
@@ -40,15 +42,32 @@ export const circle = () => {
   );
 };
 
+export const withIcon = () => {
+  return (
+    <Button theme={'subtle'} width={'50px'} fontSize={'big'} circle={true}>
+      <Icon icon="close" />
+    </Button>
+  );
+};
+
+export const withIconDisabled = () => {
+  return (
+    <Button theme={'subtle'} width={'50px'} fontSize={'big'} circle={true} disabled={true}>
+      <Icon icon="close" />
+    </Button>
+  );
+};
+
 export const button = () => {
   const label = text('children', 'BUTTON');
   const fontSize = select('fontSize', ['small', 'medium', 'big'], 'medium');
-  const theme = select('theme', ['primary', 'secondary', 'tertiary'], 'primary');
+  const theme = select('theme', ['primary', 'secondary', 'nooutline'], 'primary');
   const disabled = boolean('disabled', false);
   const width = text('width', '100%');
+  const circle = boolean('circle', false);
 
   return (
-    <Button fontSize={fontSize} theme={theme} disabled={disabled} width={width}>
+    <Button fontSize={fontSize} theme={theme} disabled={disabled} width={width} circle={circle}>
       {label}
     </Button>
   );
