@@ -31,7 +31,7 @@ public class RoomController {
                 .price(70000)
                 .title("High-End Studio! ~ In the heart of Seoul")
                 .reviewScore(3.8f)
-                .thumbnail("https://a0.muscache.com/im/pictures/64453da3-bd55-4957-9f7f-faad648b4185.jpg?aki_policy=xx_large")
+                .thumbnail("https://a0.muscache.com/ac/pictures/14409893/f8e3ed8d_original.jpg?interpolation=lanczos-none&size=small&output-format=jpg&output-quality=70")
                 .totalPrice(70000)
                 .build();
 
@@ -42,7 +42,7 @@ public class RoomController {
                 .price(140000)
                 .title("Chemically sensitive? We've removed the irritants triggering allergy or asthma attacks, like carpeting, forced air & used pillows, all culprits that harbor fungus, mold & bacteria.  No smoking, no pets.  Designed for healthy living, so breathe easy.")
                 .reviewScore(3.8f)
-                .thumbnail("https://a0.muscache.com/ac/pictures/14409893/f8e3ed8d_original.jpg?interpolation=lanczos-none&size=small&output-format=jpg&output-quality=70")
+                .thumbnail("https://a2.muscache.com/ac/pictures/84791950/f83d59ea_original.jpg?interpolation=lanczos-none&size=small&output-format=jpg&output-quality=70")
                 .totalPrice(140000)
                 .build();
 
@@ -53,7 +53,7 @@ public class RoomController {
                 .price(70000)
                 .title("Stunning Designsponge featured 6 bed, 3.75 bath, 4,000 sq ft home in the city's BEST location w/ free parking for about the same price as a decent hotel in Seattle. Walk to all of Queen Anne, or drive 5 min to downtown- this is where you want to be!")
                 .reviewScore(3.8f)
-                .thumbnail("https://a2.muscache.com/ac/pictures/91278310/1ed06e04_original.jpg?interpolation=lanczos-none&size=small&output-format=jpg&output-quality=70")
+                .thumbnail("https://a2.muscache.com/ac/pictures/69b4dfed-9fd1-494d-a279-e0539b0790e4.jpg?interpolation=lanczos-none&size=small&output-format=jpg&output-quality=70")
                 .totalPrice(70000)
                 .build();
 
