@@ -1,9 +1,9 @@
 package com.codesquad.airbnb;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 
-@SpringBootTest
+@WebMvcTest
 class AirbnbApplicationTests {
 
     @Test
