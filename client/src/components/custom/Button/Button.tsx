@@ -1,9 +1,9 @@
-import React, { ReactChild, ReactFragment, ReactPortal } from 'react';
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
+import { ReactNode } from 'react';
 
 export type ButtonProps = {
-  children: React.ReactNode;
+  children: ReactNode;
   theme: 'primary' | 'secondary' | 'nooutline' | 'subtle';
   fontSize: 'small' | 'medium' | 'big';
   width: string | number;

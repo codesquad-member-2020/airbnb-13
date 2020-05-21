@@ -1,7 +1,9 @@
-import React from "react";
+import React from 'react';
+//import CardLayout from '../src/components/Card/CardLayout/CardLayout';
+import Card from '../src/components/Card/Card';
 
 const App = () => {
-  return <div>안녕 친구들! 너는 누구니?</div>;
+  return <Card></Card>;
 };
 
 export default App;

@@ -1,9 +1,9 @@
-import React, { ReactChild, ReactFragment, ReactPortal } from 'react';
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
+import { ReactNode } from 'react';
 
 export type CardLayoutProps = {
-  children: React.ReactNode;
+  children: ReactNode;
   gap?: number | string;
   width?: string | number;
   top: string | number;

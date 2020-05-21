@@ -1,9 +1,9 @@
-import React, { ReactChild, ReactFragment, ReactPortal } from 'react';
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
+import { ReactNode } from 'react';
 
 export type FlexLayoutProps = {
-  children: React.ReactNode;
+  children: ReactNode;
   direction: 'column' | 'row';
   align: 'left' | 'right' | 'spaceAround' | 'spaceBetween';
   wrap?: boolean;
