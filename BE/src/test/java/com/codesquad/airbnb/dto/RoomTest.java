@@ -1,10 +1,9 @@
 package com.codesquad.airbnb.dto;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
-@WebMvcTest
 class RoomTest {
 
     @Test
