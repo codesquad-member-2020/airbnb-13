@@ -1,6 +1,6 @@
 import React from 'react';
 //import CardLayout from '../src/components/Card/CardLayout/CardLayout';
-import Card from '../src/components/Card/Card';
+import Card from './components/Cards/Card/Card';
 import { ThemeProvider } from 'emotion-theming';
 import theme from './style/theme';
 

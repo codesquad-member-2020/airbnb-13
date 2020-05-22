@@ -1,5 +1,5 @@
 import React from 'react';
-import Card from '../components/Card/Card';
+import Card from '../components/Cards/Card/Card';
 import { withKnobs, text, boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { ThemeProvider } from 'emotion-theming';
