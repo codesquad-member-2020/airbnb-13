@@ -5,13 +5,13 @@ drop table if exists reservation_date;
 
 create table user
 (
-    id    int primary key auto_increment,
+    id    bigint primary key auto_increment,
     email varchar(128) unique
 );
 
 create table room
 (
-    id           int primary key auto_increment,
+    id           bigint primary key auto_increment,
     title        varchar(512),
     thumbnail    varchar(256),
     super_host   tinyint(1),
@@ -27,18 +27,18 @@ create table room
 
 create table reservation
 (
-    id      int auto_increment primary key,
+    id      bigint auto_increment primary key,
     adult   int,
     child   int,
     infant  int,
-    user_id int references user (id),
-    room_id int references room (id)
+    user_id bigint references user (id),
+    room_id bigint references room (id)
 );
 
 create table reservation_date
 (
-    id               int auto_increment primary key,
+    id               bigint auto_increment primary key,
     reservation_date DATETIME,
-    reservation_id   int references reservation (id)
+    reservation_id   bigint references reservation (id)
 );
 
