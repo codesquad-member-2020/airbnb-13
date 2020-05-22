@@ -12,15 +12,17 @@ create table user
 create table room
 (
     id           int primary key auto_increment,
-    location     varchar(45),
-    price        int,
-    review_score float,
-    thumbnail    varchar(256),
-    super_host    tinyint(1),
-    cleaning_fee int,
     title        varchar(512),
+    thumbnail    varchar(256),
+    super_host   tinyint(1),
     address      varchar(512),
-    accommodates int
+    location     varchar(45),
+    latitude     float,
+    longitude    float,
+    accommodates int,
+    price        int,
+    cleaning_fee int,
+    review_score float
 );
 
 create table reservation
@@ -35,8 +37,8 @@ create table reservation
 
 create table reservation_date
 (
-    id             int auto_increment primary key,
-    date           DATETIME,
-    reservation_id int references reservation (id)
+    id               int auto_increment primary key,
+    reservation_date DATETIME,
+    reservation_id   int references reservation (id)
 );
 
