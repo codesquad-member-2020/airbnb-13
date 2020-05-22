@@ -2,15 +2,12 @@
 import { jsx, css } from '@emotion/core';
 
 export type CardImgProp = {
-  thumbnail?: string;
+  thumbnail: string;
 };
 const CardImg = ({ thumbnail }: CardImgProp) => {
-  const src = thumbnail
-    ? thumbnail
-    : 'https://file.intereuro.co.kr/Puzzle/ProductTourImg/ProductTourImg_2018920143535_359_84_2.jpeg';
   return (
     <div css={imgWrapper}>
-      <img src={src}></img>
+      <img src={thumbnail}></img>
     </div>
   );
 };

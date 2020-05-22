@@ -67,7 +67,7 @@ const gapStyle = (direction: 'row' | 'column', gap: number | string | undefined)
   }
   const marginType = direction === 'row' ? 'marginLeft' : 'marginTop';
   return css({
-    '> *:not(:first-child)': {
+    '> *:not(:first-of-type)': {
       [marginType]: gap
     }
   });

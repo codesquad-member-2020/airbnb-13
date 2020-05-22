@@ -25,10 +25,10 @@ const style = css`
 const topStyle = (top: string | number) => {
   return css({
     '> *': {
-      'margin-top': top
+      marginTop: top
     },
-    '> *:nth-child(n+1):nth-child(-n+3)': {
-      'margin-top': 0
+    '> *:nth-of-type(n+1):nth-of-type(-n+3)': {
+      marginTop: 0
     }
   });
 };
@@ -39,8 +39,8 @@ const gapStyle = (gap: number | string | undefined) => {
   }
 
   return css({
-    '> *:not(:nth-child(3n+1))': {
-      'margin-left': gap
+    '> *:not(:nth-of-type(3n+1))': {
+      marginLeft: gap
     }
   });
 };

@@ -6,8 +6,7 @@ const useFetch = (callback: Function, url: string) => {
     setLoading(true);
     const response = await fetch(url);
     const fetchData = await response.json();
-    if (!fetchData.status) return;
-    callback(fetchData.data);
+    callback(fetchData);
     setLoading(false);
   };
 
