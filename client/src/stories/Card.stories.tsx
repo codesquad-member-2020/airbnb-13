@@ -2,6 +2,8 @@ import React from 'react';
 import Card from '../components/Card/Card';
 import { withKnobs, text, boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
+import { ThemeProvider } from 'emotion-theming';
+import theme from '../style/theme';
 
 export default {
   title: 'components|Card',
@@ -10,5 +12,9 @@ export default {
 };
 
 export const card = () => {
-  return <Card></Card>;
+  return (
+    <ThemeProvider theme={theme}>
+      <Card></Card>
+    </ThemeProvider>
+  );
 };
