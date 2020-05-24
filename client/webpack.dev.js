@@ -19,12 +19,12 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.ts(x)?$/,
-        use: ['babel-loader', 'ts-loader']
+        test: /\.svg$/,
+        use: ['url-loader']
       },
       {
-        test: /\.svg$$/,
-        use: ['babel-loader', '@svgr/webpack']
+        test: /\.ts(x)?$/,
+        use: ['babel-loader', 'ts-loader']
       }
     ]
   },
