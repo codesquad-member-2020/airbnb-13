@@ -1,11 +1,16 @@
 import { useState, useEffect } from 'react';
 
-const useFetch = (callback: Function, url: string) => {
+async function http<T>(request: RequestInfo): Promise<T> {
+  const response = await fetch(request);
+  const body = await response.json();
+  return body;
+}
+
+const useFetch = <T,>(callback: Function, url: string) => {
   const [loading, setLoading] = useState(true);
   const fetchInitialData = async () => {
     setLoading(true);
-    const response = await fetch(url);
-    const fetchData = await response.json();
+    const fetchData = await http<T>(url);
     callback(fetchData);
     setLoading(false);
   };
