@@ -1,7 +1,7 @@
 import React from 'react';
 import CardImg, { CardImgProp } from './CardImg/CardImg';
 import CardDetail, { CardDetailProp } from './CardDetail/CardDetail';
-import FlexLayout from '../../custom/FlexLayout/FlexLayout';
+import FlexLayout from '@Custom/FlexLayout/FlexLayout';
 
 export type CardProp = CardDetailProp & CardImgProp;
 

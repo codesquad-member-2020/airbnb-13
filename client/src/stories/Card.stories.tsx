@@ -1,8 +1,8 @@
 import React from 'react';
-import Card from '../components/Cards/Card/Card';
+import Card from '@Cards/Card/Card';
 import { withKnobs, text, boolean, number } from '@storybook/addon-knobs';
 import { ThemeProvider } from 'emotion-theming';
-import theme from '../style/theme';
+import theme from '$Style/theme';
 
 export default {
   title: 'components|Card',

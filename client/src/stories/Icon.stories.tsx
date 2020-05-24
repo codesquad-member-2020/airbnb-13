@@ -1,6 +1,6 @@
 /**@jsx jsx */
 import { jsx } from '@emotion/core';
-import Icon from '../Icon/Icon';
+import Icon from '$Icon/Icon';
 
 export default {
   component: Icon,

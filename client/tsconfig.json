@@ -18,7 +18,12 @@
     "esModuleInterop": true,
 
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@Cards/*": ["src/components/Cards/*"],
+      "@Custom/*": ["src/components/custom/*"],
+      "$Icon/*": ["src/Icon/*"],
+      "$Style/*": ["src/style/*"],
+      "$Util/*": ["src/util/*"]
     }
   },
   "exclude": ["node_modules", "dist", "public"]

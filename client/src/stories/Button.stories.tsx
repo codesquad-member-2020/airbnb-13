@@ -1,7 +1,7 @@
 import React from 'react';
-import Button from '../components/custom/Button/Button';
+import Button from '@Custom/Button/Button';
 import { withKnobs, text, boolean, select } from '@storybook/addon-knobs';
-import Icon from '../Icon/Icon';
+import Icon from '$Icon/Icon';
 import { action } from '@storybook/addon-actions';
 
 export default {

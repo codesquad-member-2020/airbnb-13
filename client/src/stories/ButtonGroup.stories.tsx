@@ -1,8 +1,8 @@
 import React from 'react';
-import Button from '../components/custom/Button/Button';
-import ButtonGroup from '../components/custom/Button/ButtonGroup';
+import Button from '@Custom/Button/Button';
+import ButtonGroup from '@Custom/Button/ButtonGroup';
 import { withKnobs, text, radios } from '@storybook/addon-knobs';
-import Icon from '../Icon/Icon';
+import Icon from '$Icon/Icon';
 
 export default {
   title: 'components|ButtonGroup',

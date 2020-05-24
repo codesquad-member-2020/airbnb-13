@@ -24,6 +24,14 @@ module.exports = {
       ]
     });
     config.resolve.extensions.push('.ts', '.tsx');
+
+    config.resolve.alias['@'] = path.resolve(__dirname, '../src/');
+    config.resolve.alias['@Cards'] = path.resolve(__dirname, '../src/components/Cards/');
+    config.resolve.alias['@Custom'] = path.resolve(__dirname, '../src/components/custom/');
+    config.resolve.alias['$Icon'] = path.resolve(__dirname, '../src/Icon/');
+    config.resolve.alias['$Style'] = path.resolve(__dirname, '../src/style/');
+    config.resolve.alias['$Util'] = path.resolve(__dirname, '../src/util/');
+
     return config;
   }
 };

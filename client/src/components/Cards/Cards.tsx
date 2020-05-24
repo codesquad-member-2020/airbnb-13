@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import CardLayout from './Card/CardLayout/CardLayout';
 import Card, { CardProp } from './Card/Card';
-import useFetch from '../../util/customHooks/useFetch';
+import useFetch from '$Util/customHooks/useFetch';
 
 const Cards = () => {
   const [cards, setCards] = useState<CardProp[]>([]);

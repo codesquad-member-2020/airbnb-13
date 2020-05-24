@@ -1,6 +1,6 @@
 import React from 'react';
-import FlexLayout from '../components/custom/FlexLayout/FlexLayout';
-import { withKnobs, text, boolean, number, select } from '@storybook/addon-knobs';
+import FlexLayout from '@Custom/FlexLayout/FlexLayout';
+import { withKnobs, text, boolean, select } from '@storybook/addon-knobs';
 
 export default {
   title: 'components|FlexLayout',

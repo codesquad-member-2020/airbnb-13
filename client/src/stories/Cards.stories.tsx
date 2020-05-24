@@ -1,9 +1,7 @@
 import React from 'react';
-import Cards from '../components/Cards/Cards';
-import { withKnobs, text, boolean } from '@storybook/addon-knobs';
-import { action } from '@storybook/addon-actions';
+import Cards from '@Cards/Cards';
 import { ThemeProvider } from 'emotion-theming';
-import theme from '../style/theme';
+import theme from '$Style/theme';
 
 export default {
   title: 'components|Cards',

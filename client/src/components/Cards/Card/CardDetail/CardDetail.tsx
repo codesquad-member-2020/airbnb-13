@@ -1,8 +1,8 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
-import FlexLayout from '../../../custom/FlexLayout/FlexLayout';
-import Button from '../../../custom/Button/Button';
-import Icon from '../../../../Icon/Icon';
+import FlexLayout from '@Custom/FlexLayout/FlexLayout';
+import Button from '@Custom/Button/Button';
+import Icon from '$Icon/Icon';
 import SuperHost from './SuperHost/SuperHost';
 
 export type CardDetailProp = {
