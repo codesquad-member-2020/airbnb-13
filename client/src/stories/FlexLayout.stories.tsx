@@ -1,9 +1,34 @@
 import React from 'react';
 import FlexLayout from '../components/custom/FlexLayout/FlexLayout';
+import { withKnobs, text, boolean, number, select } from '@storybook/addon-knobs';
 
 export default {
   title: 'components|FlexLayout',
-  component: FlexLayout
+  component: FlexLayout,
+  decorators: [withKnobs]
+};
+
+export const defaultFlexLayout = () => {
+  const direction = select('direction', ['column', 'row'], 'column');
+  const align = select('align', ['left', 'right', 'spaceAround', 'spaceBetween'], 'left');
+  const wrap = boolean('wrap', false);
+  const gap = text('gap', '');
+  const width = text('width', '');
+
+  return (
+    <FlexLayout direction={direction} align={align} gap={gap} wrap={wrap} width={width}>
+      <div>ari</div>
+      <div>whn</div>
+      <div>ari</div>
+      <div>whn</div>
+      <div>ari</div>
+      <div>whn</div>
+    </FlexLayout>
+  );
+};
+
+defaultFlexLayout.story = {
+  name: 'Default'
 };
 
 export const flexLayout = () => {

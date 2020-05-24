@@ -14,6 +14,7 @@ export const hello = () => {
   const name = text('name', 'Storybook');
   return <Hello name={name} big={big} onHello={action('onHello')} onBye={action('onBye')} />;
 };
+
 hello.story = {
   name: 'Hi'
 };
