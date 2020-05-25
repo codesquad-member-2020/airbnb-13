@@ -1,14 +1,17 @@
 import React from 'react';
-import Cards from './components/Cards/Cards';
+import Cards from '@Cards/Cards';
 import { ThemeProvider } from 'emotion-theming';
-import theme from './style/theme';
+import theme from '$Style/theme';
 
-const App = () => {
+export default {
+  title: 'components|Cards',
+  component: Cards
+};
+
+export const cards = () => {
   return (
     <ThemeProvider theme={theme}>
       <Cards />
     </ThemeProvider>
   );
 };
-
-export default App;
