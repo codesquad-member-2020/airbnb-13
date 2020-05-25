@@ -5,20 +5,13 @@ import { ReactNode, useState } from 'react';
 export type FilterButtonProps = {
   children: ReactNode;
   focused: boolean;
+  onClick: () => void;
+  onBlur: () => void;
 };
 
-const FilterButton = ({ children, focused }: FilterButtonProps) => {
-  const [focus, setFocus] = useState(false);
-  console.log('focus is ', focus);
+const FilterButton = ({ children, focused, onClick, onBlur }: FilterButtonProps) => {
   return (
-    <button
-      css={style(focus)}
-      onFocus={() => {
-        setFocus(!focus);
-      }}
-      onBlur={() => {
-        setFocus(!focus);
-      }}>
+    <button css={style(focused)} onClick={onClick} onBlur={onBlur}>
       {children}
     </button>
   );

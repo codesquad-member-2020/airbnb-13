@@ -9,13 +9,15 @@ export type ButtonProps = {
   width: string | number;
   disabled?: boolean;
   circle?: boolean;
+  onClick?: () => void;
 };
 
-const Button = ({ children, theme, fontSize, width, disabled, circle }: ButtonProps) => {
+const Button = ({ children, theme, fontSize, width, disabled, circle, onClick }: ButtonProps) => {
   return (
     <button
       css={[style, makeCircleStyle(circle, width), themes[theme], fontSizes[fontSize], { width }]}
-      disabled={disabled}>
+      disabled={disabled}
+      onClick={onClick}>
       {children}
     </button>
   );
@@ -55,6 +57,7 @@ const themes = {
   nooutline: css`
     background: none;
     color: #484848;
+    justify-content: flex-start;
     text-decoration: underline;
     &:hover:enabled {
       color: #7b7b7b;
