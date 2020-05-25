@@ -13,7 +13,7 @@ public class RoomService {
 
     private final RoomRepository roomRepository;
 
-    public List<Room> findAll(int offset, int limit) {
+    public List<Room> findPage(int offset, int limit) {
 
         return roomRepository.findByOffset(offset, limit);
     }
