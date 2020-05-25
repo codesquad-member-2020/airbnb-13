@@ -31,7 +31,7 @@ public class Room {
 
     @Builder
     public Room(Long id, Boolean superHost, String location, String title, Integer price,
-                Float reviewScore, String thumbnail, Integer totalPrice, Integer discountedPrice) {
+                Float reviewScore, String thumbnail, Integer totalPrice) {
         this.id = id;
         this.superHost = superHost;
         this.location = location;
@@ -40,6 +40,9 @@ public class Room {
         this.reviewScore = reviewScore;
         this.thumbnail = thumbnail;
         this.totalPrice = totalPrice;
+    }
+
+    public void setDiscountedPrice(Integer discountedPrice) {
         this.discountedPrice = discountedPrice;
     }
 }
