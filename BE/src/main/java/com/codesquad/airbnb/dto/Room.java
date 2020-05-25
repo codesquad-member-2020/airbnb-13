@@ -27,9 +27,11 @@ public class Room {
 
     private Integer totalPrice;
 
+    private Integer discountedPrice;
+
     @Builder
     public Room(Long id, Boolean superHost, String location, String title, Integer price,
-                Float reviewScore, String thumbnail, Integer totalPrice) {
+                Float reviewScore, String thumbnail, Integer totalPrice, Integer discountedPrice) {
         this.id = id;
         this.superHost = superHost;
         this.location = location;
@@ -38,5 +40,6 @@ public class Room {
         this.reviewScore = reviewScore;
         this.thumbnail = thumbnail;
         this.totalPrice = totalPrice;
+        this.discountedPrice = discountedPrice;
     }
 }
