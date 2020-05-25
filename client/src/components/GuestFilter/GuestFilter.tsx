@@ -5,16 +5,32 @@ import FlexLayout from '@Custom/FlexLayout/FlexLayout';
 import Row from './Row/Row';
 import Button from '@Custom/Button/Button';
 
-const GuestFilter = () => {
+type GuestFilterProp = {
+  adult: number;
+  child: number;
+  baby: number;
+  setAdult: Function;
+  setChild: Function;
+  setBaby: Function;
+  onBlur: () => void;
+};
+
+const GuestFilter = ({ adult, setAdult, child, setChild, baby, setBaby, onBlur }: GuestFilterProp) => {
+  const reset = () => {
+    setAdult(0);
+    setChild(0);
+    setBaby(0);
+  };
+
   return (
-    <div css={style}>
+    <div css={style} onBlur={onBlur} tabIndex={0}>
       <FlexLayout direction={'column'} align={'left'} gap={'1rem'}>
-        <Row type="성인" range={'만 13세 이상'} />
-        <Row type="어린이" range={'2~12세'} />
-        <Row type="유아" range={'2세 미만'} />
+        <Row type="성인" range={'만 13세 이상'} count={adult} setCount={setAdult} />
+        <Row type="어린이" range={'2~12세'} count={child} setCount={setChild} />
+        <Row type="유아" range={'2세 미만'} count={baby} setCount={setBaby} />
       </FlexLayout>
       <FlexLayout direction={'row'} align={'spaceBetween'} customCSS={customCSS}>
-        <Button theme={'nooutline'} fontSize="medium" width={'3rem'}>
+        <Button theme={'nooutline'} fontSize="medium" width={'3rem'} onClick={reset}>
           지우기
         </Button>
         <Button theme={'secondary'} fontSize="medium" width={'3rem'}>

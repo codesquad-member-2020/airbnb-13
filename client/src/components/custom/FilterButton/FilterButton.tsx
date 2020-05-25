@@ -6,12 +6,11 @@ export type FilterButtonProps = {
   children: ReactNode;
   focused: boolean;
   onClick: () => void;
-  onBlur: () => void;
 };
 
-const FilterButton = ({ children, focused, onClick, onBlur }: FilterButtonProps) => {
+const FilterButton = ({ children, focused, onClick }: FilterButtonProps) => {
   return (
-    <button css={style(focused)} onClick={onClick} onBlur={onBlur}>
+    <button css={style(focused)} onClick={onClick}>
       {children}
     </button>
   );

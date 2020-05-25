@@ -6,19 +6,32 @@ import FilterButton from '@Custom/FilterButton/FilterButton';
 
 const GuestFilterWithButton = () => {
   const [focused, setFocused] = useState(false);
+  const [adult, setAudlt] = useState(0);
+  const [child, setChild] = useState(0);
+  const [baby, setBaby] = useState(0);
+
   return (
     <div css={styled}>
       <FilterButton
         focused={focused}
         onClick={() => {
           setFocused(!focused);
-        }}
-        onBlur={() => {
-          setFocused(false);
         }}>
-        게스트 1명, 유아 1명
+        게스트 {adult} 명 {child ? `어린이 ${child}명` : ''} {baby ? `유아 ${baby}명` : ''}
       </FilterButton>
-      {focused && <GuestFilter />}
+      {focused && (
+        <GuestFilter
+          adult={adult}
+          setAdult={setAudlt}
+          child={child}
+          setChild={setChild}
+          baby={baby}
+          setBaby={setBaby}
+          onBlur={() => {
+            setFocused(false);
+          }}
+        />
+      )}
     </div>
   );
 };

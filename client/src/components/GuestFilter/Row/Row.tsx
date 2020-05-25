@@ -8,11 +8,11 @@ import Icon from '$Icon/Icon';
 export type RowProp = {
   type: string;
   range: string;
+  count: number;
+  setCount: Function;
 };
 
-const Row = ({ type, range }: RowProp) => {
-  const [count, setCount] = useState(0);
-
+const Row = ({ type, range, count, setCount }: RowProp) => {
   return (
     <FlexLayout direction={'row'} align={'spaceBetween'} width={'100%'}>
       <FlexLayout direction={'column'} align={'left'}>
