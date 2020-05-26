@@ -31,7 +31,8 @@ module.exports = {
     config.resolve.alias['$Icon'] = path.resolve(__dirname, '../src/Icon/');
     config.resolve.alias['$Style'] = path.resolve(__dirname, '../src/style/');
     config.resolve.alias['$Util'] = path.resolve(__dirname, '../src/util/');
-
+    config.resolve.alias['@DateFilter'] = path.resolve(__dirname, '../src/components/DateFilter/');
+    config.resolve.alias['@GuestFilter'] = path.resolve(__dirname, '../src/components/GuestFilter/');
     return config;
   }
 };

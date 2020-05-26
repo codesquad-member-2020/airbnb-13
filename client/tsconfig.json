@@ -21,6 +21,8 @@
       "@/*": ["src/*"],
       "@Cards/*": ["src/components/Cards/*"],
       "@Custom/*": ["src/components/custom/*"],
+      "@DateFilter/*": ["src/components/DateFilter/*"],
+      "@GuestFilter/*": ["src/components/GuestFilter/*"],
       "$Icon/*": ["src/Icon/*"],
       "$Style/*": ["src/style/*"],
       "$Util/*": ["src/util/*"]

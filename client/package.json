@@ -13,9 +13,12 @@
   "license": "ISC",
   "dependencies": {
     "@emotion/core": "^10.0.28",
+    "@types/react-dates": "^17.1.10",
     "dotenv-webpack": "^1.8.0",
     "emotion-theming": "^10.0.27",
+    "moment": "^2.26.0",
     "react": "^16.13.1",
+    "react-dates": "^21.8.0",
     "react-dom": "^16.13.1",
     "typescript": "^3.9.2"
   },
