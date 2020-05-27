@@ -34,15 +34,19 @@ public class RoomDao {
                 "and room.price >= :minPrice ";
 
         if (maxPrice != 0) {
-            roomsSql += "and price <= :maxPrice";
+            roomsSql += "and price <= :maxPrice ";
         }
+
+        roomsSql += "limit :limit offset :offset";
 
         SqlParameterSource parameters = new MapSqlParameterSource()
                 .addValue("totalGuest", totalGuest)
                 .addValue("minPrice", minPrice)
                 .addValue("maxPrice", maxPrice)
                 .addValue("checkIn", checkIn)
-                .addValue("checkOut", checkOut);
+                .addValue("checkOut", checkOut)
+                .addValue("limit", limit)
+                .addValue("offset", offset);
 
         return namedJdbcTemplate.query(roomsSql, parameters, roomMapper);
     }
