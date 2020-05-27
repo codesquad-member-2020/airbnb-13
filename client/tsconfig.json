@@ -1,0 +1,30 @@
+//tsconfig.json
+{
+  "compilerOptions": {
+    /* Basic Options */
+    "target": "esnext",
+    "module": "esnext",
+    "jsx": "preserve",
+
+    /* Strict Type-Checking Options */
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "noImplicitThis": false,
+
+    /* Module Resolution Options */
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "esModuleInterop": true,
+
+    "paths": {
+      "@/*": ["src/*"],
+      "@Cards/*": ["src/components/Cards/*"],
+      "@Custom/*": ["src/components/custom/*"],
+      "$Icon/*": ["src/Icon/*"],
+      "$Style/*": ["src/style/*"],
+      "$Util/*": ["src/util/*"]
+    }
+  },
+  "exclude": ["node_modules", "dist", "public"]
+}
