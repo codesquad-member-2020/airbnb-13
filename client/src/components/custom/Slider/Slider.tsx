@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { useState } from 'react';
+import PriceInput from './PriceInput/PriceInput';
+import FlexLayout from '../FlexLayout/FlexLayout';
 
 type SliderWrapProp = {
   leftPercent: number;
@@ -17,44 +19,67 @@ const Slider = () => {
     percent: 75
   });
   const [range, setRange] = useState({ min: 0, max: 100 });
+
+  const calculatePercent = (min: number, max: number) => (value: number) => {
+    return ((value - min) / (max - min)) * 100;
+  };
+
   const leftInputHandler = (e: React.FormEvent<HTMLInputElement>) => {
     const value = Math.min(parseInt(e.currentTarget.value), rightValue.value);
-    const percent = ((value - range.min) / (range.max - range.min)) * 100;
+    const percent = calculatePercent(range.min, range.max)(value);
     setLeftValue({ ...leftValue, value, percent });
   };
+
   const rightInputHandler = (e: React.FormEvent<HTMLInputElement>) => {
     const value = Math.max(parseInt(e.currentTarget.value), leftValue.value);
-    const percent = ((value - range.min) / (range.max - range.min)) * 100;
+    const percent = calculatePercent(range.min, range.max)(value);
     setRightValue({ ...rightValue, value, percent });
   };
   return (
-    <Middle>
-      <div className="multi-range-slider">
-        <input
-          type="range"
-          id="input-left"
-          onInput={leftInputHandler}
-          min={range.min}
-          max={range.max}
-          value={leftValue.value}
-        />
-        <input
-          type="range"
-          id="input-right"
-          onInput={rightInputHandler}
-          min={range.min}
-          max={range.max}
-          value={rightValue.value}
-        />
+    <FlexLayout direction="column" align="left">
+      <Middle>
+        <div className="multi-range-slider">
+          <input
+            type="range"
+            id="input-left"
+            onInput={leftInputHandler}
+            min={range.min}
+            max={range.max}
+            value={leftValue.value}
+          />
+          <input
+            type="range"
+            id="input-right"
+            onInput={rightInputHandler}
+            min={range.min}
+            max={range.max}
+            value={rightValue.value}
+          />
 
-        <SliderWrap leftPercent={leftValue.percent} rightPercent={rightValue.percent}>
-          <div className="track"></div>
-          <div className="range"></div>
-          <div className="thumb left"></div>
-          <div className="thumb right"></div>
-        </SliderWrap>
-      </div>
-    </Middle>
+          <SliderWrap leftPercent={leftValue.percent} rightPercent={rightValue.percent}>
+            <div className="track"></div>
+            <div className="range"></div>
+            <div className="thumb left"></div>
+            <div className="thumb right"></div>
+          </SliderWrap>
+        </div>
+      </Middle>
+      <FlexLayout direction={'row'} align={'spaceBetween'}>
+        <PriceInput
+          value={leftValue}
+          setValue={setLeftValue}
+          calculatePercent={calculatePercent(range.min, range.max)}
+          title={'최저 요금'}
+        />
+        <span>~</span>
+        <PriceInput
+          value={rightValue}
+          setValue={setRightValue}
+          calculatePercent={calculatePercent(range.min, range.max)}
+          title={'최고 요금'}
+        />
+      </FlexLayout>
+    </FlexLayout>
   );
 };
 
