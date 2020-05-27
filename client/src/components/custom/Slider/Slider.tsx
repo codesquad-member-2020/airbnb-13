@@ -1,12 +1,26 @@
 import React from 'react';
+import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import { useState } from 'react';
 import PriceInput from './PriceInput/PriceInput';
 import FlexLayout from '../FlexLayout/FlexLayout';
+import Bar from './Bar/Bar';
 
 type SliderWrapProp = {
   leftPercent: number;
   rightPercent: number;
+};
+
+const BarData = [2, 1, 3, 4, 9, 9, 1, 2, 3, 4, 5, 8, 0, 17, 19, 22, 4, 6, 1, 10];
+
+const calculateHeightUnit = (maxHeight: number, barData: number[]) => {
+  let maxBarData = barData[0];
+  barData.forEach(element => {
+    if (element > maxBarData) {
+      maxBarData = element;
+    }
+  });
+  return maxHeight / maxBarData;
 };
 
 const Slider = () => {
@@ -35,8 +49,26 @@ const Slider = () => {
     const percent = calculatePercent(range.min, range.max)(value);
     setRightValue({ ...rightValue, value, percent });
   };
+
+  const oneUnitHeight = calculateHeightUnit(30, BarData);
+
+  const isOnHandler = (index: number) => {
+    const currentPercent = index * (100 / BarData.length);
+    return leftValue.percent <= currentPercent && currentPercent <= rightValue.percent;
+  };
+
   return (
     <FlexLayout direction="column" align="left">
+      <FlexLayout
+        direction="row"
+        align="spaceAround"
+        customCSS={css`
+          align-items: flex-end;
+        `}>
+        {BarData.map((count, index) => {
+          return <Bar height={oneUnitHeight * count} isOn={isOnHandler(index)}></Bar>;
+        })}
+      </FlexLayout>
       <Middle>
         <div className="multi-range-slider">
           <input
@@ -87,8 +119,7 @@ export default Slider;
 
 const Middle = styled.div`
   position: relative;
-  width: 50%;
-  max-width: 500px;
+  width: 100%;
   input[type='range'] {
     position: absolute;
     pointer-events: none;
@@ -112,7 +143,6 @@ const SliderWrap = styled.div`
   position: relative;
   z-index: 1;
   height: 10px;
-  margin: 0 15px;
   > .track {
     position: absolute;
     z-index: 1;
@@ -137,19 +167,18 @@ const SliderWrap = styled.div`
   > .thumb {
     position: absolute;
     z-index: 3;
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     background-color: #6200ee;
     border-radius: 50%;
-    opacity: 0.3;
 
     &.left {
       left: ${(props: SliderWrapProp) => `${props.leftPercent}%`};
-      transform: translate(-15px, -10px);
+      transform: translate(-7px, -5px);
     }
     &.right {
       right: ${(props: SliderWrapProp) => `${100 - props.rightPercent}%`};
-      transform: translate(15px, -10px);
+      transform: translate(7px, -5px);
     }
   }
 `;
