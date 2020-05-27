@@ -31,14 +31,14 @@ create table reservation
     adult   int,
     child   int,
     infant  int,
-    user_id bigint references user (id),
-    room_id bigint references room (id)
+    user_key bigint references user (id),
+    room_key bigint references room (id)
 );
 
 create table reservation_date
 (
     id               bigint auto_increment primary key,
     reservation_date DATE,
-    reservation_id   bigint references reservation (id)
+    reservation_key   bigint references reservation (id)
 );
 

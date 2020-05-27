@@ -19,7 +19,7 @@ class RoomRepositoryTest {
     public void id로_방가져오기() {
 
         Room room1 = roomRepository.findByRoomId(1L).orElseThrow(()
-                -> new IllegalStateException("There is no category with this categoryId"));
+                -> new IllegalStateException("해당 방은 없습니다."));
         assertThat(room1).isNotNull();
         System.out.println(room1);
     }

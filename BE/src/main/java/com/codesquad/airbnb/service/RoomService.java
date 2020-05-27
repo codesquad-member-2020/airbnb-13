@@ -2,12 +2,10 @@ package com.codesquad.airbnb.service;
 
 import com.codesquad.airbnb.dto.Room;
 import com.codesquad.airbnb.repository.RoomDao;
-import com.codesquad.airbnb.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -25,6 +23,5 @@ public class RoomService {
                 checkIn, checkOut,
                 minPrice, maxPrice);
     }
-
 
 }
