@@ -16,9 +16,11 @@ class RoomRepositoryTest {
     private RoomRepository roomRepository;
 
     @Test
-    public void 페이지10개내용가져오기() {
-        List<Room> rooms = roomRepository.findByOffset(0, 10);
-        assertThat(rooms).isNotNull();
-        assertThat(rooms.size()).isEqualTo(10);
+    public void id로_방가져오기() {
+
+        Room room1 = roomRepository.findByRoomId(1L).orElseThrow(()
+                -> new IllegalStateException("There is no category with this categoryId"));
+        assertThat(room1).isNotNull();
+        System.out.println(room1);
     }
 }

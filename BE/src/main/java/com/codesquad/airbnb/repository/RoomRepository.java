@@ -5,9 +5,10 @@ import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface RoomRepository extends CrudRepository<Room, Long> {
-    @Query("SELECT id, title, thumbnail, super_host, address," +
-            " location, accommodates, price, cleaning_fee, review_score from room limit :limit offset :offset")
-    List<Room> findByOffset(int offset, int limit);
+
+    @Query("SELECT * FROM room WHERE id =:id")
+    Optional<Room> findByRoomId(Long id);
 }
