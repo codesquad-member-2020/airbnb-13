@@ -1,6 +1,7 @@
 package com.codesquad.airbnb.service;
 
 import com.codesquad.airbnb.dto.Room;
+import com.codesquad.airbnb.repository.RoomDao;
 import com.codesquad.airbnb.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,22 +13,18 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class RoomService {
 
-    private final RoomRepository roomRepository;
+    private final RoomDao roomDao;
 
     public List<Room> findPage(int offset, int limit,
                                int adults, int children, int infants,
                                String checkIn, String checkOut,
                                int minPrice, int maxPrice) {
 
-        List<Room> rooms = roomRepository.findByOffset(offset, limit);
-
-        rooms.stream().map(room -> {
-            if (room.getSuperHost()) {
-                room.setDiscountedPrice((int) (room.getPrice() * 0.9));
-            }
-            return room;
-        }).collect(Collectors.toList());
-
-        return rooms;
+        return roomDao.findByCondition(offset, limit,
+                adults, children, infants,
+                checkIn, checkOut,
+                minPrice, maxPrice);
     }
+
+
 }

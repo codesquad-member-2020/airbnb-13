@@ -31,7 +31,7 @@ public class RoomController {
                                             @RequestParam(value = "checkin", required = false) String checkIn,
                                             @RequestParam(value = "checkout", required = false) String checkOut,
                                             @RequestParam(value = "minimum-price", required = false, defaultValue = "0") int minPrice,
-                                            @RequestParam(value = "minimum-price", required = false, defaultValue = "0") int maxPrice) {
+                                            @RequestParam(value = "maximum-price", required = false, defaultValue = "0") int maxPrice) {
         int offset = page - 1;
         int limit = page * 9;
 
