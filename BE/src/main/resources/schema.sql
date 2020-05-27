@@ -38,7 +38,7 @@ create table reservation
 create table reservation_date
 (
     id               bigint auto_increment primary key,
-    reservation_date DATETIME,
+    reservation_date DATE,
     reservation_id   bigint references reservation (id)
 );
 
