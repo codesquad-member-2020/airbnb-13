@@ -28,8 +28,10 @@ public class RoomDao {
         String roomsSql = "SELECT id, title, thumbnail, super_host, address, location, accommodates, " +
                 "price, cleaning_fee, review_score " +
                 "from room " +
-                "WHERE accommodates >= :totalGuest " +
-                "and price >= :minPrice ";
+                "WHERE id not in ( select distinct (r.room_id) " +
+                "from reservation_date rd left join reservation r on rd.reservation_id = r.id where rd.reservation_date between :checkIn and :checkOut) " +
+                "and room.accommodates >= :totalGuest " +
+                "and room.price >= :minPrice ";
 
         if (maxPrice != 0) {
             roomsSql += "and price <= :maxPrice";
@@ -38,9 +40,10 @@ public class RoomDao {
         SqlParameterSource parameters = new MapSqlParameterSource()
                 .addValue("totalGuest", totalGuest)
                 .addValue("minPrice", minPrice)
-                .addValue("maxPrice", maxPrice);
+                .addValue("maxPrice", maxPrice)
+                .addValue("checkIn", checkIn)
+                .addValue("checkOut", checkOut);
+
         return namedJdbcTemplate.query(roomsSql, parameters, roomMapper);
     }
-
-
 }
