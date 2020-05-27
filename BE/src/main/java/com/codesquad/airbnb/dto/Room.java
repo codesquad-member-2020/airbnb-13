@@ -11,27 +11,27 @@ import org.springframework.data.annotation.Id;
 public class Room {
 
     @Id
-    private Long id;
+    private final Long id;
 
-    private Boolean superHost;
+    private final Boolean superHost;
 
-    private String location;
+    private final String location;
 
-    private String title;
+    private final String title;
 
-    private Integer price;
+    private final Integer price;
 
-    private Float reviewScore;
+    private final Float reviewScore;
 
-    private String thumbnail;
+    private final String thumbnail;
 
     private Integer totalPrice;
 
-    private Integer discountedPrice;
+    private final Integer discountedPrice;
 
     @Builder
     public Room(Long id, Boolean superHost, String location, String title, Integer price,
-                Float reviewScore, String thumbnail, Integer totalPrice) {
+                Float reviewScore, String thumbnail, Integer totalPrice, Integer discountedPrice) {
         this.id = id;
         this.superHost = superHost;
         this.location = location;
@@ -40,9 +40,10 @@ public class Room {
         this.reviewScore = reviewScore;
         this.thumbnail = thumbnail;
         this.totalPrice = totalPrice;
+        this.discountedPrice = discountedPrice;
     }
 
-    public void setDiscountedPrice(Integer discountedPrice) {
-        this.discountedPrice = discountedPrice;
+    public void setTotalPrice(Integer totalPrice) {
+        this.totalPrice = totalPrice;
     }
 }

@@ -25,13 +25,20 @@ public class RoomController {
 
     @GetMapping("/rooms")
     public ResponseEntity<List<Room>> rooms(@RequestParam("page") int page,
-                                            @ModelAttribute Guest guest,
-                                            @ModelAttribute ReservationDate reservationDate,
-                                            @ModelAttribute Price price) {
+                                            @RequestParam(value = "adults", required = false, defaultValue = "0") int adults,
+                                            @RequestParam(value = "children", required = false, defaultValue = "0") int children,
+                                            @RequestParam(value = "infants", required = false, defaultValue = "0") int infants,
+                                            @RequestParam(value = "checkin", required = false) String checkIn,
+                                            @RequestParam(value = "checkout", required = false) String checkOut,
+                                            @RequestParam(value = "minimum-price", required = false, defaultValue = "0") int minPrice,
+                                            @RequestParam(value = "minimum-price", required = false, defaultValue = "0") int maxPrice) {
         int offset = page - 1;
         int limit = page * 9;
 
-        List<Room> rooms = roomService.findPage(offset, limit);
+        List<Room> rooms = roomService.findPage(offset, limit,
+                adults, children, infants,
+                checkIn, checkOut,
+                minPrice, maxPrice);
         return new ResponseEntity<>(rooms, HttpStatus.OK);
     }
 }

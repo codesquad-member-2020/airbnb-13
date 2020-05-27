@@ -14,7 +14,10 @@ public class RoomService {
 
     private final RoomRepository roomRepository;
 
-    public List<Room> findPage(int offset, int limit) {
+    public List<Room> findPage(int offset, int limit,
+                               int adults, int children, int infants,
+                               String checkIn, String checkOut,
+                               int minPrice, int maxPrice) {
 
         List<Room> rooms = roomRepository.findByOffset(offset, limit);
 
