@@ -41,6 +41,6 @@ public class RoomController {
     @PostMapping("/rooms/{id}")
     public ResponseEntity<String> reservation(@PathVariable Long id, @RequestBody ReservationForm reservationForm) {
         roomService.addReservation(id, reservationForm);
-        return new ResponseEntity<>(reservationForm.toString(), HttpStatus.OK);
+        return new ResponseEntity<>("OK", HttpStatus.OK);
     }
 }
