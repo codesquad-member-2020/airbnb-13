@@ -33,7 +33,8 @@ public class RoomDao {
                 "price, cleaning_fee, review_score " +
                 "from room " +
                 "WHERE id not in ( select distinct (r.room_id) " +
-                "from reservation_date rd left join reservation r on rd.reservation_id = r.id where rd.reservation_date between :checkIn and :checkOut) " +
+                "from reservation_date rd left join reservation r on rd.reservation_id = r.id " +
+                "where rd.reservation_date between :checkIn and :checkOut) " +
                 "and room.accommodates >= :totalGuest " +
                 "and room.price >= :minPrice ";
 
