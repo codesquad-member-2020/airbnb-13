@@ -1,26 +1,26 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
 import FlexLayout from '@Custom/FlexLayout/FlexLayout';
-import { useState, Dispatch, SetStateAction } from 'react';
+import { SliderValue } from '../Slider';
 
 type PriceInputProp = {
-  value: { value: number; percent: number };
-  setValue: Dispatch<SetStateAction<{ value: number; percent: number }>>;
+  price: SliderValue;
+  setPrice: (price: number) => void;
   title: string;
-  calculatePercent: Function;
 };
 
-const PriceInput = ({ value, setValue, title, calculatePercent }: PriceInputProp) => {
+const PriceInput = ({ price, setPrice, title }: PriceInputProp) => {
   const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const valuePrice = e.target.value ? parseInt(e.target.value) : 0;
-    setValue({ value: valuePrice, percent: calculatePercent(valuePrice) });
+    setPrice(valuePrice);
   };
+
   return (
     <FlexLayout direction="column" align="left" width={'200px'} customCSS={wrapperStyle}>
       <span>{title}</span>
       <FlexLayout direction="row" align="left" width={'200px'} customCSS={inputWrapper}>
         <span>&#8361;</span>
-        <input value={value.value} css={inputStyle} onChange={inputHandler} />
+        <input value={price.value} css={inputStyle} onChange={inputHandler} />
       </FlexLayout>
     </FlexLayout>
   );
