@@ -1,9 +1,23 @@
 import React from 'react';
-import Bar from '../Bar/Bar';
+import Bar, { BarProp } from './Bar/Bar';
 import { css } from '@emotion/core';
-import FlexLayout from '../FlexLayout/FlexLayout';
+import FlexLayout from '@Custom/FlexLayout/FlexLayout';
+import useDrawingBars from '$Util/customHooks/useDrawingBars';
 
-const Bars = () => {
+type BarLimit = {
+  min: number;
+  max: number;
+};
+
+type BarsProp = {
+  barData: number[];
+  maxHeight: number;
+  limit: BarLimit;
+};
+
+const Bars = ({ barData, maxHeight, limit }: BarsProp) => {
+  const [setBarData, oneUnitHeight, isOn] = useDrawingBars(barData, maxHeight);
+
   return (
     <FlexLayout
       direction="row"
@@ -11,8 +25,8 @@ const Bars = () => {
       customCSS={css`
         align-items: flex-end;
       `}>
-      {BarData.map((count, index) => {
-        return <Bar height={oneUnitHeight * count} isOn={isOnHandler(index)}></Bar>;
+      {barData.map((count, index) => {
+        return <Bar height={oneUnitHeight * count} isOn={isOn(limit.min, limit.max)(index)}></Bar>;
       })}
     </FlexLayout>
   );

@@ -1,10 +1,9 @@
 import React from 'react';
-import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import { useState } from 'react';
 import PriceInput from './PriceInput/PriceInput';
-import FlexLayout from '../FlexLayout/FlexLayout';
-import Bar from './Bar/Bar';
+import FlexLayout from '@Custom/FlexLayout/FlexLayout';
+import Bars from './Bars/Bars';
 import useSliderValue from '$Util/customHooks/useSliderValue';
 
 type SliderWrapProp = {
@@ -18,16 +17,6 @@ export type SliderValue = {
 };
 
 const BarData = [2, 1, 3, 4, 9, 9, 1, 2, 3, 4, 5, 8, 0, 17, 19, 22, 4, 6, 1, 10];
-
-const calculateHeightUnit = (maxHeight: number, barData: number[]) => {
-  let maxBarData = barData[0];
-  barData.forEach(element => {
-    if (element > maxBarData) {
-      maxBarData = element;
-    }
-  });
-  return maxHeight / maxBarData;
-};
 
 const Slider = () => {
   const [leftValue, setLeftValue] = useSliderValue({
@@ -51,25 +40,9 @@ const Slider = () => {
     setRightValue(range.min, range.max)(value);
   };
 
-  const oneUnitHeight = calculateHeightUnit(30, BarData);
-
-  const isOnHandler = (index: number) => {
-    const currentPercent = index * (100 / BarData.length);
-    return leftValue.percent <= currentPercent && currentPercent <= rightValue.percent;
-  };
-
   return (
     <FlexLayout direction="column" align="left">
-      <FlexLayout
-        direction="row"
-        align="spaceAround"
-        customCSS={css`
-          align-items: flex-end;
-        `}>
-        {BarData.map((count, index) => {
-          return <Bar height={oneUnitHeight * count} isOn={isOnHandler(index)}></Bar>;
-        })}
-      </FlexLayout>
+      <Bars barData={BarData} maxHeight={30} limit={{ min: leftValue.percent, max: rightValue.percent }} />
       <Middle>
         <div className="multi-range-slider">
           <input
