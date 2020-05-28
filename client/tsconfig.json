@@ -23,6 +23,7 @@
       "@Custom/*": ["src/components/custom/*"],
       "@DateFilter/*": ["src/components/DateFilter/*"],
       "@GuestFilter/*": ["src/components/GuestFilter/*"],
+      "@Modal/*": ["src/components/Modal/*"],
       "$Icon/*": ["src/Icon/*"],
       "$Style/*": ["src/style/*"],
       "$Util/*": ["src/util/*"]

@@ -36,6 +36,7 @@ module.exports = {
       '@Custom': path.resolve(__dirname, 'src/components/custom/'),
       '@DateFilter': path.resolve(__dirname, 'src/components/DateFilter/'),
       '@GuestFilter': path.resolve(__dirname, 'src/components/GuestFilter/'),
+      '@Modal': path.resolve(__dirname, 'src/components/Modal'),
       $Icon: path.resolve(__dirname, 'src/Icon/'),
       $Style: path.resolve(__dirname, 'src/style/'),
       $Util: path.resolve(__dirname, 'src/util/')

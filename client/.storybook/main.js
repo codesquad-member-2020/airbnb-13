@@ -25,14 +25,18 @@ module.exports = {
     });
     config.resolve.extensions.push('.ts', '.tsx');
 
-    config.resolve.alias['@'] = path.resolve(__dirname, '../src/');
-    config.resolve.alias['@Cards'] = path.resolve(__dirname, '../src/components/Cards/');
-    config.resolve.alias['@Custom'] = path.resolve(__dirname, '../src/components/custom/');
-    config.resolve.alias['$Icon'] = path.resolve(__dirname, '../src/Icon/');
-    config.resolve.alias['$Style'] = path.resolve(__dirname, '../src/style/');
-    config.resolve.alias['$Util'] = path.resolve(__dirname, '../src/util/');
-    config.resolve.alias['@DateFilter'] = path.resolve(__dirname, '../src/components/DateFilter/');
-    config.resolve.alias['@GuestFilter'] = path.resolve(__dirname, '../src/components/GuestFilter/');
+    config.resolve.alias = {
+      '@': path.resolve(__dirname, '../src/'),
+      '@Cards': path.resolve(__dirname, '../src/components/Cards/'),
+      '@Custom': path.resolve(__dirname, '../src/components/custom/'),
+      '@DateFilter': path.resolve(__dirname, '../src/components/DateFilter/'),
+      '@GuestFilter': path.resolve(__dirname, '../src/components/GuestFilter/'),
+      '@Modal': path.resolve(__dirname, 'src/components/Modal'),
+      $Icon: path.resolve(__dirname, '../src/Icon/'),
+      $Style: path.resolve(__dirname, '../src/style/'),
+      $Util: path.resolve(__dirname, '../src/util/')
+    };
+
     return config;
   }
 };
