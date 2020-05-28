@@ -32,13 +32,22 @@ public class RoomService {
     }
 
     public void addReservation(Long roomId, ReservationForm reservationForm) {
+        boolean isValid = isValidReservationForm(reservationForm);
+        // Todo
+        // 값이 유효하지 않을 때 예외 처리하기
         Long reservationId = roomDao.addReservation(roomId, reservationForm);
         addReservationDates(reservationId, reservationForm.getCheckIn(), reservationForm.getCheckOut());
     }
 
     private boolean isValidReservationForm(ReservationForm reservationForm) {
-        //check valid
-        return true;
+        Date checkIn = reservationForm.getCheckIn();
+        Date checkOut = reservationForm.getCheckOut();
+
+        if (checkIn == null || checkOut == null) {
+            return false;
+        }
+
+        return DayCalculator.getDiffDays(checkIn, checkOut) > 0;
     }
 
     private void addReservationDates(Long reservationId, Date checkIn, Date checkOut) {
