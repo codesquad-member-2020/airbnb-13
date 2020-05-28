@@ -4,9 +4,12 @@ import com.codesquad.airbnb.dto.ReservationForm;
 import com.codesquad.airbnb.dto.Room;
 import com.codesquad.airbnb.repository.RoomDao;
 import com.codesquad.airbnb.repository.RoomRepository;
+import com.codesquad.airbnb.utils.DayCalculator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -29,12 +32,23 @@ public class RoomService {
     }
 
     public void addReservation(Long roomId, ReservationForm reservationForm) {
-        roomDao.addReservation(roomId, reservationForm);
-        roomDao.addReservationDates(roomId, reservationForm.getCheckIn(), reservationForm.getCheckOut());
+        Long reservationId = roomDao.addReservation(roomId, reservationForm);
+        addReservationDates(reservationId, reservationForm.getCheckIn(), reservationForm.getCheckOut());
     }
 
     private boolean isValidReservationForm(ReservationForm reservationForm) {
         //check valid
         return true;
+    }
+
+    private void addReservationDates(Long reservationId, Date checkIn, Date checkOut) {
+        long diff = DayCalculator.getDiffDays(checkIn, checkOut);
+        Calendar c = Calendar.getInstance();
+
+        for (int i = 0; i < diff; i++) {
+            c.setTime(checkIn);
+            c.add(Calendar.DATE, i);
+            roomDao.addReservationDate(reservationId, c.getTime());
+        }
     }
 }
