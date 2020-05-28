@@ -9,8 +9,6 @@ const useSliderValue = ({ value, percent }: SliderValue) => {
     setSliderValue({ value: newValue, percent: newPercent });
   };
 
-  const a = 5;
-
   return [sliderValue, setPercentByValue] as const;
 };
 
