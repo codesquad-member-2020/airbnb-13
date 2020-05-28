@@ -1,14 +1,13 @@
 package com.codesquad.airbnb.controller;
 
+import com.codesquad.airbnb.dto.ReservationForm;
 import com.codesquad.airbnb.dto.Room;
 import com.codesquad.airbnb.service.RoomService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -36,5 +35,11 @@ public class RoomController {
                 checkIn, checkOut,
                 minPrice, maxPrice);
         return new ResponseEntity<>(rooms, HttpStatus.OK);
+    }
+
+    @PostMapping("/rooms/{id}")
+    public ResponseEntity<String> reservation(@PathVariable Long id, @RequestBody ReservationForm reservationForm) {
+        roomService.addReservation(id, reservationForm);
+        return new ResponseEntity<>(reservationForm.toString(), HttpStatus.OK);
     }
 }

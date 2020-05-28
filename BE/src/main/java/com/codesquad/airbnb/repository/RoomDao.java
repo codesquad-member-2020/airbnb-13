@@ -1,12 +1,16 @@
 package com.codesquad.airbnb.repository;
 
+import com.codesquad.airbnb.dto.ReservationForm;
 import com.codesquad.airbnb.dto.Room;
+import com.codesquad.airbnb.utils.DayCalculator;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -50,4 +54,41 @@ public class RoomDao {
 
         return namedJdbcTemplate.query(roomsSql, parameters, roomMapper);
     }
+
+    public void addReservation(Long roomId, ReservationForm reservationForm) {
+        // todo
+        // user_id 작업하기
+        String sql = "INSERT INTO reservation (adult, child, infant, user_id, room_id) " +
+                "VALUES (:adult, :child, :infant, :userId, :roomId)";
+
+        SqlParameterSource parameters = new MapSqlParameterSource()
+                .addValue("adult", reservationForm.getAdults())
+                .addValue("child", reservationForm.getChildren())
+                .addValue("infant", reservationForm.getInfants())
+                .addValue("userId", 1L)
+                .addValue("roomId", roomId);
+        namedJdbcTemplate.update(sql, parameters);
+    }
+
+    public void addReservationDates(Long reservationId, Date checkIn, Date checkOut) {
+        long diff = DayCalculator.getDiffDays(checkIn, checkOut);
+        Calendar c = Calendar.getInstance();
+
+        for (int i = 0; i < diff; i++) {
+            c.setTime(checkIn);
+            c.add(Calendar.DATE, i);
+            addReservationOneDate(reservationId, c.getTime());
+        }
+    }
+
+    private void addReservationOneDate(Long reservationId, Date date) {
+        String sql = "INSERT INTO reservation_date (reservation_id , reservation_date)" +
+                "VALUES (:reservationId, :reservationDate)";
+        SqlParameterSource parameters = new MapSqlParameterSource()
+                .addValue("reservationId", reservationId)
+                .addValue("reservationDate", date);
+
+        namedJdbcTemplate.update(sql, parameters);
+    }
+
 }

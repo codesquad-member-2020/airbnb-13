@@ -1,7 +1,9 @@
 package com.codesquad.airbnb.service;
 
+import com.codesquad.airbnb.dto.ReservationForm;
 import com.codesquad.airbnb.dto.Room;
 import com.codesquad.airbnb.repository.RoomDao;
+import com.codesquad.airbnb.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,8 @@ import java.util.List;
 public class RoomService {
 
     private final RoomDao roomDao;
+
+    private final RoomRepository roomRepository;
 
     public List<Room> findPage(int offset, int limit,
                                int adults, int children, int infants,
@@ -24,4 +28,13 @@ public class RoomService {
                 minPrice, maxPrice);
     }
 
+    public void addReservation(Long roomId, ReservationForm reservationForm) {
+        roomDao.addReservation(roomId, reservationForm);
+        roomDao.addReservationDates(roomId, reservationForm.getCheckIn(), reservationForm.getCheckOut());
+    }
+
+    private boolean isValidReservationForm(ReservationForm reservationForm) {
+        //check valid
+        return true;
+    }
 }
