@@ -31,18 +31,18 @@ public class RoomDao {
 
         String roomsSql = "SELECT id, title, thumbnail, super_host, address, location, accommodates, " +
                 "price, cleaning_fee, review_score " +
-                "from room " +
-                "WHERE id not in ( select distinct (r.room_id) " +
-                "from reservation_date rd left join reservation r on rd.reservation_id = r.id " +
-                "where rd.reservation_date between :checkIn and :checkOut) " +
-                "and room.accommodates >= :totalGuest " +
-                "and room.price >= :minPrice ";
+                "FROM room " +
+                "WHERE id NOT IN ( SELECT DISTINCT (r.room_id) " +
+                "FROM reservation_date rd LEFT JOIN reservation r ON rd.reservation_id = r.id " +
+                "WHERE rd.reservation_date BETWEEN :checkIn AND :checkOut) " +
+                "AND room.accommodates >= :totalGuest " +
+                "AND room.price >= :minPrice ";
 
         if (maxPrice != 0) {
             roomsSql += "and price <= :maxPrice ";
         }
 
-        roomsSql += "limit :limit offset :offset";
+        roomsSql += "LIMIT :limit OFFSET :offset";
 
         SqlParameterSource parameters = new MapSqlParameterSource()
                 .addValue("totalGuest", totalGuest)
