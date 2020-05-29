@@ -1,9 +1,8 @@
 package com.codesquad.airbnb.service;
 
 import com.codesquad.airbnb.dto.ReservationForm;
-import com.codesquad.airbnb.dto.Room;
+import com.codesquad.airbnb.dto.RoomResponse;
 import com.codesquad.airbnb.repository.RoomDao;
-import com.codesquad.airbnb.repository.RoomRepository;
 import com.codesquad.airbnb.utils.DayCalculator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,12 +17,10 @@ public class RoomService {
 
     private final RoomDao roomDao;
 
-    private final RoomRepository roomRepository;
-
-    public List<Room> findPage(int offset, int limit,
-                               int adults, int children, int infants,
-                               String checkIn, String checkOut,
-                               int minPrice, int maxPrice) {
+    public List<RoomResponse> findPage(int offset, int limit,
+                                       int adults, int children, int infants,
+                                       String checkIn, String checkOut,
+                                       int minPrice, int maxPrice) {
 
         return roomDao.findByCondition(offset, limit,
                 adults, children, infants,
