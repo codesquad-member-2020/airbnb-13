@@ -31,7 +31,8 @@ class RoomDaoTest {
 
     @Test
     public void 예약일_필터_없는_테스트() {
-        List<Room> rooms = roomDao.findByCondition(0, 9, 1, 1, 1, null, null, 10, 100);
+        List<Room> rooms = roomDao.findByCondition(0, 9, 1, 1, 1,
+                null, null, 10, 100);
         assertThat(rooms).isNotNull();
 
     }

@@ -27,10 +27,10 @@ CREATE TABLE room
 
 CREATE TABLE reservation
 (
-    id       BIGINT PRIMARY KEY AUTO_INCREMENT,
-    adult    INT,
-    child    INT,
-    infant   INT,
+    id      BIGINT PRIMARY KEY AUTO_INCREMENT,
+    adult   INT,
+    child   INT,
+    infant  INT,
     user_id BIGINT REFERENCES user (id),
     room_id BIGINT REFERENCES room (id)
 );
@@ -39,7 +39,7 @@ CREATE TABLE reservation_date
 (
     id               BIGINT PRIMARY KEY AUTO_INCREMENT,
     reservation_date DATE,
-    reservation_id  BIGINT REFERENCES reservation (id),
-    reservation_key INT
+    reservation_id   BIGINT REFERENCES reservation (id),
+    reservation_key  INT
 );
 

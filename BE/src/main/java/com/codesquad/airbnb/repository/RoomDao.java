@@ -2,6 +2,7 @@ package com.codesquad.airbnb.repository;
 
 import com.codesquad.airbnb.dto.ReservationForm;
 import com.codesquad.airbnb.dto.Room;
+import com.codesquad.airbnb.utils.DayCalculator;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -10,6 +11,8 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -74,7 +77,6 @@ public class RoomDao {
 
         return keyHolder.getKey().longValue();
     }
-
 
     public void addReservationDate(Long reservationId, Date date) {
         String sql = "INSERT INTO reservation_date (reservation_id , reservation_date)" +
