@@ -4,11 +4,17 @@ import { useState } from 'react';
 import GuestFilter from '../GuestFilter';
 import FilterButton from '@Custom/FilterButton/FilterButton';
 
-const GuestFilterWithButton = () => {
+type GuestProp = {
+  adult: number;
+  setAdult: React.Dispatch<React.SetStateAction<number>>;
+  child: number;
+  setChild: React.Dispatch<React.SetStateAction<number>>;
+  baby: number;
+  setBaby: React.Dispatch<React.SetStateAction<number>>;
+};
+
+const GuestFilterWithButton = ({ adult, setAdult, child, setChild, baby, setBaby }: GuestProp) => {
   const [focused, setFocused] = useState(false);
-  const [adult, setAudlt] = useState(0);
-  const [child, setChild] = useState(0);
-  const [baby, setBaby] = useState(0);
 
   return (
     <div css={styled}>
@@ -22,7 +28,7 @@ const GuestFilterWithButton = () => {
       {focused && (
         <GuestFilter
           adult={adult}
-          setAdult={setAudlt}
+          setAdult={setAdult}
           child={child}
           setChild={setChild}
           baby={baby}

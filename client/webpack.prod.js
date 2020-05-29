@@ -31,23 +31,31 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
-        use: ['babel-loader', 'ts-loader']
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
       },
       {
-        test: /\.(jpg|png)$/,
-        loader: 'file-loader',
-        options: {
-          publicPath: './',
-          name: '[name].[ext]?[hash]'
-        }
+        test: /\.svg$/,
+        use: ['url-loader']
+      },
+      {
+        test: /\.ts(x)?$/,
+        use: ['babel-loader', 'ts-loader']
       }
     ]
   },
   resolve: {
     extensions: ['.js', 'jsx', '.ts', '.tsx'],
     alias: {
-      '@': path.resolve(__dirname, 'src/')
+      '@': path.resolve(__dirname, 'src/'),
+      '@Cards': path.resolve(__dirname, 'src/components/Cards/'),
+      '@Custom': path.resolve(__dirname, 'src/components/custom/'),
+      '@DateFilter': path.resolve(__dirname, 'src/components/DateFilter/'),
+      '@GuestFilter': path.resolve(__dirname, 'src/components/GuestFilter/'),
+      '@Modal': path.resolve(__dirname, 'src/components/Modal'),
+      $Icon: path.resolve(__dirname, 'src/Icon/'),
+      $Style: path.resolve(__dirname, 'src/style/'),
+      $Util: path.resolve(__dirname, 'src/util/')
     }
   },
   plugins: [

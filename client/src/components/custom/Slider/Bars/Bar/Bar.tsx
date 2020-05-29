@@ -15,13 +15,13 @@ const barStyle = (isOn: boolean, height: number) => {
     return css`
       height: ${height}px;
       width: 30px;
-      background-color: green;
+      background-color: #555;
     `;
   }
   return css`
     height: ${height}px;
     width: 30px;
-    background-color: red;
+    background-color: #ccc;
   `;
 };
 

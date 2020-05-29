@@ -11,7 +11,9 @@ export default {
 export const filterButton = () => {
   return (
     <ThemeProvider theme={theme}>
-      <FilterButton focused={false}>button</FilterButton>
+      <FilterButton focused={false} onClick={() => {}}>
+        button
+      </FilterButton>
     </ThemeProvider>
   );
 };

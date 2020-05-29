@@ -16,9 +16,9 @@ const PriceInput = ({ price, setPrice, title }: PriceInputProp) => {
   };
 
   return (
-    <FlexLayout direction="column" align="left" width={'200px'} customCSS={wrapperStyle}>
+    <FlexLayout direction="column" align="left" width={'40%'} customCSS={wrapperStyle}>
       <span>{title}</span>
-      <FlexLayout direction="row" align="left" width={'200px'} customCSS={inputWrapper}>
+      <FlexLayout direction="row" align="left" width={'100%'} customCSS={inputWrapper}>
         <span>&#8361;</span>
         <input value={price.value} css={inputStyle} onChange={inputHandler} />
       </FlexLayout>

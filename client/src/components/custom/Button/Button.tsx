@@ -34,6 +34,7 @@ const style = css`
   align-items: center;
   justify-content: center;
   color: #ffffff;
+  height: 100%;
   cursor: pointer;
   &:disabled {
     cursor: not-allowed;

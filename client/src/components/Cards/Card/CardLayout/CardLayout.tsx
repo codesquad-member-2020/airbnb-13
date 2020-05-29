@@ -26,10 +26,10 @@ const topStyle = (top: string | number) => {
   return css({
     '> *': {
       marginTop: top
-    },
-    '> *:nth-of-type(n+1):nth-of-type(-n+3)': {
-      marginTop: 0
     }
+    // '> *:nth-of-type(n+1):nth-of-type(-n+3)': {
+    //   marginTop: 0
+    // }
   });
 };
 

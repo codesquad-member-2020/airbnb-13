@@ -20,6 +20,7 @@ const style = (focused: boolean) => (theme: any) => css`
   outline: none;
   box-sizing: border-box;
   padding: 0.5rem 1rem;
+  height: 40px;
   border: ${focused ? '1px solid transparent' : `1px solid ${theme.colors.gray}`};
   border-radius: 1.5rem;
   background-color: #ffffff;

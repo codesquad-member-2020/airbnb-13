@@ -15,6 +15,7 @@
     "@emotion/core": "^10.0.28",
     "@types/react-dates": "^17.1.10",
     "@types/react-redux": "^7.1.9",
+    "css-loader": "^3.5.3",
     "dotenv-webpack": "^1.8.0",
     "emotion-theming": "^10.0.27",
     "moment": "^2.26.0",
@@ -23,6 +24,7 @@
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
     "redux": "^4.0.5",
+    "style-loader": "^1.2.1",
     "typescript": "^3.9.2"
   },
   "devDependencies": {

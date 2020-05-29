@@ -7,8 +7,8 @@ import Slider from '@Custom/Slider/Slider';
 const PriceFilter = () => {
   return (
     <div css={style}>
-      <FlexLayout direction="column" align="left">
-        <span>평균 1박 요금은 $123입니다</span>
+      <FlexLayout direction="column" align="left" gap={'1.5rem'}>
+        <div>평균 1박 요금은 $123입니다</div>
         <Slider />
       </FlexLayout>
       <FlexLayout direction={'row'} align={'spaceBetween'} customCSS={customCSS}>

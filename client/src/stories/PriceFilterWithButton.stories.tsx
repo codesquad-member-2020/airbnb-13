@@ -1,5 +1,5 @@
 import React from 'react';
-import PriceFilterWithButton from '@/components/PriceFilter/PriceFilterWithButton/PriceFilterWithButton';
+import PriceFilterWithButton from '@/components/Filters/PriceFilter/PriceFilterWithButton/PriceFilterWithButton';
 import { ThemeProvider } from 'emotion-theming';
 import theme from '$Style/theme';
 

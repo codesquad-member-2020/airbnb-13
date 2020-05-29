@@ -1,4 +1,5 @@
-import React from 'react';
+/** @jsx jsx */
+import { jsx, css } from '@emotion/core';
 import styled from '@emotion/styled';
 import { useState } from 'react';
 import PriceInput from './PriceInput/PriceInput';
@@ -69,7 +70,7 @@ const Slider = () => {
           </SliderWrap>
         </div>
       </Middle>
-      <FlexLayout direction={'row'} align={'spaceBetween'}>
+      <FlexLayout direction={'row'} align={'spaceBetween'} alignItemCenter={true} customCSS={inputWrapStyle}>
         <PriceInput price={leftValue} setPrice={setLeftValue(range.min, range.max)} title={'최저 요금'} />
         <span>~</span>
         <PriceInput price={rightValue} setPrice={setRightValue(range.min, range.max)} title={'최고 요금'} />
@@ -144,4 +145,8 @@ const SliderWrap = styled.div`
       transform: translate(7px, -5px);
     }
   }
+`;
+
+const inputWrapStyle = css`
+  margin-top: 2rem;
 `;
