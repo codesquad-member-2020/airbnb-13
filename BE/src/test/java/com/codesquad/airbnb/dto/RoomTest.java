@@ -15,7 +15,6 @@ class RoomTest {
                 .reviewScore(5.8f)
                 .superHost(true)
                 .thumbnail("http://sldkjf")
-                .totalPrice(100000)
                 .title("서울 집")
                 .build();
 
