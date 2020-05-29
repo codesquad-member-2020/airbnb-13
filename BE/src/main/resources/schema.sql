@@ -1,44 +1,45 @@
-drop table if exists user;
-drop table if exists room;
-drop table if exists reservation;
-drop table if exists reservation_date;
+DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS room;
+DROP TABLE IF EXISTS reservation;
+DROP TABLE IF EXISTS reservation_date;
 
-create table user
+CREATE TABLE user
 (
-    id    bigint primary key auto_increment,
-    email varchar(128) unique
+    id    BIGINT PRIMARY KEY AUTO_INCREMENT,
+    email VARCHAR(128) UNIQUE
 );
 
-create table room
+CREATE TABLE room
 (
-    id           bigint primary key auto_increment,
-    title        varchar(512),
-    thumbnail    varchar(256),
-    super_host   tinyint(1),
-    address      varchar(512),
-    location     varchar(45),
-    latitude     float,
-    longitude    float,
-    accommodates int,
-    price        int,
-    cleaning_fee int,
-    review_score float
+    id           BIGINT PRIMARY KEY AUTO_INCREMENT,
+    title        VARCHAR(512),
+    thumbnail    VARCHAR(256),
+    super_host   TINYINT(1),
+    address      VARCHAR(512),
+    location     VARCHAR(45),
+    latitude     FLOAT,
+    longitude    FLOAT,
+    accommodates INT,
+    price        INT,
+    cleaning_fee INT,
+    review_score FLOAT
 );
 
-create table reservation
+CREATE TABLE reservation
 (
-    id      bigint auto_increment primary key,
-    adult   int,
-    child   int,
-    infant  int,
-    user_id bigint references user (id),
-    room_id bigint references room (id)
+    id      BIGINT PRIMARY KEY AUTO_INCREMENT,
+    adult   INT,
+    child   INT,
+    infant  INT,
+    user_id BIGINT REFERENCES user (id),
+    room_id BIGINT REFERENCES room (id)
 );
 
-create table reservation_date
+CREATE TABLE reservation_date
 (
-    id               bigint auto_increment primary key,
+    id               BIGINT PRIMARY KEY AUTO_INCREMENT,
     reservation_date DATE,
-    reservation_id   bigint references reservation (id)
+    reservation_id   BIGINT REFERENCES reservation (id),
+    reservation_key  INT
 );
 

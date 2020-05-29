@@ -15,9 +15,4 @@ class RoomServiceTest {
     @Autowired
     private RoomService roomService;
 
-    @Test
-    public void findAll() {
-        List<Room> rooms = roomService.findPage(1, 10);
-        assertThat(rooms).isNotNull();
-    }
 }
