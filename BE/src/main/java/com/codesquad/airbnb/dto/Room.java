@@ -4,13 +4,11 @@ package com.codesquad.airbnb.dto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
-import org.springframework.data.annotation.Id;
 
 @Getter
 @ToString
 public class Room {
 
-    @Id
     private final Long id;
 
     private final Boolean superHost;
@@ -25,10 +23,9 @@ public class Room {
 
     private final String thumbnail;
 
-
     @Builder
     public Room(Long id, Boolean superHost, String location, String title, Integer price,
-                Float reviewScore, String thumbnail) {
+                Float reviewScore, String thumbnail, String checkIn, String checkOut) {
         this.id = id;
         this.superHost = superHost;
         this.location = location;
