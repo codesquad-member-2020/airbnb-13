@@ -11,7 +11,7 @@ const theme = {
     large: '19px',
     ragular: '16px',
     small: '14px',
-    micro: '8px'
+    micro: '11px'
   }
 };
 
