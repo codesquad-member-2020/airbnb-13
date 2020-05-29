@@ -26,7 +26,7 @@ const Bars = ({ barData, maxHeight, limit }: BarsProp) => {
         align-items: flex-end;
       `}>
       {barData.map((count, index) => {
-        return <Bar height={oneUnitHeight * count} isOn={isOn(limit.min, limit.max)(index)}></Bar>;
+        return <Bar key={index} height={oneUnitHeight * count} isOn={isOn(limit.min, limit.max)(index)}></Bar>;
       })}
     </FlexLayout>
   );

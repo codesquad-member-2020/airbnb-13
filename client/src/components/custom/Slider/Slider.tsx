@@ -48,7 +48,7 @@ const Slider = () => {
           <input
             type="range"
             id="input-left"
-            onInput={leftInputHandler}
+            onChange={leftInputHandler}
             min={range.min}
             max={range.max}
             value={leftValue.value}
@@ -56,7 +56,7 @@ const Slider = () => {
           <input
             type="range"
             id="input-right"
-            onInput={rightInputHandler}
+            onChange={rightInputHandler}
             min={range.min}
             max={range.max}
             value={rightValue.value}
