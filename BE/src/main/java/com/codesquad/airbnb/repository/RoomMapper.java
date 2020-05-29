@@ -21,7 +21,6 @@ public class RoomMapper implements RowMapper<Room> {
                 .location(rs.getString("location"))
                 .title(rs.getString("title"))
                 .price(rs.getInt("price"))
-                .discountedPrice(superHost ? discountPrice(rs.getInt("price")) : null)
                 .reviewScore(rs.getFloat("review_score"))
                 .thumbnail(rs.getString("thumbnail"))
                 .build();

@@ -1,7 +1,6 @@
 package com.codesquad.airbnb.dto;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
@@ -26,16 +25,10 @@ public class Room {
 
     private final String thumbnail;
 
-    private final Integer totalPrice;
-
-    private final Integer discountedPrice;
-
-    @JsonIgnore
-    private int diff;
 
     @Builder
     public Room(Long id, Boolean superHost, String location, String title, Integer price,
-                Float reviewScore, String thumbnail, Integer totalPrice, Integer discountedPrice, int diff) {
+                Float reviewScore, String thumbnail) {
         this.id = id;
         this.superHost = superHost;
         this.location = location;
@@ -43,7 +36,5 @@ public class Room {
         this.price = price;
         this.reviewScore = reviewScore;
         this.thumbnail = thumbnail;
-        this.totalPrice = totalPrice * diff;
-        this.discountedPrice = discountedPrice;
     }
 }
