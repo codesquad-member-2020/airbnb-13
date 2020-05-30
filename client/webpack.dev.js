@@ -28,7 +28,8 @@ module.exports = {
       },
       {
         test: /\.ts(x)?$/,
-        use: ['babel-loader', 'ts-loader']
+        use: ['babel-loader', 'ts-loader'],
+        exclude: ['/stories']
       }
     ]
   },
@@ -38,6 +39,7 @@ module.exports = {
       '@': path.resolve(__dirname, 'src/'),
       '@Action': path.resolve(__dirname, 'src/action/'),
       '@Reducer': path.resolve(__dirname, 'src/reducer/'),
+      '@Saga': path.resolve(__dirname, 'src/saga/'),
       '@Cards': path.resolve(__dirname, 'src/components/Cards/'),
       '@Custom': path.resolve(__dirname, 'src/components/custom/'),
       '@Filters': path.resolve(__dirname, 'src/components/Filters/'),

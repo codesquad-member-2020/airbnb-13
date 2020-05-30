@@ -8,11 +8,9 @@ export default {
 
 const Temp = () => {
   const [days, setDays] = useState(0);
-  const [startDateStr, setStartDateStr] = useState('');
-  const [endDateStr, setEndDateStr] = useState('');
   return (
     <div>
-      <DateFilter setDays={setDays} setStartDateStr={setStartDateStr} setEndDateStr={setEndDateStr} />
+      <DateFilter setDays={setDays} />
     </div>
   );
 };
