@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import DateFilter from '@/components/Filters/DateFilter/DateFilter';
+import DateFilter from '@Filters/DateFilter/DateFilter';
 
 export default {
   title: 'components|Date',
