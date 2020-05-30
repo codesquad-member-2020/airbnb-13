@@ -5,6 +5,8 @@ import moment from 'moment';
 import 'moment/locale/ko';
 import styled from '@emotion/styled';
 import 'react-dates/lib/css/_datepicker.css';
+import { useDispatch } from 'react-redux';
+import { setDateFilter } from '@Action/filterAction';
 
 type DateFilterFocus = {
   focus: Focus;
@@ -14,15 +16,15 @@ type Focus = 'startDate' | 'endDate' | null;
 
 type DateProp = {
   setDays: React.Dispatch<React.SetStateAction<number>>;
-  setStartDateStr: React.Dispatch<React.SetStateAction<string>>;
-  setEndDateStr: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const AirBnbCalendar = ({ setDays, setStartDateStr, setEndDateStr }: DateProp) => {
+const AirBnbCalendar = ({ setDays }: DateProp) => {
   const [focused, setFocused] = useState<Focus>(null);
   const [startDate, setStartDate] = useState<moment.Moment | null>(null);
   const [endDate, setEndDate] = useState<moment.Moment | null>(null);
+  const dispatch = useDispatch();
   moment.locale('ko');
+
   return (
     <StyledDatePickerWrapper focus={focused}>
       <DateRangePicker
@@ -35,9 +37,8 @@ const AirBnbCalendar = ({ setDays, setStartDateStr, setEndDateStr }: DateProp) =
         onDatesChange={({ startDate, endDate }) => {
           setStartDate(startDate);
           setEndDate(endDate);
-          startDate && setStartDateStr(startDate.format('YYYY-MM-DD'));
-          endDate && setEndDateStr(endDate.format('YYYY-MM-DD'));
           if (startDate && endDate) {
+            dispatch(setDateFilter(startDate.format('YYYY-MM-DD'), endDate.format('YYYY-MM-DD')));
             const diff = moment.duration(endDate.diff(startDate));
             setDays(diff.asDays() + 1);
           }

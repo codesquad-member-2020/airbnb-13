@@ -36,6 +36,8 @@ module.exports = {
     extensions: ['.js', 'jsx', '.ts', '.tsx'], // WDS가 serve하는 파일은 javascript
     alias: {
       '@': path.resolve(__dirname, 'src/'),
+      '@Action': path.resolve(__dirname, 'src/action/'),
+      '@Reducer': path.resolve(__dirname, 'src/reducer/'),
       '@Cards': path.resolve(__dirname, 'src/components/Cards/'),
       '@Custom': path.resolve(__dirname, 'src/components/custom/'),
       '@Filters': path.resolve(__dirname, 'src/components/Filters/'),

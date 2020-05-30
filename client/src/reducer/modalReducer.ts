@@ -1,6 +1,5 @@
-import React from 'react';
-import { TURN_ON_MODAL, TURN_OFF_MODAL, ModalAction, turnOnModal } from '../action/modalAction';
-import modals from '../components/Modal/AvailableModal';
+import { TURN_ON_MODAL, TURN_OFF_MODAL, ModalAction, turnOnModal } from '@Action/modalAction';
+import modals from '@Modal/AvailableModal';
 import Reservation from '@Modal/Reservation/Reservation';
 
 type ModalState = {

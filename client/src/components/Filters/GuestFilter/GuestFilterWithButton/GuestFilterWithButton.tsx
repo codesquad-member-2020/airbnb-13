@@ -3,18 +3,12 @@ import { jsx, css } from '@emotion/core';
 import { useState } from 'react';
 import GuestFilter from '../GuestFilter';
 import FilterButton from '@Custom/FilterButton/FilterButton';
+import { useSelector } from 'react-redux';
+import { RootState } from '@Reducer/index';
 
-type GuestProp = {
-  adult: number;
-  setAdult: React.Dispatch<React.SetStateAction<number>>;
-  child: number;
-  setChild: React.Dispatch<React.SetStateAction<number>>;
-  baby: number;
-  setBaby: React.Dispatch<React.SetStateAction<number>>;
-};
-
-const GuestFilterWithButton = ({ adult, setAdult, child, setChild, baby, setBaby }: GuestProp) => {
+const GuestFilterWithButton = () => {
   const [focused, setFocused] = useState(false);
+  const { adult, child, baby } = useSelector((state: RootState) => state.filterReducer);
 
   return (
     <div css={styled}>
@@ -27,12 +21,6 @@ const GuestFilterWithButton = ({ adult, setAdult, child, setChild, baby, setBaby
       </FilterButton>
       {focused && (
         <GuestFilter
-          adult={adult}
-          setAdult={setAdult}
-          child={child}
-          setChild={setChild}
-          baby={baby}
-          setBaby={setBaby}
           onBlur={() => {
             setFocused(false);
           }}

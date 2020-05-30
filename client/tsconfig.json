@@ -19,6 +19,8 @@
 
     "paths": {
       "@/*": ["src/*"],
+      "@Action/*": ["src/action/*"],
+      "@Reducer/*": ["src/reducer/*"],
       "@Cards/*": ["src/components/Cards/*"],
       "@Custom/*": ["src/components/custom/*"],
       "@Filters/*": ["src/components/Filters/*"],

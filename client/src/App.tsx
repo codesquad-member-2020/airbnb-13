@@ -5,13 +5,12 @@ import { ThemeProvider } from 'emotion-theming';
 import theme from './style/theme';
 import Modal from '@Modal/Modal';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from './reducer';
-import { turnOnModal } from './action/modalAction';
-import Filters from '@/components/Filters/Filters';
+import { RootState } from '@Reducer/index';
+import { turnOnModal } from '@Action/modalAction';
+import Filters from '@Filters/Filters';
 
 const App = () => {
-  const on = useSelector((state: RootState) => state.modalReducer.on);
-  const content = useSelector((state: RootState) => state.modalReducer.content);
+  const { on, content } = useSelector((state: RootState) => state.modalReducer);
   const dispatch = useDispatch();
   const onClickHandler = () => dispatch(turnOnModal('Reservation'));
 
