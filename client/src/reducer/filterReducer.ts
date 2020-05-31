@@ -26,7 +26,7 @@ const initialState = {
   child: 0,
   baby: 0,
   startPrice: 0,
-  endPrice: 0
+  endPrice: 100
 };
 
 const handleGuestFilter = (type: GuestType, count: number) => {

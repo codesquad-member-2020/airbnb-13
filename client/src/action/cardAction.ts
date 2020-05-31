@@ -2,6 +2,7 @@ import { CardProp } from '@Cards/Card/Card';
 export const SET_NEW_CARD_SET = 'SET_NEW_CARD_SET';
 export const SET_NEXT_CARD_SET = 'SET_NEXT_CARD_SET';
 export const SET_START_CARD_SET = 'SET_START_CARD_SET';
+export const GET_NEXT_CARD_SET = 'GET_NEXT_CARD_SET';
 
 export const setNextCardSet = (cards: CardProp[]) => {
   return {
@@ -23,7 +24,14 @@ export const setStartCardSet = () => {
   };
 };
 
+export const getNextCardSet = () => {
+  return {
+    type: GET_NEXT_CARD_SET
+  };
+};
+
 export type CardAction =
   | ReturnType<typeof setNewCardSet>
   | ReturnType<typeof setNextCardSet>
-  | ReturnType<typeof setStartCardSet>;
+  | ReturnType<typeof setStartCardSet>
+  | ReturnType<typeof getNextCardSet>;

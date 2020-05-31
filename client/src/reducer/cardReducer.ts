@@ -5,7 +5,8 @@ import {
   SET_START_CARD_SET,
   CardAction,
   setNextCardSet,
-  setNewCardSet
+  setNewCardSet,
+  GET_NEXT_CARD_SET
 } from '@Action/cardAction';
 
 type CardState = {
@@ -34,6 +35,11 @@ const cardReducer = (state: CardState = initialState, action: CardAction) => {
       };
     }
     case SET_START_CARD_SET: {
+      return {
+        ...state
+      };
+    }
+    case GET_NEXT_CARD_SET: {
       return {
         ...state
       };

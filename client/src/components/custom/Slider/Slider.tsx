@@ -17,28 +17,34 @@ export type SliderValue = {
   percent: number;
 };
 
+export type SliderRange = {
+  min: number;
+  max: number;
+  setFilter: Function;
+};
+
 const BarData = [2, 1, 3, 4, 9, 9, 1, 2, 3, 4, 5, 8, 0, 17, 19, 22, 4, 6, 1, 10];
 
-const Slider = () => {
+const Slider = ({ min, max, setFilter }: SliderRange) => {
   const [leftValue, setLeftValue] = useSliderValue({
-    value: 25,
-    percent: 25
+    value: min,
+    percent: 0
   });
   const [rightValue, setRightValue] = useSliderValue({
-    value: 75,
-    percent: 75
+    value: max,
+    percent: 100
   });
-
-  const [range, setRange] = useState({ min: 0, max: 100 });
 
   const leftInputHandler = (e: React.FormEvent<HTMLInputElement>) => {
     const value = Math.min(parseInt(e.currentTarget.value), rightValue.value);
-    setLeftValue(range.min, range.max)(value);
+    setLeftValue(min, max)(value);
+    setFilter(leftValue.value, rightValue.value);
   };
 
   const rightInputHandler = (e: React.FormEvent<HTMLInputElement>) => {
     const value = Math.max(parseInt(e.currentTarget.value), leftValue.value);
-    setRightValue(range.min, range.max)(value);
+    setRightValue(min, max)(value);
+    setFilter(leftValue.value, rightValue.value);
   };
 
   return (
@@ -46,20 +52,13 @@ const Slider = () => {
       <Bars barData={BarData} maxHeight={30} limit={{ min: leftValue.percent, max: rightValue.percent }} />
       <Middle>
         <div className="multi-range-slider">
-          <input
-            type="range"
-            id="input-left"
-            onChange={leftInputHandler}
-            min={range.min}
-            max={range.max}
-            value={leftValue.value}
-          />
+          <input type="range" id="input-left" onChange={leftInputHandler} min={min} max={max} value={leftValue.value} />
           <input
             type="range"
             id="input-right"
             onChange={rightInputHandler}
-            min={range.min}
-            max={range.max}
+            min={min}
+            max={max}
             value={rightValue.value}
           />
           <SliderWrap leftPercent={leftValue.percent} rightPercent={rightValue.percent}>
@@ -71,9 +70,9 @@ const Slider = () => {
         </div>
       </Middle>
       <FlexLayout direction={'row'} align={'spaceBetween'} alignItemCenter={true} customCSS={inputWrapStyle}>
-        <PriceInput price={leftValue} setPrice={setLeftValue(range.min, range.max)} title={'최저 요금'} />
+        <PriceInput price={leftValue} setPrice={setLeftValue(min, max)} title={'최저 요금'} />
         <span>~</span>
-        <PriceInput price={rightValue} setPrice={setRightValue(range.min, range.max)} title={'최고 요금'} />
+        <PriceInput price={rightValue} setPrice={setRightValue(min, max)} title={'최고 요금'} />
       </FlexLayout>
     </FlexLayout>
   );
