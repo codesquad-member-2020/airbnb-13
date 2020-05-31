@@ -11,10 +11,11 @@ export type CardDetailProp = {
   title: string;
   price: number;
   reviewScore: number;
+  discountPrice: number | null;
   totalPrice: number;
 };
 
-const CardDetail = ({ superHost, location, title, price, reviewScore, totalPrice }: CardDetailProp) => {
+const CardDetail = ({ superHost, location, title, price, reviewScore, discountPrice, totalPrice }: CardDetailProp) => {
   return (
     <FlexLayout direction="column" align="left" gap={'1rem'} width={'100%'}>
       <FlexLayout direction="row" align="spaceBetween">
@@ -38,17 +39,19 @@ const CardDetail = ({ superHost, location, title, price, reviewScore, totalPrice
         {title}
       </div>
       <div>
-        <span
-          css={theme => ({
-            fontSize: theme.fontSizes.ragular,
-            color: theme.colors.gray,
-            marginRight: '3px',
-            textDecoration: 'line-through'
-          })}>
-          &#8361;{price}
-        </span>
+        {discountPrice && (
+          <span
+            css={theme => ({
+              fontSize: theme.fontSizes.ragular,
+              color: theme.colors.gray,
+              marginRight: '3px',
+              textDecoration: 'line-through'
+            })}>
+            &#8361;{price}
+          </span>
+        )}
         <span css={theme => ({ fontSize: theme.fontSizes.ragular, color: theme.colors.darkGray, fontWeight: 'bold' })}>
-          &#8361;239,816
+          &#8361;{discountPrice ? discountPrice : price}
         </span>
         <span>/1박</span>
       </div>

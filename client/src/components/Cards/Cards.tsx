@@ -24,6 +24,7 @@ const Cards = () => {
           location={card.location}
           title={card.title}
           reviewScore={card.reviewScore}
+          discountPrice={card.discountPrice}
           totalPrice={card.totalPrice}
           price={card.price}
         />
