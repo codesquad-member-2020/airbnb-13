@@ -7,6 +7,7 @@ import Modal from '@Modal/Modal';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@Reducer/index';
 import { turnOnModal } from '@Action/modalAction';
+import Header from '@Header/Header';
 import Filters from '@Filters/Filters';
 
 const App = () => {
@@ -16,6 +17,7 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
+      <Header />
       {/* <button onClick={onClickHandler}>click</button>
       {on && <Modal content={content} />} */}
       <div css={wrapStyle}>

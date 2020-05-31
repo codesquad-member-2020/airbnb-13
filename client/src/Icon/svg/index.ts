@@ -3,3 +3,4 @@ export { ReactComponent as minus } from './minus.svg';
 export { ReactComponent as close } from './close.svg';
 export { ReactComponent as star } from './star.svg';
 export { ReactComponent as arrow } from './arrow.svg';
+export { ReactComponent as hotel } from './hotel.svg';

@@ -43,6 +43,7 @@ module.exports = {
       '@Cards': path.resolve(__dirname, 'src/components/Cards/'),
       '@Custom': path.resolve(__dirname, 'src/components/custom/'),
       '@Filters': path.resolve(__dirname, 'src/components/Filters/'),
+      '@Header': path.resolve(__dirname, 'src/components/Header/'),
       '@Modal': path.resolve(__dirname, 'src/components/Modal'),
       $Icon: path.resolve(__dirname, 'src/Icon/'),
       $Style: path.resolve(__dirname, 'src/style/'),
