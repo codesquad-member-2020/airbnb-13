@@ -34,6 +34,7 @@ export const defaultCard = () => {
         reviewScore={reviewScore}
         discountPrice={discountPrice}
         totalPrice={totalPrice}
+        id={5}
       />
     </ThemeProvider>
   );
@@ -56,7 +57,8 @@ export const card = () => {
         reviewScore={3.7}
         discountPrice={50000}
         totalPrice={70000}
-        price={90000}></Card>
+        price={90000}
+        id={4}></Card>
     </ThemeProvider>
   );
 };

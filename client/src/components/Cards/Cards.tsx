@@ -27,6 +27,7 @@ const Cards = () => {
           discountPrice={card.discountPrice}
           totalPrice={card.totalPrice}
           price={card.price}
+          id={card.id}
         />
       ))}
     </CardLayout>

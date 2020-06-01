@@ -4,8 +4,9 @@ import FlexLayout from '@Custom/FlexLayout/FlexLayout';
 import Button from '@Custom/Button/Button';
 import Icon from '$Icon/Icon';
 import SuperHost from './SuperHost/SuperHost';
-import { turnOnModal } from '@Action/modalAction';
-import { useDispatch } from 'react-redux';
+import { turnOnReservationModal, turnOnModal } from '@Action/modalAction';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@Reducer/index';
 
 export type CardDetailProp = {
   superHost: boolean;
@@ -15,12 +16,29 @@ export type CardDetailProp = {
   reviewScore: number;
   discountPrice: number | null;
   totalPrice: number;
+  id: number;
 };
 
-const CardDetail = ({ superHost, location, title, price, reviewScore, discountPrice, totalPrice }: CardDetailProp) => {
+const CardDetail = ({
+  superHost,
+  location,
+  title,
+  price,
+  reviewScore,
+  discountPrice,
+  totalPrice,
+  id
+}: CardDetailProp) => {
   const dispatch = useDispatch();
-  const turnOnReservationModal = () => {
-    dispatch(turnOnModal('Reservation'));
+  const { startDate, endDate, adult, child, baby } = useSelector((state: RootState) => state.filterReducer);
+  const onClickHandler = () => {
+    dispatch(turnOnReservationModal(id));
+  };
+  const isAvailable = () => {
+    const guest = adult + child + baby;
+    const isSetDate = !!startDate && !!endDate;
+
+    return isSetDate && !!guest;
   };
 
   return (
@@ -67,7 +85,7 @@ const CardDetail = ({ superHost, location, title, price, reviewScore, discountPr
           <span>총 요금: </span>
           <span>&#8361;{totalPrice}</span>
         </div>
-        <Button theme={'primary'} fontSize={'medium'} width={'25%'} onClick={turnOnReservationModal}>
+        <Button theme={'primary'} fontSize={'medium'} width={'25%'} onClick={onClickHandler} disabled={!isAvailable()}>
           예약
         </Button>
       </FlexLayout>

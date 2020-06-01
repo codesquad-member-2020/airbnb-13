@@ -1,4 +1,11 @@
-import { TURN_ON_MODAL, TURN_OFF_MODAL, ModalAction, turnOnModal } from '@Action/modalAction';
+import {
+  TURN_ON_MODAL,
+  TURN_OFF_MODAL,
+  TURN_ON_RESERVATION_MODAL,
+  ModalAction,
+  turnOnModal,
+  turnOnReservationModal
+} from '@Action/modalAction';
 import modals from '@Modal/AvailableModal';
 import Reservation from '@Modal/Reservation/Reservation';
 
@@ -19,6 +26,13 @@ const modalReducer = (state: ModalState = initialState, action: ModalAction) => 
       return {
         on: true,
         content: modals[newAction.modalType]
+      };
+    case TURN_ON_RESERVATION_MODAL:
+      const reservation = action as ReturnType<typeof turnOnReservationModal>;
+      return {
+        on: true,
+        content: modals['Reservation'],
+        id: reservation.id
       };
     case TURN_OFF_MODAL:
       return {

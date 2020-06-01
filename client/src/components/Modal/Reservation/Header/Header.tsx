@@ -3,11 +3,15 @@ import { jsx, css } from '@emotion/core';
 import Icon from '$Icon/Icon';
 import FlexLayout from '@Custom/FlexLayout/FlexLayout';
 
-const Header = () => {
+type HeaderProp = {
+  price: number;
+};
+
+const Header = ({ price }: HeaderProp) => {
   return (
     <FlexLayout direction="column" align="left" customCSS={wrapperStyle}>
       <div>
-        <strong css={theme => ({ fontSize: theme.fontSizes.title3 })}>&#8361;99,652</strong>
+        <strong css={theme => ({ fontSize: theme.fontSizes.title3 })}>&#8361;{price}</strong>
         <span css={theme => ({ fontSize: theme.fontSizes.small, color: theme.colors.darkGray })}>/박</span>
       </div>
       <span>
