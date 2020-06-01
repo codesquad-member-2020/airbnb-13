@@ -35,6 +35,7 @@ export const defaultCard = () => {
         discountPrice={discountPrice}
         totalPrice={totalPrice}
         id={5}
+        refCard={null}
       />
     </ThemeProvider>
   );
@@ -58,7 +59,8 @@ export const card = () => {
         discountPrice={50000}
         totalPrice={70000}
         price={90000}
-        id={4}></Card>
+        id={4}
+        refCard={null}></Card>
     </ThemeProvider>
   );
 };

@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { MutableRefObject } from 'react';
 import CardImg, { CardImgProp } from './CardImg/CardImg';
 import CardDetail, { CardDetailProp } from './CardDetail/CardDetail';
 import FlexLayout from '@Custom/FlexLayout/FlexLayout';
 
-export type CardProp = CardDetailProp & CardImgProp;
+export type CardProp = CardDetailProp &
+  CardImgProp & {
+    refCard: ((instance: HTMLDivElement | null) => void) | null;
+  };
 
 const Card = ({
   superHost,
@@ -14,10 +17,11 @@ const Card = ({
   thumbnail,
   discountPrice,
   totalPrice,
-  id
+  id,
+  refCard
 }: CardProp) => {
   return (
-    <FlexLayout direction="column" align="left" gap={'1rem'} width={'30%'}>
+    <FlexLayout direction="column" align="left" gap={'1rem'} width={'30%'} refFlexLayout={refCard}>
       <CardImg thumbnail={thumbnail} />
       <CardDetail
         superHost={superHost}

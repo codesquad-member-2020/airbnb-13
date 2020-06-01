@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx, css, SerializedStyles } from '@emotion/core';
-import { ReactNode } from 'react';
+import { ReactNode, MutableRefObject } from 'react';
 
 export type FlexLayoutProps = {
   children: ReactNode;
@@ -11,9 +11,20 @@ export type FlexLayoutProps = {
   width?: string | number;
   alignItemCenter?: boolean;
   customCSS?: SerializedStyles;
+  refFlexLayout?: ((instance: HTMLDivElement | null) => void) | null;
 };
 
-const FlexLayout = ({ children, direction, wrap, align, gap, width, alignItemCenter, customCSS }: FlexLayoutProps) => {
+const FlexLayout = ({
+  children,
+  direction,
+  wrap,
+  align,
+  gap,
+  width,
+  alignItemCenter,
+  customCSS,
+  refFlexLayout
+}: FlexLayoutProps) => {
   const cssArray = [
     style,
     alignItemCenterStyle(alignItemCenter),
@@ -24,7 +35,11 @@ const FlexLayout = ({ children, direction, wrap, align, gap, width, alignItemCen
     { width }
   ];
   customCSS && cssArray.push(customCSS);
-  return <div css={cssArray}>{children}</div>;
+  return (
+    <div ref={refFlexLayout} css={cssArray}>
+      {children}
+    </div>
+  );
 };
 
 export default FlexLayout;

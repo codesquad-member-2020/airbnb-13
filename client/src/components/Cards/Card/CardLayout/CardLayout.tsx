@@ -1,16 +1,21 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
-import { ReactNode } from 'react';
+import { ReactNode, MutableRefObject } from 'react';
 
 export type CardLayoutProps = {
   children: ReactNode;
   gap?: number | string;
   width?: string | number;
   top: string | number;
+  refCardLayout: MutableRefObject<null> | null;
 };
 
-const CardLayout = ({ children, gap, width, top }: CardLayoutProps) => {
-  return <div css={[style, gapStyle(gap), topStyle(top), { width }]}>{children}</div>;
+const CardLayout = ({ children, gap, width, top, refCardLayout }: CardLayoutProps) => {
+  return (
+    <div ref={refCardLayout} css={[style, gapStyle(gap), topStyle(top), { width }]}>
+      {children}
+    </div>
+  );
 };
 
 export default CardLayout;
