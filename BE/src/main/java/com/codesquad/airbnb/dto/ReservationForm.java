@@ -1,9 +1,10 @@
 package com.codesquad.airbnb.dto;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Getter
 @ToString
@@ -15,11 +16,12 @@ public class ReservationForm {
 
     private final Integer infants;
 
-    private final Date checkIn;
+    private final LocalDate checkIn;
 
-    private final Date checkOut;
+    private final LocalDate checkOut;
 
-    public ReservationForm(Integer adults, Integer children, Integer infants, Date checkIn, Date checkOut) {
+    @Builder
+    public ReservationForm(Integer adults, Integer children, Integer infants, LocalDate checkIn, LocalDate checkOut) {
         this.adults = adults;
         this.children = children;
         this.infants = infants;

@@ -1,13 +1,12 @@
 package com.codesquad.airbnb.utils;
 
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 public class DayCalculator {
 
-    public static int getDiffDays(Date day1, Date day2) {
-        long diff = day2.getTime() - day1.getTime();
-        TimeUnit time = TimeUnit.MILLISECONDS;
-        return (int) time.toDays(diff);
+    public static int getDiffDays(LocalDate day1, LocalDate day2) {
+
+        return (int) ChronoUnit.DAYS.between(day1, day2);
     }
 }

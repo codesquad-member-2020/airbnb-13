@@ -7,6 +7,7 @@ import com.codesquad.airbnb.utils.DayCalculator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -37,8 +38,8 @@ public class RoomService {
     }
 
     private boolean isValidReservationForm(ReservationForm reservationForm) {
-        Date checkIn = reservationForm.getCheckIn();
-        Date checkOut = reservationForm.getCheckOut();
+        LocalDate checkIn = reservationForm.getCheckIn();
+        LocalDate checkOut = reservationForm.getCheckOut();
 
         if (checkIn == null || checkOut == null) {
             return false;
@@ -47,14 +48,14 @@ public class RoomService {
         return DayCalculator.getDiffDays(checkIn, checkOut) > 0;
     }
 
-    private void addReservationDates(Long reservationId, Date checkIn, Date checkOut) {
+    private void addReservationDates(Long reservationId, LocalDate checkIn, LocalDate checkOut) {
         long diff = DayCalculator.getDiffDays(checkIn, checkOut);
-        Calendar c = Calendar.getInstance();
+        Calendar calendar = Calendar.getInstance();
 
-        for (int i = 0; i < diff; i++) {
-            c.setTime(checkIn);
-            c.add(Calendar.DATE, i);
-            roomDao.addReservationDate(reservationId, c.getTime());
-        }
+//        for (int i = 0; i < diff; i++) {
+//            calendar.setTime(checkIn);
+//            calendar.add(Calendar.DATE, i);
+//            roomDao.addReservationDate(reservationId, calendar.getTime());
+//        }
     }
 }

@@ -11,8 +11,10 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Repository
@@ -75,10 +77,10 @@ public class RoomDao {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         namedJdbcTemplate.update(sql, parameters, keyHolder);
 
-        return keyHolder.getKey().longValue();
+        return Objects.requireNonNull(keyHolder.getKey()).longValue();
     }
 
-    public void addReservationDate(Long reservationId, Date date) {
+    public void addReservationDate(Long reservationId, LocalDate date) {
         String sql = "INSERT INTO reservation_date (reservation_id , reservation_date)" +
                 "VALUES (:reservationId, :reservationDate)";
         SqlParameterSource parameters = new MapSqlParameterSource()

@@ -1,6 +1,5 @@
 package com.codesquad.airbnb.controller;
 
-import com.codesquad.airbnb.repository.RoomRepository;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +12,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 class RoomControllerTest {
-
-    @Autowired
-    private RoomRepository roomRepository;
 
     @InjectMocks
     private RoomController roomController;

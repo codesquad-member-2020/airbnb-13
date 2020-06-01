@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.ToString;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 @Getter
@@ -25,9 +27,9 @@ public class RoomResponse {
 
     private final String thumbnail;
 
-    private Integer discountPrice;
+    private final Integer discountPrice;
 
-    private int totalPrice;
+    private final int totalPrice;
 
     public RoomResponse(Room room, String checkIn, String checkOut) {
         this.id = room.getId();
@@ -46,11 +48,10 @@ public class RoomResponse {
     }
 
     private int calcTotalPrice(String checkIn, String checkOut, int price, boolean superHost) {
-        String pattern = "yyyy-MM-dd";
-        SimpleDateFormat format = new SimpleDateFormat(pattern);
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         try {
-            Date checkInDate = format.parse(checkIn);
-            Date checkOutDate = format.parse(checkOut);
+            LocalDate checkInDate = LocalDate.parse(checkIn, format);
+            LocalDate checkOutDate = LocalDate.parse(checkOut, format);
             int dateDiff = DayCalculator.getDiffDays(checkInDate, checkOutDate);
             return superHost ? dateDiff * calcDiscountPrice(price) : dateDiff * price;
         } catch (Exception e) {
