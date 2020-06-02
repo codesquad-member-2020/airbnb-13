@@ -5,12 +5,52 @@ import moment from 'moment';
 import 'moment/locale/ko';
 import styled from '@emotion/styled';
 import 'react-dates/lib/css/_datepicker.css';
+import { useDispatch } from 'react-redux';
+import { setDateFilter } from '@Action/filterAction';
 
 type DateFilterFocus = {
   focus: Focus;
 };
 
 type Focus = 'startDate' | 'endDate' | null;
+
+const AirBnbCalendar = () => {
+  const [focused, setFocused] = useState<Focus>(null);
+  const [startDate, setStartDate] = useState<moment.Moment | null>(null);
+  const [endDate, setEndDate] = useState<moment.Moment | null>(null);
+  const dispatch = useDispatch();
+  moment.locale('ko');
+
+  return (
+    <StyledDatePickerWrapper focus={focused}>
+      <DateRangePicker
+        startDatePlaceholderText="체크인"
+        endDatePlaceholderText="체크아웃"
+        startDate={startDate}
+        startDateId="sunnyElly"
+        endDate={endDate}
+        endDateId="ariwon"
+        onDatesChange={({ startDate, endDate }) => {
+          setStartDate(startDate);
+          setEndDate(endDate);
+          if (startDate && endDate) {
+            dispatch(setDateFilter(startDate.format('YYYY-MM-DD'), endDate.format('YYYY-MM-DD')));
+          }
+        }}
+        focusedInput={focused}
+        onFocusChange={focus => setFocused(focus)}
+        monthFormat="YYYY[년] MMMM"
+        showClearDates
+        readOnly={true}
+        displayFormat="MMM D[일]"
+        customArrowIcon={<span>-</span>}
+        daySize={50}
+      />
+    </StyledDatePickerWrapper>
+  );
+};
+
+export default AirBnbCalendar;
 
 const StyledDatePickerWrapper = styled.div`
   & {
@@ -187,36 +227,3 @@ const StyledDatePickerWrapper = styled.div`
     }
   }
 `;
-
-const AirBnbCalendar = () => {
-  const [focused, setFocused] = useState<Focus>(null);
-  const [startDate, setStartDate] = useState<moment.Moment | null>(null);
-  const [endDate, setEndDate] = useState<moment.Moment | null>(null);
-  moment.locale('ko');
-  return (
-    <StyledDatePickerWrapper focus={focused}>
-      <DateRangePicker
-        startDatePlaceholderText="체크인"
-        endDatePlaceholderText="체크아웃"
-        startDate={startDate}
-        startDateId="213242dfefsdve"
-        endDate={endDate}
-        endDateId="er32aesdfvder"
-        onDatesChange={({ startDate, endDate }) => {
-          setStartDate(startDate);
-          setEndDate(endDate);
-        }}
-        focusedInput={focused}
-        onFocusChange={focus => setFocused(focus)}
-        monthFormat="YYYY[년] MMMM"
-        showClearDates
-        readOnly={true}
-        displayFormat="MMM D[일]"
-        customArrowIcon={<span>-</span>}
-        daySize={50}
-      />
-    </StyledDatePickerWrapper>
-  );
-};
-
-export default AirBnbCalendar;

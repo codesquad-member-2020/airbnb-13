@@ -1,5 +1,5 @@
 import React from 'react';
-import DateFilter from '@DateFilter/DateFilter';
+import DateFilter from '@Filters/DateFilter/DateFilter';
 
 export default {
   title: 'components|Date',

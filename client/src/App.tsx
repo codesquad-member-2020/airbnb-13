@@ -1,25 +1,32 @@
-import React from 'react';
-import Cards from './components/Cards/Cards';
+/** @jsx jsx */
+import { jsx, css } from '@emotion/core';
+import Cards from '@Cards/Cards';
 import { ThemeProvider } from 'emotion-theming';
-import theme from './style/theme';
-
+import theme from '$Style/theme';
 import Modal from '@Modal/Modal';
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from './reducer';
-import { turnOnModal } from './action/modalAction';
+import { useSelector } from 'react-redux';
+import { RootState } from '@Reducer/index';
+import Header from '@Header/Header';
+import Filters from '@Filters/Filters';
 
 const App = () => {
-  const on = useSelector((state: RootState) => state.modalReducer.on);
-  const content = useSelector((state: RootState) => state.modalReducer.content);
-  const dispatch = useDispatch();
-  const onClickHandler = () => dispatch(turnOnModal('Reservation'));
+  const { on, content } = useSelector((state: RootState) => state.modalReducer);
 
   return (
     <ThemeProvider theme={theme}>
-      <button onClick={onClickHandler}>click</button>
+      <Header />
       {on && <Modal content={content} />}
+      <div css={wrapStyle}>
+        <Filters />
+        <Cards />
+      </div>
     </ThemeProvider>
   );
 };
 
 export default App;
+
+const wrapStyle = css`
+  max-width: 900px;
+  margin: 50px auto;
+`;

@@ -1,7 +1,15 @@
 export const TURN_ON_MODAL = 'TURN_ON_MODAL';
 export const TURN_OFF_MODAL = 'TURN_OFF_MODAL';
+export const TURN_ON_RESERVATION_MODAL = 'TURN_ON_RESERVATION_MODAL';
 
 export type ModalType = 'Reservation';
+
+export const turnOnReservationModal = (id: number) => {
+  return {
+    type: TURN_ON_RESERVATION_MODAL,
+    id
+  };
+};
 
 export const turnOnModal = (modalType: ModalType) => {
   return {
@@ -16,4 +24,7 @@ export const turnOffModal = () => {
   };
 };
 
-export type ModalAction = ReturnType<typeof turnOffModal> | ReturnType<typeof turnOnModal>;
+export type ModalAction =
+  | ReturnType<typeof turnOnReservationModal>
+  | ReturnType<typeof turnOffModal>
+  | ReturnType<typeof turnOnModal>;

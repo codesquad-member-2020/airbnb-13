@@ -19,17 +19,22 @@ const Bars = ({ barData, maxHeight, limit }: BarsProp) => {
   const [setBarData, oneUnitHeight, isOn] = useDrawingBars(barData, maxHeight);
 
   return (
-    <FlexLayout
-      direction="row"
-      align="spaceAround"
-      customCSS={css`
-        align-items: flex-end;
-      `}>
+    <FlexLayout direction="row" align="spaceAround" customCSS={barsWrapStyle}>
       {barData.map((count, index) => {
-        return <Bar height={oneUnitHeight * count} isOn={isOn(limit.min, limit.max)(index)}></Bar>;
+        return <Bar key={index} height={oneUnitHeight * count} isOn={isOn(limit.min, limit.max)(index)}></Bar>;
       })}
     </FlexLayout>
   );
 };
 
 export default Bars;
+
+const barsWrapStyle = css`
+  align-items: flex-end;
+  > * {
+    margin-left: 2px;
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+`;

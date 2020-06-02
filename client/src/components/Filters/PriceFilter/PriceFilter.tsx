@@ -3,13 +3,18 @@ import { jsx, css } from '@emotion/core';
 import FlexLayout from '@Custom/FlexLayout/FlexLayout';
 import Button from '@Custom/Button/Button';
 import Slider from '@Custom/Slider/Slider';
+import { useSelector, useDispatch } from 'react-redux';
+import { setPriceFilter } from '@Action/filterAction';
+import { RootState } from '@Reducer/index';
 
 const PriceFilter = () => {
+  const dispatch = useDispatch();
+  const setFilter = (min: number, max: number) => dispatch(setPriceFilter(min, max));
   return (
     <div css={style}>
-      <FlexLayout direction="column" align="left">
-        <span>평균 1박 요금은 $123입니다</span>
-        <Slider />
+      <FlexLayout direction="column" align="left" gap={'1.5rem'}>
+        <div>평균 1박 요금은 $123입니다</div>
+        <Slider min={0} max={100} setFilter={setFilter} />
       </FlexLayout>
       <FlexLayout direction={'row'} align={'spaceBetween'} customCSS={customCSS}>
         <Button theme={'nooutline'} fontSize="medium" width={'3rem'}>

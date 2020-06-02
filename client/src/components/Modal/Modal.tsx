@@ -36,6 +36,7 @@ const modalDim = css`
   background: rgba(0, 0, 0, 0.5);
   top: 0;
   left: 0;
+  z-index: 100;
 `;
 
 const overlay = css`
@@ -44,15 +45,18 @@ const overlay = css`
   left: 0;
   width: 100%;
   height: 100%;
+  z-index: 200;
 `;
 
 const modalWrap = css`
   position: absolute;
   top: 50%;
   left: 50%;
+  width: 300px;
   transform: translate(-50%, -50%);
   background: #fff;
   padding: 1rem;
+  z-index: 300;
 `;
 
 const buttonWrapStyle = css`
