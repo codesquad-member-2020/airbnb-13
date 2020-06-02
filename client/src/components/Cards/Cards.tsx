@@ -21,20 +21,22 @@ const Cards = () => {
   const setRefTarget = (a: HTMLDivElement | null) => {
     setTarget(a);
   };
+  const options = {
+    root: null,
+    threshold: 0.5,
+    rootMargin: '-40px -20px'
+  };
 
   useEffect(() => {
-    const options = {
-      root: viewport.current,
-      threshold: 0
-    };
-    console.log(target);
     const handleIntersection = (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
+      console.log(entries);
       entries.forEach(entry => {
         if (!entry.isIntersecting) {
           return;
         }
-        console.log(entry.target);
+
         observer.unobserve(entry.target); // 기존 타겟을 unobserve 하고
+        dispatch(getNextCardSet());
         observer.observe(entry.target);
       });
     };
@@ -45,7 +47,7 @@ const Cards = () => {
       io.observe(target); // target
     }
     return () => io.disconnect();
-  }, [target, viewport]);
+  }, [target]);
 
   return (
     <CardLayout gap={'5%'} width={'100%'} top={'5rem'} refCardLayout={viewport}>
