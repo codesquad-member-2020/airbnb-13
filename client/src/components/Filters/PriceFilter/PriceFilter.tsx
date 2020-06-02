@@ -9,7 +9,6 @@ import { RootState } from '@Reducer/index';
 
 const PriceFilter = () => {
   const dispatch = useDispatch();
-  //const { startPrice, endPrice } = useSelector((state: RootState) => state.filterReducer);
   const setFilter = (min: number, max: number) => dispatch(setPriceFilter(min, max));
   return (
     <div css={style}>

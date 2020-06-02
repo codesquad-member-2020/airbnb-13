@@ -14,11 +14,7 @@ type DateFilterFocus = {
 
 type Focus = 'startDate' | 'endDate' | null;
 
-type DateProp = {
-  setDays: React.Dispatch<React.SetStateAction<number>>;
-};
-
-const AirBnbCalendar = ({ setDays }: DateProp) => {
+const AirBnbCalendar = () => {
   const [focused, setFocused] = useState<Focus>(null);
   const [startDate, setStartDate] = useState<moment.Moment | null>(null);
   const [endDate, setEndDate] = useState<moment.Moment | null>(null);
@@ -31,16 +27,14 @@ const AirBnbCalendar = ({ setDays }: DateProp) => {
         startDatePlaceholderText="체크인"
         endDatePlaceholderText="체크아웃"
         startDate={startDate}
-        startDateId="213242dfefsdve"
+        startDateId="sunnyElly"
         endDate={endDate}
-        endDateId="er32aesdfvder"
+        endDateId="ariwon"
         onDatesChange={({ startDate, endDate }) => {
           setStartDate(startDate);
           setEndDate(endDate);
           if (startDate && endDate) {
             dispatch(setDateFilter(startDate.format('YYYY-MM-DD'), endDate.format('YYYY-MM-DD')));
-            const diff = moment.duration(endDate.diff(startDate));
-            setDays(diff.asDays() + 1);
           }
         }}
         focusedInput={focused}

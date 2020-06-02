@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import DateFilter from '@Filters/DateFilter/DateFilter';
 
 export default {
@@ -6,15 +6,6 @@ export default {
   component: DateFilter
 };
 
-const Temp = () => {
-  const [days, setDays] = useState(0);
-  return (
-    <div>
-      <DateFilter setDays={setDays} />
-    </div>
-  );
-};
-
 export const dateFilter = () => {
-  return <Temp />;
+  return <DateFilter />;
 };
