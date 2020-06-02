@@ -60,6 +60,31 @@ public class RoomDao {
         return rooms.stream().map(room -> new RoomInfo(room, checkIn, checkOut)).collect(Collectors.toList());
     }
 
+    public List<Integer> findPriceByCondition(int adults, int children, int infants, String checkIn, String checkOut, int minPrice, int maxPrice) {
+        int totalGuest = adults + children + infants;
+
+        String roomsSql = "SELECT price , super_host " +
+                "FROM room " +
+                "WHERE id NOT IN ( SELECT DISTINCT (r.room_id) " +
+                "FROM reservation_date rd LEFT JOIN reservation r ON rd.reservation_id = r.id " +
+                "WHERE rd.reservation_date BETWEEN :checkIn AND :checkOut) " +
+                "AND room.accommodates >= :totalGuest " +
+                "AND room.price >= :minPrice ";
+
+        SqlParameterSource parameters = new MapSqlParameterSource()
+                .addValue("totalGuest", totalGuest)
+                .addValue("minPrice", minPrice)
+                .addValue("maxPrice", maxPrice)
+                .addValue("checkIn", checkIn)
+                .addValue("checkOut", checkOut);
+
+        if (maxPrice != 0) {
+            roomsSql += "and price <= :maxPrice ";
+        }
+
+        return namedJdbcTemplate.query(roomsSql, parameters, new PriceMapper());
+    }
+
     public Long addReservation(Long roomId, ReservationForm reservationForm) {
         // todo
         // user_id 작업하기
