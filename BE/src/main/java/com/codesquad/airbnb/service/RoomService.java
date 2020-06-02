@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -30,7 +29,7 @@ public class RoomService {
                 checkIn, checkOut,
                 minPrice, maxPrice);
 
-        PriceInfo price = new PriceInfo(rooms.stream().map(RoomInfo::getPrice).collect(Collectors.toList()));
+        PriceInfo price = new PriceInfo(roomDao.findPriceByCondition(adults, children, infants, checkIn, checkOut, minPrice, maxPrice));
 
         return RoomResponse.builder().price(price).room(rooms).build();
     }
