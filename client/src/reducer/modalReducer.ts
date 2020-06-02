@@ -39,9 +39,7 @@ const modalReducer = (state: ModalState = initialState, action: ModalAction) => 
         on: false
       };
     default:
-      return {
-        ...state
-      };
+      return state;
   }
 };
 

@@ -1,37 +1,37 @@
 import { CardProp } from '@Cards/Card/Card';
-export const SET_NEW_CARD_SET = 'SET_NEW_CARD_SET';
-export const SET_NEXT_CARD_SET = 'SET_NEXT_CARD_SET';
-export const SET_START_CARD_SET = 'SET_START_CARD_SET';
-export const GET_NEXT_CARD_SET = 'GET_NEXT_CARD_SET';
+export const SET_NEW_CARD_PAGE = 'SET_NEW_CARD_PAGE';
+export const SET_NEXT_CARD_PAGE = 'SET_NEXT_CARD_PAGE';
+export const SET_START_CARD_PAGE = 'SET_START_CARD_PAGE';
+export const GET_NEXT_CARD_PAGE = 'GET_NEXT_CARD_PAGE';
 
-export const setNextCardSet = (cards: CardProp[]) => {
+export const setNextCardPage = (cards: CardProp[]) => {
   return {
-    type: SET_NEXT_CARD_SET,
+    type: SET_NEXT_CARD_PAGE,
     cards
   };
 };
 
-export const setNewCardSet = (cards: CardProp[]) => {
+export const setNewCardPage = (cards: CardProp[]) => {
   return {
-    type: SET_NEW_CARD_SET,
+    type: SET_NEW_CARD_PAGE,
     cards
   };
 };
 
-export const setStartCardSet = () => {
+export const setStartCardPage = () => {
   return {
-    type: SET_START_CARD_SET
+    type: SET_START_CARD_PAGE
   };
 };
 
-export const getNextCardSet = () => {
+export const getNextCardPage = () => {
   return {
-    type: GET_NEXT_CARD_SET
+    type: GET_NEXT_CARD_PAGE
   };
 };
 
 export type CardAction =
-  | ReturnType<typeof setNewCardSet>
-  | ReturnType<typeof setNextCardSet>
-  | ReturnType<typeof setStartCardSet>
-  | ReturnType<typeof getNextCardSet>;
+  | ReturnType<typeof setNewCardPage>
+  | ReturnType<typeof setNextCardPage>
+  | ReturnType<typeof setStartCardPage>
+  | ReturnType<typeof getNextCardPage>;

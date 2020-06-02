@@ -2,10 +2,10 @@ import React, { useState, useEffect, useRef, MutableRefObject } from 'react';
 import CardLayout from './Card/CardLayout/CardLayout';
 import Card, { CardProp } from './Card/Card';
 import useFetch from '$Util/customHooks/useFetch';
-import { setStartCardSet } from '@Action/cardAction';
+import { setStartCardPage } from '@Action/cardAction';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@Reducer/index';
-import { getNextCardSet } from '@Action/cardAction';
+import { getNextCardPage } from '@Action/cardAction';
 
 const Cards = () => {
   //const [cards, setCards] = useState<CardProp[]>([]);
@@ -13,7 +13,7 @@ const Cards = () => {
   const { cards } = useSelector((state: RootState) => state.cardReducer);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(setStartCardSet());
+    dispatch(setStartCardPage());
   }, []);
 
   const viewport = useRef(null);
@@ -35,7 +35,7 @@ const Cards = () => {
         }
 
         observer.unobserve(entry.target);
-        dispatch(getNextCardSet());
+        dispatch(getNextCardPage());
       });
     };
 

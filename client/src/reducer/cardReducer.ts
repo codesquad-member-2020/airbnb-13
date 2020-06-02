@@ -1,54 +1,50 @@
 import { CardProp } from '@Cards/Card/Card';
 import {
-  SET_NEW_CARD_SET,
-  SET_NEXT_CARD_SET,
-  SET_START_CARD_SET,
+  SET_NEW_CARD_PAGE,
+  SET_NEXT_CARD_PAGE,
+  SET_START_CARD_PAGE,
   CardAction,
-  setNextCardSet,
-  setNewCardSet,
-  GET_NEXT_CARD_SET
+  setNextCardPage,
+  setNewCardPage,
+  GET_NEXT_CARD_PAGE
 } from '@Action/cardAction';
 
 export type CardState = {
-  cardSet: number;
+  cardPage: number;
   cards: CardProp[];
 };
 
 const initialState = {
-  cardSet: 2,
+  cardPage: 2,
   cards: []
 };
 
 const cardReducer = (state: CardState = initialState, action: CardAction) => {
   switch (action.type) {
-    case SET_NEXT_CARD_SET:
-      const { cards } = action as ReturnType<typeof setNextCardSet>;
+    case SET_NEXT_CARD_PAGE:
+      const { cards } = action as ReturnType<typeof setNextCardPage>;
       return {
         ...state,
         cards: [...state.cards, ...cards]
       };
-    case SET_NEW_CARD_SET: {
-      const { cards } = action as ReturnType<typeof setNewCardSet>;
+    case SET_NEW_CARD_PAGE: {
+      const { cards } = action as ReturnType<typeof setNewCardPage>;
       return {
-        cardSet: 1,
+        cardPage: 1,
         cards
       };
     }
-    case SET_START_CARD_SET: {
-      return {
-        ...state
-      };
+    case SET_START_CARD_PAGE: {
+      return state;
     }
-    case GET_NEXT_CARD_SET: {
+    case GET_NEXT_CARD_PAGE: {
       return {
         ...state,
-        cardSet: state.cardSet + 1
+        cardPage: state.cardPage + 1
       };
     }
     default:
-      return {
-        ...state
-      };
+      return state;
   }
 };
 

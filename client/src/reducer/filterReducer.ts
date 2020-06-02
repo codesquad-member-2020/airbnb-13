@@ -76,9 +76,7 @@ const modalReducer = (state: FilterState = initialState, action: FilterAction) =
         endPrice
       };
     default:
-      return {
-        ...state
-      };
+      return state;
   }
 };
 

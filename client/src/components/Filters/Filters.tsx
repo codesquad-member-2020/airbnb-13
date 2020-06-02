@@ -9,7 +9,7 @@ import Button from '@Custom/Button/Button';
 import useFetch from '$Util/customHooks/useFetch';
 import { CardProp } from '@/components/Cards/Card/Card';
 import { useDispatch } from 'react-redux';
-import { getNextCardSet } from '@Action/cardAction';
+import { getNextCardPage } from '@Action/cardAction';
 
 const Filters = () => {
   const [diffDays, setDays] = useState(0); //redux.....
@@ -22,7 +22,7 @@ const Filters = () => {
       <GuestFilterWithButton />
       <PriceFilterWithButton />
       <div css={buttonStyle}>
-        <Button theme={'primary'} fontSize={'medium'} width={'80px'} onClick={() => dispatch(getNextCardSet())}>
+        <Button theme={'primary'} fontSize={'medium'} width={'80px'} onClick={() => dispatch(getNextCardPage())}>
           조회하기
         </Button>
       </div>
