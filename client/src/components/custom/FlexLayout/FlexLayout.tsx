@@ -1,6 +1,6 @@
 /** @jsx jsx */
-import { jsx, css } from '@emotion/core';
-import { ReactNode } from 'react';
+import { jsx, css, SerializedStyles } from '@emotion/core';
+import { ReactNode, MutableRefObject } from 'react';
 
 export type FlexLayoutProps = {
   children: ReactNode;
@@ -9,12 +9,34 @@ export type FlexLayoutProps = {
   wrap?: boolean;
   gap?: number | string;
   width?: string | number;
+  alignItemCenter?: boolean;
+  customCSS?: SerializedStyles;
+  refFlexLayout?: ((instance: HTMLDivElement | null) => void) | null;
 };
 
-const FlexLayout = ({ children, direction, wrap, align, gap, width }: FlexLayoutProps) => {
+const FlexLayout = ({
+  children,
+  direction,
+  wrap,
+  align,
+  gap,
+  width,
+  alignItemCenter,
+  customCSS,
+  refFlexLayout
+}: FlexLayoutProps) => {
+  const cssArray = [
+    style,
+    alignItemCenterStyle(alignItemCenter),
+    directionStyle(direction),
+    gapStyle(direction, gap),
+    alignStyle(align),
+    wrapStyle(wrap),
+    { width }
+  ];
+  customCSS && cssArray.push(customCSS);
   return (
-    <div
-      css={[style, directionStyle(direction), gapStyle(direction, gap), alignStyle(align), wrapStyle(wrap), { width }]}>
+    <div ref={refFlexLayout} css={cssArray}>
       {children}
     </div>
   );
@@ -25,6 +47,15 @@ export default FlexLayout;
 const style = css`
   display: flex;
 `;
+
+const alignItemCenterStyle = (alignItemCenter: boolean | undefined) => {
+  if (!alignItemCenter) {
+    return css``;
+  }
+  return css`
+    align-items: center;
+  `;
+};
 
 const directionStyle = (direction: 'column' | 'row') => {
   return css`

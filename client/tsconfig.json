@@ -19,8 +19,14 @@
 
     "paths": {
       "@/*": ["src/*"],
+      "@Action/*": ["src/action/*"],
+      "@Reducer/*": ["src/reducer/*"],
+      "@Saga/*": ["src/saga/*"],
       "@Cards/*": ["src/components/Cards/*"],
       "@Custom/*": ["src/components/custom/*"],
+      "@Filters/*": ["src/components/Filters/*"],
+      "@Header/*": ["src/components/Header/*"],
+      "@Modal/*": ["src/components/Modal/*"],
       "$Icon/*": ["src/Icon/*"],
       "$Style/*": ["src/style/*"],
       "$Util/*": ["src/util/*"]

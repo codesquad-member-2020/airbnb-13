@@ -19,12 +19,17 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
+      },
+      {
         test: /\.svg$/,
         use: ['url-loader']
       },
       {
         test: /\.ts(x)?$/,
-        use: ['babel-loader', 'ts-loader']
+        use: ['babel-loader', 'ts-loader'],
+        exclude: ['/stories']
       }
     ]
   },
@@ -32,8 +37,14 @@ module.exports = {
     extensions: ['.js', 'jsx', '.ts', '.tsx'], // WDS가 serve하는 파일은 javascript
     alias: {
       '@': path.resolve(__dirname, 'src/'),
+      '@Action': path.resolve(__dirname, 'src/action/'),
+      '@Reducer': path.resolve(__dirname, 'src/reducer/'),
+      '@Saga': path.resolve(__dirname, 'src/saga/'),
       '@Cards': path.resolve(__dirname, 'src/components/Cards/'),
       '@Custom': path.resolve(__dirname, 'src/components/custom/'),
+      '@Filters': path.resolve(__dirname, 'src/components/Filters/'),
+      '@Header': path.resolve(__dirname, 'src/components/Header/'),
+      '@Modal': path.resolve(__dirname, 'src/components/Modal'),
       $Icon: path.resolve(__dirname, 'src/Icon/'),
       $Style: path.resolve(__dirname, 'src/style/'),
       $Util: path.resolve(__dirname, 'src/util/')

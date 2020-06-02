@@ -16,6 +16,7 @@ export const defaultCard = () => {
   const title = text('title', '행복이 가득한 쉼터');
   const price = number('price', 70000);
   const reviewScore = number('reviewScore', 3.8);
+  const discountPrice = number('discountPrice', 10000);
   const totalPrice = number('totalPrice', 80000);
   const thumbnail = text(
     'thumbnail',
@@ -31,7 +32,10 @@ export const defaultCard = () => {
         title={title}
         price={price}
         reviewScore={reviewScore}
+        discountPrice={discountPrice}
         totalPrice={totalPrice}
+        id={5}
+        refCard={null}
       />
     </ThemeProvider>
   );
@@ -52,8 +56,11 @@ export const card = () => {
         location={'seoul'}
         title={'High-End Studio! ~ In the heart of Seoul'}
         reviewScore={3.7}
+        discountPrice={50000}
         totalPrice={70000}
-        price={90000}></Card>
+        price={90000}
+        id={4}
+        refCard={null}></Card>
     </ThemeProvider>
   );
 };
