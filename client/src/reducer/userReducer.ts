@@ -1,6 +1,6 @@
 import { SET_USER, UserAction } from '@Action/userAction';
 
-type UserState = {
+export type UserState = {
   token: string;
 };
 
