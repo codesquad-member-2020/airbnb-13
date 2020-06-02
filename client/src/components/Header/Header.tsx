@@ -3,8 +3,11 @@ import { jsx, css } from '@emotion/core';
 import Icon from '$Icon/Icon';
 import FlexLayout from '@Custom/FlexLayout/FlexLayout';
 import Button from '@Custom/Button/Button';
+import { useDispatch } from 'react-redux';
+import { turnOnModal } from '@Action/modalAction';
 
 const Header = () => {
+  const dispatch = useDispatch();
   return (
     <FlexLayout direction="row" align="spaceAround" alignItemCenter={true} customCSS={headerStyle}>
       <FlexLayout direction="row" align="left" alignItemCenter={true}>
@@ -15,7 +18,7 @@ const Header = () => {
         <a css={aStyle} href="https://github.com/codesquad-member-2020/airbnb-13">
           도움말
         </a>
-        <Button theme={'secondary'} fontSize={'small'} width="30%">
+        <Button theme={'secondary'} fontSize={'small'} width="30%" onClick={() => dispatch(turnOnModal('Login'))}>
           로그인
         </Button>
       </FlexLayout>
