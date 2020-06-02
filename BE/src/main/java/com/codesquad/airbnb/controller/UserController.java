@@ -15,7 +15,7 @@ import java.util.List;
 public class UserController {
     private final UserService userService;
 
-    @GetMapping("users")
+    @GetMapping("/users")
     public ResponseEntity<List<ReservationResponse>> userReservation() {
         Long userId = 1L;
         return new ResponseEntity<>(userService.reservationsByUserId(userId), HttpStatus.OK);
