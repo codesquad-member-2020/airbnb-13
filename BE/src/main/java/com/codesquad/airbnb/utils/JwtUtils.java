@@ -1,6 +1,6 @@
 package com.codesquad.airbnb.utils;
 
-import com.codesquad.airbnb.dto.User;
+import com.codesquad.airbnb.dto.UserResponse;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -14,7 +14,7 @@ public class JwtUtils {
     private JwtUtils() {
     }
 
-    public static String jwtCreate(User user) {
+    public static String jwtCreate(UserResponse user) {
         Map<String, Object> headers = new HashMap<>();
         headers.put("typ", "JWT");
         headers.put("alg", "HS256");
