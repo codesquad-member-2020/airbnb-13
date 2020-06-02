@@ -24,27 +24,25 @@ const Cards = () => {
   const options = {
     root: null,
     threshold: 0.5,
-    rootMargin: '-40px -20px'
+    rootMargin: '-100px -50px'
   };
 
   useEffect(() => {
     const handleIntersection = (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
-      console.log(entries);
       entries.forEach(entry => {
         if (!entry.isIntersecting) {
           return;
         }
 
-        observer.unobserve(entry.target); // 기존 타겟을 unobserve 하고
+        observer.unobserve(entry.target);
         dispatch(getNextCardSet());
-        observer.observe(entry.target);
       });
     };
 
     const io = new IntersectionObserver(handleIntersection, options);
 
     if (target) {
-      io.observe(target); // target
+      io.observe(target);
     }
     return () => io.disconnect();
   }, [target]);

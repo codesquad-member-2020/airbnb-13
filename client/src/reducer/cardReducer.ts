@@ -9,13 +9,13 @@ import {
   GET_NEXT_CARD_SET
 } from '@Action/cardAction';
 
-type CardState = {
+export type CardState = {
   cardSet: number;
   cards: CardProp[];
 };
 
 const initialState = {
-  cardSet: 1,
+  cardSet: 2,
   cards: []
 };
 
@@ -24,7 +24,7 @@ const cardReducer = (state: CardState = initialState, action: CardAction) => {
     case SET_NEXT_CARD_SET:
       const { cards } = action as ReturnType<typeof setNextCardSet>;
       return {
-        cardSet: state.cardSet + 1,
+        ...state,
         cards: [...state.cards, ...cards]
       };
     case SET_NEW_CARD_SET: {
@@ -41,7 +41,8 @@ const cardReducer = (state: CardState = initialState, action: CardAction) => {
     }
     case GET_NEXT_CARD_SET: {
       return {
-        ...state
+        ...state,
+        cardSet: state.cardSet + 1
       };
     }
     default:
