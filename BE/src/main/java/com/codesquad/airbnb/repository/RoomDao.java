@@ -2,6 +2,7 @@ package com.codesquad.airbnb.repository;
 
 import com.codesquad.airbnb.dto.ReservationForm;
 import com.codesquad.airbnb.dto.Room;
+import com.codesquad.airbnb.repository.mapper.RoomMapper;
 import com.codesquad.airbnb.dto.RoomInfo;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;

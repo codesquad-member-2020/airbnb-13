@@ -1,4 +1,4 @@
-package com.codesquad.airbnb.repository;
+package com.codesquad.airbnb.repository.mapper;
 
 import com.codesquad.airbnb.dto.Room;
 import org.springframework.jdbc.core.RowMapper;
