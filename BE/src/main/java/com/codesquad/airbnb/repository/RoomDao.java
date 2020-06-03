@@ -3,6 +3,7 @@ package com.codesquad.airbnb.repository;
 import com.codesquad.airbnb.dto.ReservationRequest;
 import com.codesquad.airbnb.dto.Room;
 import com.codesquad.airbnb.repository.mapper.PriceMapper;
+import com.codesquad.airbnb.repository.mapper.ReservationIdMapper;
 import com.codesquad.airbnb.repository.mapper.RoomMapper;
 import com.codesquad.airbnb.dto.RoomInfo;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -117,4 +118,17 @@ public class RoomDao {
         namedJdbcTemplate.update(sql, parameters);
     }
 
+    public List<Long> findReservation(Long roomId, LocalDate checkIn, LocalDate checkOut) {
+        String findSql = "SELECT DISTINCT (r.id) From reservation r INNER JOIN reservation_date rd " +
+                "ON r.room_id = :roomId " +
+                "AND rd.reservation_date " +
+                "BETWEEN :checkIn AND :checkOut";
+
+        SqlParameterSource parameters = new MapSqlParameterSource()
+                .addValue("roomId", roomId)
+                .addValue("checkIn", checkIn)
+                .addValue("checkOut", checkOut);
+
+        return namedJdbcTemplate.query(findSql, parameters, new ReservationIdMapper());
+    }
 }

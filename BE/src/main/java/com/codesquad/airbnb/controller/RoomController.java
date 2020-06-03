@@ -42,7 +42,7 @@ public class RoomController {
 
     @PostMapping("/rooms/{id}")
     public ResponseEntity<String> reservation(@PathVariable Long id, @RequestBody ReservationRequest reservationForm,
-                                              @CookieValue(value = "email", required = false) String cookie) {
+                                              @CookieValue(value = "jwt", required = false) String cookie) {
         String email = JwtUtils.jwtParsing(cookie);
         User user = loginService.findUserByEmail(email);
         roomService.addReservation(id, user.getId(), reservationForm);

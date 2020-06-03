@@ -4,6 +4,7 @@ import com.codesquad.airbnb.dto.PriceInfo;
 import com.codesquad.airbnb.dto.ReservationRequest;
 import com.codesquad.airbnb.dto.RoomInfo;
 import com.codesquad.airbnb.dto.RoomResponse;
+import com.codesquad.airbnb.error.exception.AlreadyBookedException;
 import com.codesquad.airbnb.error.exception.ReservationInvalidFormException;
 import com.codesquad.airbnb.repository.RoomDao;
 import com.codesquad.airbnb.utils.DayCalculator;
@@ -39,6 +40,9 @@ public class RoomService {
         boolean isValid = isValidReservationForm(reservationForm);
         if (!isValid) {
             throw new ReservationInvalidFormException();
+        }
+        if (roomDao.findReservation(roomId, reservationForm.getCheckIn(), reservationForm.getCheckOut()).size() > 0) {
+            throw new AlreadyBookedException();
         }
 
         Long reservationId = roomDao.addReservation(roomId, userId, reservationForm);
