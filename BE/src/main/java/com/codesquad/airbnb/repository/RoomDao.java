@@ -2,7 +2,7 @@ package com.codesquad.airbnb.repository;
 
 import com.codesquad.airbnb.dto.ReservationForm;
 import com.codesquad.airbnb.dto.Room;
-import com.codesquad.airbnb.dto.RoomResponse;
+import com.codesquad.airbnb.dto.RoomInfo;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -12,7 +12,6 @@ import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -27,10 +26,10 @@ public class RoomDao {
         this.namedJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
     }
 
-    public List<RoomResponse> findByCondition(int offset, int limit,
-                                              int adults, int children, int infants,
-                                              String checkIn, String checkOut,
-                                              int minPrice, int maxPrice) {
+    public List<RoomInfo> findByCondition(int offset, int limit,
+                                          int adults, int children, int infants,
+                                          String checkIn, String checkOut,
+                                          int minPrice, int maxPrice) {
         int totalGuest = adults + children + infants;
 
         String roomsSql = "SELECT id, title, thumbnail, super_host, address, location, accommodates, " +
@@ -58,7 +57,32 @@ public class RoomDao {
                 .addValue("offset", offset);
 
         List<Room> rooms = namedJdbcTemplate.query(roomsSql, parameters, roomMapper);
-        return rooms.stream().map(room -> new RoomResponse(room, checkIn, checkOut)).collect(Collectors.toList());
+        return rooms.stream().map(room -> new RoomInfo(room, checkIn, checkOut)).collect(Collectors.toList());
+    }
+
+    public List<Integer> findPriceByCondition(int adults, int children, int infants, String checkIn, String checkOut, int minPrice, int maxPrice) {
+        int totalGuest = adults + children + infants;
+
+        String roomsSql = "SELECT price , super_host " +
+                "FROM room " +
+                "WHERE id NOT IN ( SELECT DISTINCT (r.room_id) " +
+                "FROM reservation_date rd LEFT JOIN reservation r ON rd.reservation_id = r.id " +
+                "WHERE rd.reservation_date BETWEEN :checkIn AND :checkOut) " +
+                "AND room.accommodates >= :totalGuest " +
+                "AND room.price >= :minPrice ";
+
+        SqlParameterSource parameters = new MapSqlParameterSource()
+                .addValue("totalGuest", totalGuest)
+                .addValue("minPrice", minPrice)
+                .addValue("maxPrice", maxPrice)
+                .addValue("checkIn", checkIn)
+                .addValue("checkOut", checkOut);
+
+        if (maxPrice != 0) {
+            roomsSql += "and price <= :maxPrice ";
+        }
+
+        return namedJdbcTemplate.query(roomsSql, parameters, new PriceMapper());
     }
 
     public Long addReservation(Long roomId, ReservationForm reservationForm) {
