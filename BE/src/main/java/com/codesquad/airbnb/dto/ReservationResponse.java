@@ -10,19 +10,19 @@ import java.time.LocalDate;
 @ToString
 public class ReservationResponse {
 
-    private String title;
+    private final String title;
 
-    private String location;
+    private final String location;
 
-    private String thumbnail;
+    private final String thumbnail;
 
-    private LocalDate checkIn;
+    private final LocalDate checkIn;
 
-    private LocalDate checkOut;
+    private final LocalDate checkOut;
 
-    private GuestResponse guestCount;
+    private final GuestResponse guestCount;
 
-    private Integer totalPrice;
+    private final Integer totalPrice;
 
     public ReservationResponse(Reservation reservation, ReservationDate reservationDate) {
         this.checkIn = reservationDate.getCheckIn();

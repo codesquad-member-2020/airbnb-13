@@ -18,7 +18,6 @@ public class UserService {
 
     public List<ReservationResponse> reservationsByUserId(Long userId) {
         List<Reservation> reservations = reservationDao.findByUserId(userId);
-        System.out.println(reservations);
 
         return reservations.stream().map(reservation -> {
             ReservationDate reservationDate = reservationDao.findReservationDateByReservationId(reservation.getId());

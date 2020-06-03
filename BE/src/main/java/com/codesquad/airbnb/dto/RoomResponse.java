@@ -11,7 +11,7 @@ import java.util.List;
 @Builder
 public class RoomResponse {
 
-    private PriceInfo price;
+    private final PriceInfo price;
 
-    private List<RoomInfo> room;
+    private final List<RoomInfo> room;
 }

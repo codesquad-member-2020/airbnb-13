@@ -9,9 +9,9 @@ import lombok.ToString;
 @Builder
 public class GuestResponse {
 
-    private Integer adult;
+    private final Integer adult;
 
-    private Integer child;
+    private final Integer child;
 
-    private Integer infant;
+    private final Integer infant;
 }

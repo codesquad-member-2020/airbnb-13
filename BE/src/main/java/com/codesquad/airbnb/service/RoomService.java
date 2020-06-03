@@ -1,9 +1,11 @@
 package com.codesquad.airbnb.service;
 
 import com.codesquad.airbnb.dto.PriceInfo;
-import com.codesquad.airbnb.dto.ReservationForm;
+import com.codesquad.airbnb.dto.ReservationRequest;
 import com.codesquad.airbnb.dto.RoomInfo;
 import com.codesquad.airbnb.dto.RoomResponse;
+import com.codesquad.airbnb.error.exception.AlreadyBookedException;
+import com.codesquad.airbnb.error.exception.ReservationInvalidFormException;
 import com.codesquad.airbnb.repository.RoomDao;
 import com.codesquad.airbnb.utils.DayCalculator;
 import lombok.RequiredArgsConstructor;
@@ -28,20 +30,26 @@ public class RoomService {
                 checkIn, checkOut,
                 minPrice, maxPrice);
 
-        PriceInfo price = new PriceInfo(roomDao.findPriceByCondition(adults, children, infants, checkIn, checkOut, minPrice, maxPrice));
+        PriceInfo price = new PriceInfo(roomDao.findPriceByCondition(adults, children, infants,
+                checkIn, checkOut, minPrice, maxPrice));
 
         return RoomResponse.builder().price(price).room(rooms).build();
     }
 
-    public void addReservation(Long roomId, ReservationForm reservationForm) {
+    public void addReservation(Long roomId, Long userId, ReservationRequest reservationForm) {
         boolean isValid = isValidReservationForm(reservationForm);
-        // Todo
-        // 값이 유효하지 않을 때 예외 처리하기
-        Long reservationId = roomDao.addReservation(roomId, reservationForm);
+        if (!isValid) {
+            throw new ReservationInvalidFormException();
+        }
+        if (roomDao.findReservation(roomId, reservationForm.getCheckIn(), reservationForm.getCheckOut()).size() > 0) {
+            throw new AlreadyBookedException();
+        }
+
+        Long reservationId = roomDao.addReservation(roomId, userId, reservationForm);
         addReservationDates(reservationId, reservationForm.getCheckIn(), reservationForm.getCheckOut());
     }
 
-    private boolean isValidReservationForm(ReservationForm reservationForm) {
+    private boolean isValidReservationForm(ReservationRequest reservationForm) {
         LocalDate checkIn = reservationForm.getCheckIn();
         LocalDate checkOut = reservationForm.getCheckOut();
 

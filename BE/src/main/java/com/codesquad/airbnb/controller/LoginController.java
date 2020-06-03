@@ -51,7 +51,7 @@ public class LoginController {
 
     @GetMapping("/logout")
     public ResponseEntity<String> logOut(HttpServletResponse response) {
-        Cookie cookie = new Cookie("username", null);
+        Cookie cookie = new Cookie("jwt", null);
         cookie.setMaxAge(0);
         cookie.setPath("/");
 

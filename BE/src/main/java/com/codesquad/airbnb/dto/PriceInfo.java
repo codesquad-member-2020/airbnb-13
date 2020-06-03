@@ -12,15 +12,15 @@ import java.util.List;
 @ToString
 public class PriceInfo {
 
-    private List<Integer> price;
+    private final List<Integer> price;
 
-    private Integer averagePrice;
+    private final Integer averagePrice;
 
-    private Integer minPrice;
+    private final Integer minPrice;
 
-    private Integer maxPrice;
+    private final Integer maxPrice;
 
-    private Integer priceGap;
+    private final Integer priceGap;
 
     public PriceInfo(List<Integer> priceList) {
         int priceSize = 20;
@@ -39,27 +39,27 @@ public class PriceInfo {
         return priceList.stream().reduce(0, Integer::sum);
     }
 
-    private List<Integer> countPrice(List<Integer> sortedList, Integer priceGap, int start, int size) {
+    private List<Integer> countPrice(List<Integer> sortedList, Integer priceGap, int minPrice, int sectionSize) {
         List<Integer> countList = new ArrayList<>();
 
-        int listIndex = 0;
+        int sortListIndex = 0;
         int sizeIndex = 0;
-        int count = 0;
+        int roomCount = 0;
 
-        while (sizeIndex < size) {
+        while (sizeIndex < sectionSize) {
             sizeIndex++;
-            int range = priceGap * (sizeIndex) + start;
+            int maxValueOfSection = priceGap * (sizeIndex) + minPrice;
 
-            while (listIndex < sortedList.size()) {
-                if (sortedList.get(listIndex) <= range) {
-                    listIndex++;
-                    count++;
-                } else {
-                    break;
+            while (sortListIndex < sortedList.size()) {
+                if (sortedList.get(sortListIndex) <= maxValueOfSection) {
+                    sortListIndex++;
+                    roomCount++;
+                    continue;
                 }
+                break;
             }
-            countList.add(count);
-            count = 0;
+            countList.add(roomCount);
+            roomCount = 0;
 
         }
         return countList;

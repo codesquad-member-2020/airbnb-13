@@ -25,7 +25,7 @@ public class Room {
 
     @Builder
     public Room(Long id, Boolean superHost, String location, String title, Integer price,
-                Float reviewScore, String thumbnail, String checkIn, String checkOut) {
+                Float reviewScore, String thumbnail) {
         this.id = id;
         this.superHost = superHost;
         this.location = location;
