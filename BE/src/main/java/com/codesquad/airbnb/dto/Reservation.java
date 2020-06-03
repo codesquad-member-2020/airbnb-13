@@ -9,25 +9,25 @@ import lombok.ToString;
 @Builder
 public class Reservation {
 
-    private Long id;
+    private final Long id;
 
-    private Long userId;
+    private final Long userId;
 
-    private Long roomId;
+    private final Long roomId;
 
-    private Integer child;
+    private final Integer child;
 
-    private Integer infant;
+    private final Integer infant;
 
-    private Integer adult;
+    private final Integer adult;
 
-    private String title;
+    private final String title;
 
-    private String location;
+    private final String location;
 
-    private Boolean superHost;
+    private final Boolean superHost;
 
-    private Integer price;
+    private final Integer price;
 
-    private String thumbnail;
+    private final String thumbnail;
 }

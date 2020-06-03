@@ -3,6 +3,7 @@ package com.codesquad.airbnb.repository;
 import com.codesquad.airbnb.dto.ReservationRequest;
 import com.codesquad.airbnb.dto.Room;
 import com.codesquad.airbnb.repository.mapper.PriceMapper;
+import com.codesquad.airbnb.repository.mapper.ReservationIdMapper;
 import com.codesquad.airbnb.repository.mapper.RoomMapper;
 import com.codesquad.airbnb.dto.RoomInfo;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -89,9 +90,8 @@ public class RoomDao {
         return namedJdbcTemplate.query(roomsSql, parameters, new PriceMapper());
     }
 
-    public Long addReservation(Long roomId, ReservationRequest reservationForm) {
-        // todo
-        // user_id 작업하기
+    public Long addReservation(Long roomId, Long userId, ReservationRequest reservationForm) {
+
         String sql = "INSERT INTO reservation (adult, child, infant, user_id, room_id) " +
                 "VALUES (:adult, :child, :infant, :userId, :roomId)";
 
@@ -99,7 +99,7 @@ public class RoomDao {
                 .addValue("adult", reservationForm.getAdults())
                 .addValue("child", reservationForm.getChildren())
                 .addValue("infant", reservationForm.getInfants())
-                .addValue("userId", 1L)
+                .addValue("userId", userId)
                 .addValue("roomId", roomId);
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -118,4 +118,17 @@ public class RoomDao {
         namedJdbcTemplate.update(sql, parameters);
     }
 
+    public List<Long> findReservation(Long roomId, LocalDate checkIn, LocalDate checkOut) {
+        String findSql = "SELECT DISTINCT (r.id) From reservation r INNER JOIN reservation_date rd " +
+                "ON r.room_id = :roomId " +
+                "AND rd.reservation_date " +
+                "BETWEEN :checkIn AND :checkOut";
+
+        SqlParameterSource parameters = new MapSqlParameterSource()
+                .addValue("roomId", roomId)
+                .addValue("checkIn", checkIn)
+                .addValue("checkOut", checkOut);
+
+        return namedJdbcTemplate.query(findSql, parameters, new ReservationIdMapper());
+    }
 }

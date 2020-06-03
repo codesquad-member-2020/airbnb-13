@@ -1,6 +1,7 @@
 package com.codesquad.airbnb.service;
 
 import com.codesquad.airbnb.dto.GithubToken;
+import com.codesquad.airbnb.dto.User;
 import com.codesquad.airbnb.dto.UserResponse;
 import com.codesquad.airbnb.repository.UserDao;
 import lombok.RequiredArgsConstructor;
@@ -37,8 +38,8 @@ public class LoginService {
         return userResponse;
     }
 
-    private void findUserByEmail(String email) {
-        userDao.findByEmail(email);
+    public User findUserByEmail(String email) {
+        return userDao.findByEmail(email);
     }
 
     private MultiValueMap<String, String> requestAccess() {

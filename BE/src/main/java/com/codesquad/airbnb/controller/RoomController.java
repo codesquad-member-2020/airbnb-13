@@ -2,7 +2,10 @@ package com.codesquad.airbnb.controller;
 
 import com.codesquad.airbnb.dto.ReservationRequest;
 import com.codesquad.airbnb.dto.RoomResponse;
+import com.codesquad.airbnb.dto.User;
+import com.codesquad.airbnb.service.LoginService;
 import com.codesquad.airbnb.service.RoomService;
+import com.codesquad.airbnb.utils.JwtUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
@@ -15,16 +18,17 @@ import org.springframework.web.bind.annotation.*;
 public class RoomController {
 
     private final RoomService roomService;
+    private final LoginService loginService;
 
     @GetMapping("/rooms")
     public ResponseEntity<RoomResponse> rooms(@RequestParam("page") int page,
-                                                @RequestParam(value = "adults", required = false, defaultValue = "0") int adults,
-                                                @RequestParam(value = "children", required = false, defaultValue = "0") int children,
-                                                @RequestParam(value = "infants", required = false, defaultValue = "0") int infants,
-                                                @RequestParam(value = "checkin", required = false) String checkIn,
-                                                @RequestParam(value = "checkout", required = false) String checkOut,
-                                                @RequestParam(value = "minimum-price", required = false, defaultValue = "0") int minPrice,
-                                                @RequestParam(value = "maximum-price", required = false, defaultValue = "0") int maxPrice) {
+                                              @RequestParam(value = "adults", required = false, defaultValue = "0") int adults,
+                                              @RequestParam(value = "children", required = false, defaultValue = "0") int children,
+                                              @RequestParam(value = "infants", required = false, defaultValue = "0") int infants,
+                                              @RequestParam(value = "checkin", required = false) String checkIn,
+                                              @RequestParam(value = "checkout", required = false) String checkOut,
+                                              @RequestParam(value = "minimum-price", required = false, defaultValue = "0") int minPrice,
+                                              @RequestParam(value = "maximum-price", required = false, defaultValue = "0") int maxPrice) {
 
         final int limit = 9;
         final int offset = (limit * page) - limit;
@@ -37,8 +41,11 @@ public class RoomController {
     }
 
     @PostMapping("/rooms/{id}")
-    public ResponseEntity<String> reservation(@PathVariable Long id, @RequestBody ReservationRequest reservationForm) {
-        roomService.addReservation(id, reservationForm);
+    public ResponseEntity<String> reservation(@PathVariable Long id, @RequestBody ReservationRequest reservationForm,
+                                              @CookieValue(value = "jwt", required = false) String cookie) {
+        String email = JwtUtils.jwtParsing(cookie);
+        User user = loginService.findUserByEmail(email);
+        roomService.addReservation(id, user.getId(), reservationForm);
         return new ResponseEntity<>("OK", HttpStatus.OK);
     }
 }

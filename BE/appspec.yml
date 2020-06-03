@@ -3,7 +3,8 @@ os: linux
 
 files:
   - source: /
-    destination: /home/ubuntu/myapp
+    destination: /home/ubuntu/myapp/
+
 permissions:
   - object: /home/ubuntu/myapp
     owner: ubuntu
