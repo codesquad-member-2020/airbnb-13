@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.*;
 class JwtUtilsTest {
 
     private final Logger logger = LoggerFactory.getLogger(JwtUtilsTest.class);
-    
+
     @Test
     public void JWT토큰제작하기() {
         UserResponse user = UserResponse.builder()

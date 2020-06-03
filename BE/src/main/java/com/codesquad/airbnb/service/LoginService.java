@@ -4,7 +4,6 @@ import com.codesquad.airbnb.dto.GithubToken;
 import com.codesquad.airbnb.dto.UserResponse;
 import com.codesquad.airbnb.repository.UserDao;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -17,7 +16,6 @@ import org.springframework.web.client.RestTemplate;
 import java.util.HashMap;
 import java.util.Map;
 
-@Slf4j
 @RequiredArgsConstructor
 @Service
 public class LoginService {
