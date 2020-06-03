@@ -89,9 +89,8 @@ public class RoomDao {
         return namedJdbcTemplate.query(roomsSql, parameters, new PriceMapper());
     }
 
-    public Long addReservation(Long roomId, ReservationRequest reservationForm) {
-        // todo
-        // user_id 작업하기
+    public Long addReservation(Long roomId, Long userId, ReservationRequest reservationForm) {
+
         String sql = "INSERT INTO reservation (adult, child, infant, user_id, room_id) " +
                 "VALUES (:adult, :child, :infant, :userId, :roomId)";
 
@@ -99,7 +98,7 @@ public class RoomDao {
                 .addValue("adult", reservationForm.getAdults())
                 .addValue("child", reservationForm.getChildren())
                 .addValue("infant", reservationForm.getInfants())
-                .addValue("userId", 1L)
+                .addValue("userId", userId)
                 .addValue("roomId", roomId);
 
         KeyHolder keyHolder = new GeneratedKeyHolder();

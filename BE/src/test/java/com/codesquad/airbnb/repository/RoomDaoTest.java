@@ -19,7 +19,7 @@ class RoomDaoTest {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate day1 = LocalDate.parse("2020-01-01", formatter);
         LocalDate day2 = LocalDate.parse("2020-01-02", formatter);
-        Long reservationId = roomDao.addReservation(1L, ReservationRequest.builder()
+        Long reservationId = roomDao.addReservation(1L, 4L, ReservationRequest.builder()
                 .adults(1)
                 .children(1)
                 .infants(3)
