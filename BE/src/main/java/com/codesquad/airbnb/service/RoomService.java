@@ -1,6 +1,8 @@
 package com.codesquad.airbnb.service;
 
+import com.codesquad.airbnb.dto.PriceInfo;
 import com.codesquad.airbnb.dto.ReservationForm;
+import com.codesquad.airbnb.dto.RoomInfo;
 import com.codesquad.airbnb.dto.RoomResponse;
 import com.codesquad.airbnb.repository.RoomDao;
 import com.codesquad.airbnb.utils.DayCalculator;
@@ -8,8 +10,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -18,15 +18,19 @@ public class RoomService {
 
     private final RoomDao roomDao;
 
-    public List<RoomResponse> findPage(int offset, int limit,
-                                       int adults, int children, int infants,
-                                       String checkIn, String checkOut,
-                                       int minPrice, int maxPrice) {
+    public RoomResponse findPage(int offset, int limit,
+                                 int adults, int children, int infants,
+                                 String checkIn, String checkOut,
+                                 int minPrice, int maxPrice) {
 
-        return roomDao.findByCondition(offset, limit,
+        List<RoomInfo> rooms = roomDao.findByCondition(offset, limit,
                 adults, children, infants,
                 checkIn, checkOut,
                 minPrice, maxPrice);
+
+        PriceInfo price = new PriceInfo(roomDao.findPriceByCondition(adults, children, infants, checkIn, checkOut, minPrice, maxPrice));
+
+        return RoomResponse.builder().price(price).room(rooms).build();
     }
 
     public void addReservation(Long roomId, ReservationForm reservationForm) {
@@ -50,12 +54,9 @@ public class RoomService {
 
     private void addReservationDates(Long reservationId, LocalDate checkIn, LocalDate checkOut) {
         long diff = DayCalculator.getDiffDays(checkIn, checkOut);
-        Calendar calendar = Calendar.getInstance();
 
-//        for (int i = 0; i < diff; i++) {
-//            calendar.setTime(checkIn);
-//            calendar.add(Calendar.DATE, i);
-//            roomDao.addReservationDate(reservationId, calendar.getTime());
-//        }
+        for (int i = 0; i < diff; i++) {
+            roomDao.addReservationDate(reservationId, checkIn.plusDays(i));
+        }
     }
 }

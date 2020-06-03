@@ -4,14 +4,14 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 
-import java.util.List;
-
 @Getter
 @ToString
 @Builder
-public class RoomResponse {
+public class GuestResponse {
 
-    private PriceInfo price;
+    private Integer adult;
 
-    private List<RoomInfo> room;
+    private Integer child;
+
+    private Integer infant;
 }
