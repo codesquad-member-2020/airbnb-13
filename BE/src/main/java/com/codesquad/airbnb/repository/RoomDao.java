@@ -1,11 +1,11 @@
 package com.codesquad.airbnb.repository;
 
-import com.codesquad.airbnb.dto.ReservationRequest;
-import com.codesquad.airbnb.dto.Room;
+import com.codesquad.airbnb.dto.*;
+import com.codesquad.airbnb.repository.mapper.RoomPriceMapper;
 import com.codesquad.airbnb.repository.mapper.PriceMapper;
 import com.codesquad.airbnb.repository.mapper.ReservationIdMapper;
 import com.codesquad.airbnb.repository.mapper.RoomMapper;
-import com.codesquad.airbnb.dto.RoomInfo;
+import com.codesquad.airbnb.utils.DayCalculator;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -130,5 +130,12 @@ public class RoomDao {
                 .addValue("checkOut", checkOut);
 
         return namedJdbcTemplate.query(findSql, parameters, new ReservationIdMapper());
+    }
+
+    public RoomPrice findRoomByRoomId(Long id) {
+        String findSql = "SELECT r.price, r.cleaning_fee, r.super_host FROM room r WHERE r.id = :id";
+        SqlParameterSource parameters = new MapSqlParameterSource("id", id);
+
+        return namedJdbcTemplate.queryForObject(findSql, parameters, new RoomPriceMapper());
     }
 }

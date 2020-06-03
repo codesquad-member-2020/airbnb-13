@@ -1,9 +1,6 @@
 package com.codesquad.airbnb.service;
 
-import com.codesquad.airbnb.dto.PriceInfo;
-import com.codesquad.airbnb.dto.ReservationRequest;
-import com.codesquad.airbnb.dto.RoomInfo;
-import com.codesquad.airbnb.dto.RoomResponse;
+import com.codesquad.airbnb.dto.*;
 import com.codesquad.airbnb.error.exception.AlreadyBookedException;
 import com.codesquad.airbnb.error.exception.ReservationInvalidFormException;
 import com.codesquad.airbnb.repository.RoomDao;
@@ -47,6 +44,13 @@ public class RoomService {
 
         Long reservationId = roomDao.addReservation(roomId, userId, reservationForm);
         addReservationDates(reservationId, reservationForm.getCheckIn(), reservationForm.getCheckOut());
+    }
+
+    public ReservationPreviewResponse previewResponse(Long id, int adults, int children, int infants,
+                                                      String checkIn, String checkOut) {
+        int guestCount = adults + children + infants;
+        RoomPrice roomPrice = roomDao.findRoomByRoomId(id);
+        return new ReservationPreviewResponse(roomPrice, guestCount, checkIn, checkOut);
     }
 
     private boolean isValidReservationForm(ReservationRequest reservationForm) {
