@@ -5,14 +5,13 @@ on:
     branches: [ dev ]
 
 jobs:
-## 백엔드 배포
   backend:
-    name: CD
+    name: CD with Gradle
     runs-on: ubuntu-18.04
     defaults:
       run:
         shell: bash
-				working-directory: BE
+        working-directory: BE
 
     steps:
       - name: 체크아웃 Github-Action
