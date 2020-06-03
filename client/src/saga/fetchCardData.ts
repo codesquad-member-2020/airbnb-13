@@ -37,13 +37,14 @@ function* requestNewCard() {
   const state = yield select(reducer => reducer.filterReducer);
   const param = { ...state, page: 1 };
   const res = yield call(send, param);
-  const data = res.data as CardProp[];
+  const data = res.data.room as CardProp[];
+
   yield put({ type: SET_NEW_CARD_PAGE, cards: data });
 }
 
 function* requestFirstCard() {
   const { data } = yield call(sendFirstCardRequest);
-  yield put({ type: SET_NEW_CARD_PAGE, cards: data });
+  yield put({ type: SET_NEW_CARD_PAGE, cards: data.room });
 }
 
 function* requestNextCard() {
@@ -52,7 +53,7 @@ function* requestNextCard() {
   const cardPage = cardState.cardPage;
   const param = { ...state, page: cardPage };
   const res = yield call(send, param);
-  const data = res.data as CardProp[];
+  const data = res.data.room as CardProp[];
   yield put({ type: SET_NEXT_CARD_PAGE, cards: data });
 }
 

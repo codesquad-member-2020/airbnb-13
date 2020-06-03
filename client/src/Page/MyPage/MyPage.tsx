@@ -1,11 +1,18 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { RootState } from '@Reducer/index';
-import { UserState } from '@Reducer/userReducer';
+import { isLogin } from '$Util/cookie/cookie';
+import Modal from '@Modal/Modal';
+import Login from '@Modal/Login/Login';
+import { useDispatch } from 'react-redux';
+import { turnOnModal } from '@Action/modalAction';
+import { useEffect } from 'react';
 
 const MyPage = () => {
-  const user: UserState = useSelector((state: RootState) => state.userReducer);
-  return <>{user.token ? <div>유저가 있습니다</div> : <div>유저가 없습니다</div>}</>;
+  const dispatch = useDispatch();
+  const login = isLogin('jwt');
+  useEffect(() => {
+    !login && dispatch(turnOnModal('Login'));
+  }, []);
+  return <>{login ? <div>유저가 있습니다</div> : null}</>;
 };
 
 export default MyPage;

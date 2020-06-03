@@ -8,9 +8,13 @@ import Button from '@Custom/Button/Button';
 type modalProp = {
   content: () => JSX.Element | null;
 };
+
 const Modal = ({ content }: modalProp) => {
   const dispatch = useDispatch();
-  const onClickHandler = () => dispatch(turnOffModal());
+  const onClickHandler = () => {
+    console.log('hello');
+    dispatch(turnOffModal());
+  };
   return (
     <div css={modalDim}>
       <div onClick={onClickHandler} css={overlay}></div>

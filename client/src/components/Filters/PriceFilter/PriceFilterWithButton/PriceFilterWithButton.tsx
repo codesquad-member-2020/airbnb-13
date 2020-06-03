@@ -3,19 +3,20 @@ import { jsx, css } from '@emotion/core';
 import { useState } from 'react';
 import PriceFilter from '../PriceFilter';
 import FilterButton from '@Custom/FilterButton/FilterButton';
+import { FilterButtonProp } from '@Filters/Filters';
 
-const PriceFilterWithButton = () => {
-  const [focused, setFocused] = useState(false);
+const PriceFilterWithButton = ({ focus, setFocus, setRefTarget }: FilterButtonProp) => {
+  const { price } = focus;
   return (
-    <div css={styled}>
+    <div css={styled} ref={setRefTarget}>
       <FilterButton
-        focused={focused}
+        focused={price}
         onClick={() => {
-          setFocused(!focused);
+          setFocus({ guest: false, price: true });
         }}>
         $123
       </FilterButton>
-      {focused && <PriceFilter />}
+      {price && <PriceFilter />}
     </div>
   );
 };

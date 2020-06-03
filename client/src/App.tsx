@@ -15,9 +15,9 @@ const App = () => {
   const { on, content } = useSelector((state: RootState) => state.modalReducer);
   return (
     <ThemeProvider theme={theme}>
-      <Header />
-      {on && <Modal content={content} />}
       <BrowserRouter>
+        <Header />
+        {on && <Modal content={content} />}
         <Switch>
           <Route path="/" exact component={MainPage} />
           <Route path="/mypage" component={MyPage} />

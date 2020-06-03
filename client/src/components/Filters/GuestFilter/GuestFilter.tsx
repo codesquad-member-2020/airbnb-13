@@ -7,11 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setGuestFilter } from '@Action/filterAction';
 import { RootState } from '@Reducer/index';
 
-type GuestFilterProp = {
-  onBlur: () => void;
-};
-
-const GuestFilter = ({ onBlur }: GuestFilterProp) => {
+const GuestFilter = () => {
   const dispatch = useDispatch();
   const { adult, child, baby } = useSelector((state: RootState) => state.filterReducer);
   const reset = () => {
@@ -19,7 +15,7 @@ const GuestFilter = ({ onBlur }: GuestFilterProp) => {
   };
 
   return (
-    <div css={style} onBlur={onBlur} tabIndex={0}>
+    <div css={style}>
       <FlexLayout direction={'column'} align={'left'} gap={'1rem'}>
         <Row
           type="성인"
