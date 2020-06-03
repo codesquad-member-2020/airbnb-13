@@ -10,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.Calendar;
 import java.util.List;
 
 @Service
@@ -55,12 +54,9 @@ public class RoomService {
 
     private void addReservationDates(Long reservationId, LocalDate checkIn, LocalDate checkOut) {
         long diff = DayCalculator.getDiffDays(checkIn, checkOut);
-        Calendar calendar = Calendar.getInstance();
 
-//        for (int i = 0; i < diff; i++) {
-//            calendar.setTime(checkIn);
-//            calendar.add(Calendar.DATE, i);
-//            roomDao.addReservationDate(reservationId, calendar.getTime());
-//        }
+        for (int i = 0; i < diff; i++) {
+            roomDao.addReservationDate(reservationId, checkIn.plusDays(i));
+        }
     }
 }
