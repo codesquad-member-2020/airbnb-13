@@ -1,6 +1,6 @@
 package com.codesquad.airbnb.controller;
 
-import com.codesquad.airbnb.dto.ReservationForm;
+import com.codesquad.airbnb.dto.ReservationRequest;
 import com.codesquad.airbnb.dto.RoomResponse;
 import com.codesquad.airbnb.service.RoomService;
 import lombok.RequiredArgsConstructor;
@@ -37,7 +37,7 @@ public class RoomController {
     }
 
     @PostMapping("/rooms/{id}")
-    public ResponseEntity<String> reservation(@PathVariable Long id, @RequestBody ReservationForm reservationForm) {
+    public ResponseEntity<String> reservation(@PathVariable Long id, @RequestBody ReservationRequest reservationForm) {
         roomService.addReservation(id, reservationForm);
         return new ResponseEntity<>("OK", HttpStatus.OK);
     }

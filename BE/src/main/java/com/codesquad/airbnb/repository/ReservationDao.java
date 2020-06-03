@@ -26,7 +26,7 @@ public class ReservationDao {
     public List<Reservation> findByUserId(Long userId) {
         String query = "SELECT reservation.id AS reservation_id, user_id, room_id, child, infant, adult, " +
                 "room.title, room.thumbnail, room.location, room.super_host, room.price " +
-                "FROM reservation JOIN room ON user_id = :userId and room_id = room.id";
+                "FROM reservation INNER JOIN room ON user_id = :userId and room_id = room.id";
 
         SqlParameterSource parameters = new MapSqlParameterSource().addValue("userId", userId);
 
@@ -40,14 +40,9 @@ public class ReservationDao {
 
         SqlParameterSource parameters = new MapSqlParameterSource().addValue("reservationId", reservationId);
 
-        return namedJdbcTemplate.queryForObject(query, parameters, new RowMapper<ReservationDate>() {
-            public ReservationDate mapRow(ResultSet rs, int rowNum) throws SQLException {
-
-                return ReservationDate.builder()
-                        .checkIn(LocalDate.parse(rs.getString("check_in")))
-                        .checkOut(LocalDate.parse(rs.getString("check_out")))
-                        .build();
-            }
-        });
+        return namedJdbcTemplate.queryForObject(query, parameters, (rs, rowNum) -> ReservationDate.builder()
+                .checkIn(LocalDate.parse(rs.getString("check_in")))
+                .checkOut(LocalDate.parse(rs.getString("check_out")))
+                .build());
     }
 }
