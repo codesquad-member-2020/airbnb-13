@@ -1,11 +1,13 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
 import styled from '@emotion/styled';
-import { useState } from 'react';
+import { useState, Dispatch, SetStateAction, useEffect } from 'react';
 import PriceInput from './PriceInput/PriceInput';
 import FlexLayout from '@Custom/FlexLayout/FlexLayout';
 import Bars from './Bars/Bars';
 import useSliderValue from '$Util/customHooks/useSliderValue';
+import { useSelector } from 'react-redux';
+import { RootState } from '@Reducer/index';
 
 type SliderWrapProp = {
   leftPercent: number;
@@ -20,45 +22,57 @@ export type SliderValue = {
 export type SliderRange = {
   min: number;
   max: number;
-  setFilter: Function;
+  setMin: Dispatch<SetStateAction<number>>;
+  setMax: Dispatch<SetStateAction<number>>;
 };
 
-const BarData = [2, 1, 3, 4, 9, 9, 1, 2, 3, 4, 5, 8, 0, 17, 19, 22, 4, 6, 1, 10];
-
-const Slider = ({ min, max, setFilter }: SliderRange) => {
+const Slider = ({ min, max, setMin, setMax }: SliderRange) => {
+  const { priceGap, minPrice, maxPrice, price } = useSelector((state: RootState) => state.priceReducer);
   const [leftValue, setLeftValue] = useSliderValue({
-    value: min,
+    value: minPrice,
     percent: 0
   });
   const [rightValue, setRightValue] = useSliderValue({
-    value: max,
+    value: maxPrice,
     percent: 100
   });
 
+  useEffect(() => {
+    setLeftValue(minPrice, maxPrice)(minPrice);
+    setRightValue(minPrice, maxPrice)(maxPrice);
+  }, [minPrice, maxPrice]);
+
   const leftInputHandler = (e: React.FormEvent<HTMLInputElement>) => {
     const value = Math.min(parseInt(e.currentTarget.value), rightValue.value);
-    setLeftValue(min, max)(value);
-    setFilter(leftValue.value, rightValue.value);
+    setLeftValue(minPrice, maxPrice)(value);
+    setMin(leftValue.value);
   };
 
   const rightInputHandler = (e: React.FormEvent<HTMLInputElement>) => {
     const value = Math.max(parseInt(e.currentTarget.value), leftValue.value);
-    setRightValue(min, max)(value);
-    setFilter(leftValue.value, rightValue.value);
+    setRightValue(minPrice, maxPrice)(value);
+    setMax(rightValue.value);
   };
 
   return (
     <FlexLayout direction="column" align="left">
-      <Bars barData={BarData} maxHeight={30} limit={{ min: leftValue.percent, max: rightValue.percent }} />
+      <Bars barData={price} maxHeight={30} limit={{ min: leftValue.percent, max: rightValue.percent }} />
       <Middle>
         <div className="multi-range-slider">
-          <input type="range" id="input-left" onChange={leftInputHandler} min={min} max={max} value={leftValue.value} />
+          <input
+            type="range"
+            id="input-left"
+            onChange={leftInputHandler}
+            min={minPrice}
+            max={maxPrice}
+            value={leftValue.value}
+          />
           <input
             type="range"
             id="input-right"
             onChange={rightInputHandler}
-            min={min}
-            max={max}
+            min={minPrice}
+            max={maxPrice}
             value={rightValue.value}
           />
           <SliderWrap leftPercent={leftValue.percent} rightPercent={rightValue.percent}>
@@ -70,9 +84,9 @@ const Slider = ({ min, max, setFilter }: SliderRange) => {
         </div>
       </Middle>
       <FlexLayout direction={'row'} align={'spaceBetween'} alignItemCenter={true} customCSS={inputWrapStyle}>
-        <PriceInput price={leftValue} setPrice={setLeftValue(min, max)} title={'최저 요금'} />
+        <PriceInput price={leftValue} setPrice={setLeftValue(minPrice, maxPrice)} title={'최저 요금'} />
         <span>~</span>
-        <PriceInput price={rightValue} setPrice={setRightValue(min, max)} title={'최고 요금'} />
+        <PriceInput price={rightValue} setPrice={setRightValue(minPrice, maxPrice)} title={'최고 요금'} />
       </FlexLayout>
     </FlexLayout>
   );

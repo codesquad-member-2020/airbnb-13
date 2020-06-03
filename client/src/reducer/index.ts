@@ -3,12 +3,14 @@ import modalReducer from './modalReducer';
 import filterReducer from './filterReducer';
 import cardReducer from './cardReducer';
 import userReducer from './userReducer';
+import priceReducer from './priceReducer';
 
 const rootReducer = combineReducers({
   modalReducer,
   filterReducer,
   cardReducer,
-  userReducer
+  userReducer,
+  priceReducer
 } as any);
 
 export default rootReducer;

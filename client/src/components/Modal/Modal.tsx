@@ -12,7 +12,6 @@ type modalProp = {
 const Modal = ({ content }: modalProp) => {
   const dispatch = useDispatch();
   const onClickHandler = () => {
-    console.log('hello');
     dispatch(turnOffModal());
   };
   return (

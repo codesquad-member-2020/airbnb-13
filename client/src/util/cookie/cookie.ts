@@ -31,10 +31,8 @@ export const isLogin = (key: string) => {
 };
 
 export const login = () => {
-  console.log('login');
   if (process.env.NODE_ENV === 'development') {
     setCookie('jwt', 'asdlkfjadslkfj', 1);
-    console.log('jwt');
     window.location.href = 'http://localhost:3000/';
   }
 };
