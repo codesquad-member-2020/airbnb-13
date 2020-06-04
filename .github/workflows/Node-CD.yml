@@ -35,15 +35,16 @@ jobs:
       - name: npm 빌드
         run: npm run build
      
-      - name: AWS 설정
-        uses: aws-actions/configure-aws-credentials@v1
+      - name: Transfer to S3 for serving static
+        uses: jakejarvis/s3-sync-action@master
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
-
-      - name: S3 업로드
-        run: aws deploy push --application-name EC2-S3-Deploy-FE --description "This is a revision for the application airbnb_App" --s3-location s3://codesquad-deploy/client/build-client.zip --source .
+          args: --acl public-read --follow-symlinks --delete
+        env:
+          AWS_S3_BUCKET: codesquad-deploy
+          AWS_ACCESS_KEY_ID: ${{ secrets. AWS_IAM_MANAGER_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_IAM_MANAGER_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          SOURCE_DIR: 'dist'
 
       - name: Code Deploy
-        run: aws deploy create-deployment --application-name EC2-S3-Deploy-FE --deployment-config-name CodeDeployDefault.OneAtATime --deployment-group-name dev-FE --s3-location bucket=codesquad-deploy,bundleType=zip,key=client/build-client.zip
+        run: aws deploy create-deployment --application-name EC2-S3-Deploy-FE --deployment-config-name CodeDeployDefault.OneAtATime --deployment-group-name dev-FE --s3-location bucket=codesquad-deploy,bundleType=zip,key=dist.zip
