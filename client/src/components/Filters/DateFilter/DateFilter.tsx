@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Dispatch, SetStateAction } from 'react';
 import 'react-dates/initialize';
 import { DateRangePicker } from 'react-dates';
 import moment from 'moment';
@@ -7,6 +7,8 @@ import styled from '@emotion/styled';
 import 'react-dates/lib/css/_datepicker.css';
 import { useDispatch } from 'react-redux';
 import { setDateFilter } from '@Action/filterAction';
+import { FilterFocus } from '@Filters/Filters';
+import theme from '@/style/theme';
 
 type DateFilterFocus = {
   focus: Focus;
@@ -14,7 +16,11 @@ type DateFilterFocus = {
 
 type Focus = 'startDate' | 'endDate' | null;
 
-const AirBnbCalendar = () => {
+type DateFilterProp = {
+  setFocus: Dispatch<SetStateAction<FilterFocus>>;
+};
+
+const AirBnbCalendar = ({ setFocus }: DateFilterProp) => {
   const [focused, setFocused] = useState<Focus>(null);
   const [startDate, setStartDate] = useState<moment.Moment | null>(null);
   const [endDate, setEndDate] = useState<moment.Moment | null>(null);
@@ -38,7 +44,10 @@ const AirBnbCalendar = () => {
           }
         }}
         focusedInput={focused}
-        onFocusChange={focus => setFocused(focus)}
+        onFocusChange={focus => {
+          setFocused(focus);
+          setFocus({ price: false, guest: false });
+        }}
         monthFormat="YYYY[년] MMMM"
         showClearDates
         readOnly={true}
@@ -66,6 +75,7 @@ const StyledDatePickerWrapper = styled.div`
       height: 40px;
       align-items: center;
       border-radius: 1.5rem;
+      border: 1px solid ${theme.colors.gray};
       ${(props: DateFilterFocus) => props.focus && `border: 2px solid #000`};
       .DateInput {
         width: 50%;
@@ -84,18 +94,21 @@ const StyledDatePickerWrapper = styled.div`
             .DateRangePickerInput {
               border: 2px solid #000;
             }
-            &,
-            &::placeholder {
-              font-weight: bold;
-            }
           }
         }
         .DateInput_input::placeholder {
           font-size: 13px;
-          color: #000;
+          color: ${theme.colors.darkGray};
           text-align: center;
+          font-weight: normal;
         }
       }
+    }
+    .DayPicker__withBorder {
+      border-radius: 1rem;
+    }
+    .CalendarMonthGrid {
+      background: none;
     }
 
     .CalendarDay__default {
