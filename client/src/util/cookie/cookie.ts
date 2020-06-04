@@ -34,6 +34,8 @@ export const login = () => {
   if (process.env.NODE_ENV === 'development') {
     setCookie('jwt', 'asdlkfjadslkfj', 1);
     window.location.href = 'http://localhost:3000/';
+  } else {
+    window.location.href = process.env.LOGIN_API!;
   }
 };
 
