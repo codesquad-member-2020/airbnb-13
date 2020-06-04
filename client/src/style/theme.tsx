@@ -2,7 +2,8 @@ const theme = {
   colors: {
     primary: '#ff5a5f',
     darkGray: '#484848',
-    gray: '#767676'
+    gray: '#767676',
+    lightGray: '#cccccc'
   },
   fontSizes: {
     title1: '44px',
