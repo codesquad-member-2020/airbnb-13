@@ -6,9 +6,9 @@ import { login } from '$Util/cookie/cookie';
 const Login = () => {
   return (
     <div>
-      <Button theme={'primary'} fontSize={'medium'} width={'100%'}>
+      <Button theme={'primary'} fontSize={'medium'} width={'100%'} onClick={login}>
         <Icon icon="github" />
-        <span onClick={login}>Github으로 로그인</span>
+        <span>Github으로 로그인</span>
       </Button>
     </div>
   );
