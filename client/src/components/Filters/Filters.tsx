@@ -5,6 +5,7 @@ import FlexLayout from '@Custom/FlexLayout/FlexLayout';
 import PriceFilterWithButton from './PriceFilter/PriceFilterWithButton/PriceFilterWithButton';
 import GuestFilterWithButton from './GuestFilter/GuestFilterWithButton/GuestFilterWithButton';
 import DateFilter from './DateFilter/DateFilter';
+import FilterContentWrap from './FilterContentWrap';
 
 export type FilterFocus = {
   guest: boolean;
@@ -21,20 +22,15 @@ const Filters = () => {
   const [focus, setFocus] = useState<FilterFocus>({ guest: false, price: false });
   const [guestRefer, setGuestRefer] = useState<HTMLDivElement | null>(null);
   const [priceRefer, setPriceRefer] = useState<HTMLDivElement | null>(null);
-  const setGuestRef = (guestRef: HTMLDivElement | null) => {
-    setGuestRefer(guestRef);
-  };
-
-  const setPriceRef = (priceRef: HTMLDivElement | null) => {
-    setPriceRefer(priceRef);
-  };
 
   return (
-    <FlexLayout direction={'row'} align={'left'} gap={'10px'}>
-      <DateFilter />
-      <GuestFilterWithButton focus={focus} setFocus={setFocus} setRefTarget={setGuestRefer} />
-      <PriceFilterWithButton focus={focus} setFocus={setFocus} setRefTarget={setPriceRefer} />
-    </FlexLayout>
+    <FilterContentWrap setFocus={setFocus}>
+      <FlexLayout direction={'row'} align={'left'} gap={'10px'}>
+        <DateFilter setFocus={setFocus} />
+        <GuestFilterWithButton focus={focus} setFocus={setFocus} setRefTarget={setGuestRefer} />
+        <PriceFilterWithButton focus={focus} setFocus={setFocus} setRefTarget={setPriceRefer} />
+      </FlexLayout>
+    </FilterContentWrap>
   );
 };
 

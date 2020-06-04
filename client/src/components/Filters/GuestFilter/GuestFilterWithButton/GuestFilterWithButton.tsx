@@ -20,7 +20,7 @@ const GuestFilterWithButton = ({ focus, setFocus, setRefTarget }: FilterButtonPr
         }}>
         게스트 {adult} 명 {child ? `어린이 ${child}명` : ''} {baby ? `유아 ${baby}명` : ''}
       </FilterButton>
-      {guest && <GuestFilter />}
+      {guest && <GuestFilter setFocus={setFocus} />}
     </div>
   );
 };

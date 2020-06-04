@@ -8,6 +8,7 @@ import Bars from './Bars/Bars';
 import useSliderValue from '$Util/customHooks/useSliderValue';
 import { useSelector } from 'react-redux';
 import { RootState } from '@Reducer/index';
+import theme from '@/style/theme';
 
 type SliderWrapProp = {
   leftPercent: number;
@@ -56,7 +57,7 @@ const Slider = ({ min, max, setMin, setMax }: SliderRange) => {
 
   return (
     <FlexLayout direction="column" align="left">
-      <Bars barData={price} maxHeight={30} limit={{ min: leftValue.percent, max: rightValue.percent }} />
+      <Bars barData={price} maxHeight={40} limit={{ min: leftValue.percent, max: rightValue.percent }} />
       <Middle>
         <div className="multi-range-slider">
           <input
@@ -104,6 +105,7 @@ const Middle = styled.div`
     width: 100%;
     height: 10px;
     opacity: 0;
+    margin: 0;
     &::-webkit-slider-thumb {
       pointer-events: all;
       width: 30px;
@@ -119,7 +121,7 @@ const Middle = styled.div`
 const SliderWrap = styled.div`
   position: relative;
   z-index: 1;
-  height: 10px;
+  height: 3px;
   > .track {
     position: absolute;
     z-index: 1;
@@ -128,7 +130,7 @@ const SliderWrap = styled.div`
     top: 0;
     bottom: 0;
     border-radius: 5px;
-    background-color: #c6aee7;
+    background-color: ${theme.colors.lightGray};
   }
 
   > .range {
@@ -139,23 +141,24 @@ const SliderWrap = styled.div`
     top: 0;
     bottom: 0;
     border-radius: 5px;
-    background-color: #6200ee;
+    background-color: ${theme.colors.gray};
   }
   > .thumb {
     position: absolute;
     z-index: 3;
     width: 20px;
     height: 20px;
-    background-color: #6200ee;
+    background-color: #ffffff;
+    border: 1px solid ${theme.colors.lightGray};
     border-radius: 50%;
 
     &.left {
       left: ${(props: SliderWrapProp) => `${props.leftPercent}%`};
-      transform: translate(-7px, -5px);
+      transform: translate(-7px, -8.5px);
     }
     &.right {
       right: ${(props: SliderWrapProp) => `${100 - props.rightPercent}%`};
-      transform: translate(7px, -5px);
+      transform: translate(7px, -8.5px);
     }
   }
 `;

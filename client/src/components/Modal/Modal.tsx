@@ -58,7 +58,7 @@ const modalWrap = css`
   width: 300px;
   transform: translate(-50%, -50%);
   background: #fff;
-  padding: 1rem;
+  padding: 2rem;
   z-index: 300;
 `;
 

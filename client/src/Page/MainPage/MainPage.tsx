@@ -18,5 +18,5 @@ export default MainPage;
 
 const wrapStyle = css`
   max-width: 900px;
-  margin: 50px auto;
+  margin: 80px auto;
 `;

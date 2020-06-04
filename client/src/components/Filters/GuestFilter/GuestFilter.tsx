@@ -3,11 +3,17 @@ import { jsx, css } from '@emotion/core';
 import FlexLayout from '@Custom/FlexLayout/FlexLayout';
 import Row from './Row/Row';
 import Button from '@Custom/Button/Button';
+import { Dispatch, SetStateAction } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setGuestFilter } from '@Action/filterAction';
 import { RootState } from '@Reducer/index';
+import { FilterFocus } from '@Filters/Filters';
 
-const GuestFilter = () => {
+type GuestProp = {
+  setFocus: Dispatch<SetStateAction<FilterFocus>>;
+};
+
+const GuestFilter = ({ setFocus }: GuestProp) => {
   const dispatch = useDispatch();
   const { adult, child, baby } = useSelector((state: RootState) => state.filterReducer);
   const reset = () => {
@@ -40,7 +46,11 @@ const GuestFilter = () => {
         <Button theme={'nooutline'} fontSize="medium" width={'3rem'} onClick={reset}>
           지우기
         </Button>
-        <Button theme={'secondary'} fontSize="medium" width={'3rem'}>
+        <Button
+          theme={'secondary'}
+          fontSize="medium"
+          width={'3rem'}
+          onClick={() => setFocus({ guest: false, price: false })}>
           저장
         </Button>
       </FlexLayout>
@@ -50,11 +60,13 @@ const GuestFilter = () => {
 
 const style = css`
   width: 400px;
-  padding: 1rem;
+  padding: 1.5rem 1rem 1rem 1.5rem;
   border-radius: 1rem;
   background-color: #ffffff;
   border: 1px solid #eeeeee;
   position: absolute;
+  top: calc(100% + 10px);
+  box-shadow: 0px 0px 10px rgba(173, 173, 173, 0.3);
 `;
 
 const customCSS = css`

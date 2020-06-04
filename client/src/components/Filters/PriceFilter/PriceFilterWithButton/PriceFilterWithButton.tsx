@@ -19,7 +19,7 @@ const PriceFilterWithButton = ({ focus, setFocus, setRefTarget }: FilterButtonPr
         }}>
         ${averagePrice}
       </FilterButton>
-      {price && <PriceFilter />}
+      {price && <PriceFilter setFocus={setFocus} />}
     </div>
   );
 };
