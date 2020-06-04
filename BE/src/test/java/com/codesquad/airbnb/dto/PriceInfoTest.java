@@ -39,4 +39,10 @@ class PriceInfoTest {
     void price_한_구간_범위() {
         assertThat(testPriceInfo.getPriceGap()).isEqualTo(10);
     }
+
+    @Test
+    void 배열이_비었을때_테스트() {
+        PriceInfo testPriceInfo = new PriceInfo(new ArrayList<>(Arrays.asList()));
+        assertThat(testPriceInfo.getMaxPrice()).isEqualTo(0);
+    }
 }
