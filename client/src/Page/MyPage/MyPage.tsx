@@ -29,7 +29,6 @@ const MyPage = () => {
   const dispatch = useDispatch();
   const login = isLogin('jwt');
   const [userInfo, setUserInfo] = useState<MypageState[]>([]);
-  console.log(userInfo);
   useFetch(setUserInfo, `${process.env.MYPAGE_API}`);
   useEffect(() => {
     !login && dispatch(turnOnModal('Login'));
@@ -38,15 +37,17 @@ const MyPage = () => {
     <div css={myPageWrap}>
       {userInfo.length ? (
         userInfo.map(({ title, location, thumbnail, checkIn, checkOut, guestCount, totalPrice }) => {
-          <MyReservation
-            title={title}
-            location={location}
-            thumbnail={thumbnail}
-            checkIn={checkIn}
-            checkOut={checkOut}
-            guestCount={guestCount}
-            totalPrice={totalPrice}
-          />;
+          return (
+            <MyReservation
+              title={title}
+              location={location}
+              thumbnail={thumbnail}
+              checkIn={checkIn}
+              checkOut={checkOut}
+              guestCount={guestCount}
+              totalPrice={totalPrice}
+            />
+          );
         })
       ) : (
         <div css={userInfoStyle}>예약 내역이 없습니다.</div>
