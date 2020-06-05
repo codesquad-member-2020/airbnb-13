@@ -36,7 +36,7 @@ const Reservation = () => {
     occupancyFee: 0,
     totalPrice: 0
   });
-  const reservationUrl = `${process.env.RESEVATION_MODAL_API}${id}/adults=${adult}&children=${child}&infants=${baby}&checkin=${startDate}&checkout=${endDate}`;
+  const reservationUrl = `${process.env.RESEVATION_MODAL_API}${id}?adults=${adult}&children=${child}&infants=${baby}&checkin=${startDate}&checkout=${endDate}`;
   useFetch(setReservationInfo, reservationUrl);
   const { price, checkIn, checkOut, guestCount, cleaningFee, serviceFee, occupancyFee, totalPrice } = reservationInfo;
   const resultReservationData = {
