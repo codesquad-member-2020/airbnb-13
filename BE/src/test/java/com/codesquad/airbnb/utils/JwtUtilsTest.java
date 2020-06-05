@@ -24,11 +24,11 @@ class JwtUtilsTest {
     @Test
     public void JWT토큰파싱하기() {
         UserResponse user = UserResponse.builder()
-                .email("abc12@email.com")
+                .email(null)
                 .build();
         String jwt = JwtUtils.jwtCreate(user);
         String email = JwtUtils.jwtParsing(jwt);
-        assertThat(email).isEqualTo("abc12@email.com");
+        assertThat(email).isNull();
     }
 
 }
