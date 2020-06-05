@@ -33,19 +33,22 @@ const MyPage = () => {
   useEffect(() => {
     !login && dispatch(turnOnModal('Login'));
   }, []);
+  console.log('userInfo is', userInfo);
   return (
     <div css={myPageWrap}>
       {userInfo.length ? (
         userInfo.map(({ title, location, thumbnail, checkIn, checkOut, guestCount, totalPrice }) => {
-          <MyReservation
-            title={title}
-            location={location}
-            thumbnail={thumbnail}
-            checkIn={checkIn}
-            checkOut={checkOut}
-            guestCount={guestCount}
-            totalPrice={totalPrice}
-          />;
+          return (
+            <MyReservation
+              title={title}
+              location={location}
+              thumbnail={thumbnail}
+              checkIn={checkIn}
+              checkOut={checkOut}
+              guestCount={guestCount}
+              totalPrice={totalPrice}
+            />
+          );
         })
       ) : (
         <div css={userInfoStyle}>예약 내역이 없습니다.</div>
