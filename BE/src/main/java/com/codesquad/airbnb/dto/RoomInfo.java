@@ -1,6 +1,7 @@
 package com.codesquad.airbnb.dto;
 
 import com.codesquad.airbnb.utils.DayCalculator;
+import com.codesquad.airbnb.utils.PriceCalculator;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -37,23 +38,7 @@ public class RoomInfo {
         this.price = room.getPrice();
         this.reviewScore = room.getReviewScore();
         this.thumbnail = room.getThumbnail();
-        this.discountPrice = superHost ? calcDiscountPrice(price) : null;
-        this.totalPrice = calcTotalPrice(checkIn, checkOut, price, superHost);
-    }
-
-    private int calcDiscountPrice(int price) {
-        return (int) Math.floor(price * 0.9);
-    }
-
-    private int calcTotalPrice(String checkIn, String checkOut, int price, boolean superHost) {
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        try {
-            LocalDate checkInDate = LocalDate.parse(checkIn, format);
-            LocalDate checkOutDate = LocalDate.parse(checkOut, format);
-            int dateDiff = DayCalculator.getDiffDays(checkInDate, checkOutDate);
-            return superHost ? dateDiff * calcDiscountPrice(price) : dateDiff * price;
-        } catch (Exception e) {
-            return price;
-        }
+        this.discountPrice = superHost ? PriceCalculator.calcDiscountPrice(price) : null;
+        this.totalPrice = PriceCalculator.calcTotalPrice(checkIn, checkOut, price, superHost);
     }
 }
