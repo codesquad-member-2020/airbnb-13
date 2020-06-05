@@ -29,6 +29,7 @@ const MyPage = () => {
   const dispatch = useDispatch();
   const login = isLogin('jwt');
   const [userInfo, setUserInfo] = useState<MypageState[]>([]);
+  console.log(userInfo);
   useFetch(setUserInfo, `${process.env.MYPAGE_API}`);
   useEffect(() => {
     !login && dispatch(turnOnModal('Login'));
