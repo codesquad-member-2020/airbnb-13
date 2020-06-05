@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PriceFilter from '@Filters/PriceFilter/PriceFilter';
 import { ThemeProvider } from 'emotion-theming';
 import theme from '$Style/theme';
@@ -8,10 +8,15 @@ export default {
   component: PriceFilter
 };
 
+type PriceProp = {
+  guest: boolean;
+  price: boolean;
+};
 export const priceFilter = () => {
+  const [focus, setFocused] = useState<PriceProp>({ guest: false, price: false });
   return (
     <ThemeProvider theme={theme}>
-      <PriceFilter />
+      <PriceFilter setFocus={setFocused} />
     </ThemeProvider>
   );
 };

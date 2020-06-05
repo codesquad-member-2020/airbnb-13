@@ -27,10 +27,6 @@ jobs:
 
       - name: Gradle 빌드
         run: ./gradlew bootJar
-     
-      - name: zip 생성
-        run: zip -qq -r ./build.zip .
-        shell: bash
 
       - name: AWS 설정
         uses: aws-actions/configure-aws-credentials@v1
@@ -40,7 +36,7 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: S3 업로드
-        run: aws s3 cp --region ap-northeast-2 ./build.zip s3://codesquad-deploy/server/build.zip
+        run: aws deploy push --application-name EC2-S3-Deploy --description "This is a revision for the application airbnb_App" --s3-location s3://codesquad-deploy/server/build.zip --source .
 
       - name: Code Deploy
         run: aws deploy create-deployment --application-name EC2-S3-Deploy --deployment-config-name CodeDeployDefault.OneAtATime --deployment-group-name dev --s3-location bucket=codesquad-deploy,bundleType=zip,key=server/build.zip

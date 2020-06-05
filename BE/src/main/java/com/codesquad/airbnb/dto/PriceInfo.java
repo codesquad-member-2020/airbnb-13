@@ -23,6 +23,15 @@ public class PriceInfo {
     private final Integer priceGap;
 
     public PriceInfo(List<Integer> priceList) {
+        if (priceList.isEmpty()) {
+            this.maxPrice = 0;
+            this.minPrice = 0;
+            this.price = new ArrayList<>();
+            this.averagePrice = 0;
+            this.priceGap = 0;
+            return;
+        }
+
         int priceSize = 20;
         Collections.sort(priceList);
         Integer sum = calcSum(priceList);

@@ -7,6 +7,7 @@ import SuperHost from './SuperHost/SuperHost';
 import { turnOnReservationModal, turnOnModal } from '@Action/modalAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@Reducer/index';
+import { isLogin } from '$Util/cookie/cookie';
 
 export type CardDetailProp = {
   superHost: boolean;
@@ -37,8 +38,8 @@ const CardDetail = ({
   const isAvailable = () => {
     const guest = adult + child + baby;
     const isSetDate = !!startDate && !!endDate;
-
-    return isSetDate && !!guest;
+    const login = isLogin('jwt');
+    return isSetDate && !!guest && login;
   };
 
   return (

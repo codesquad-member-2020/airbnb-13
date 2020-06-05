@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
+import theme from '@/style/theme';
 
 export type BarProp = {
   height: number;
@@ -15,13 +16,13 @@ const barStyle = (isOn: boolean, height: number) => {
     return css`
       height: ${height}px;
       width: 30px;
-      background-color: #555;
+      background-color: ${theme.colors.gray};
     `;
   }
   return css`
     height: ${height}px;
     width: 30px;
-    background-color: #ccc;
+    background-color: ${theme.colors.lightGray};
   `;
 };
 

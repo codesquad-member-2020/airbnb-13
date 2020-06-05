@@ -4,6 +4,7 @@ import { SET_NEW_CARD_PAGE, SET_START_CARD_PAGE, GET_NEXT_CARD_PAGE, SET_NEXT_CA
 import { CardProp } from '@Cards/Card/Card';
 import axios from 'axios';
 import { CardState } from '@Reducer/cardReducer';
+import { PricesType, SET_PRICES } from '@Action/priceAction';
 
 function* fetchCardData() {
   yield takeEvery([SET_DATE_FILTER, SET_GUEST_FILTER, SET_PRICE_FILTER], requestNewCard);
@@ -37,13 +38,17 @@ function* requestNewCard() {
   const state = yield select(reducer => reducer.filterReducer);
   const param = { ...state, page: 1 };
   const res = yield call(send, param);
-  const data = res.data as CardProp[];
+  const data = res.data.room as CardProp[];
+  const priceData = res.data.price as PricesType;
+  yield put({ type: SET_PRICES, ...priceData });
   yield put({ type: SET_NEW_CARD_PAGE, cards: data });
 }
 
 function* requestFirstCard() {
   const { data } = yield call(sendFirstCardRequest);
-  yield put({ type: SET_NEW_CARD_PAGE, cards: data });
+  const priceData = data.price as PricesType;
+  yield put({ type: SET_PRICES, ...priceData });
+  yield put({ type: SET_NEW_CARD_PAGE, cards: data.room });
 }
 
 function* requestNextCard() {
@@ -52,7 +57,9 @@ function* requestNextCard() {
   const cardPage = cardState.cardPage;
   const param = { ...state, page: cardPage };
   const res = yield call(send, param);
-  const data = res.data as CardProp[];
+  const data = res.data.room as CardProp[];
+  const priceData = res.data.price as PricesType;
+  yield put({ type: SET_PRICES, ...priceData });
   yield put({ type: SET_NEXT_CARD_PAGE, cards: data });
 }
 

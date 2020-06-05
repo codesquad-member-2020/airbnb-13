@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PriceFilterWithButton from '@Filters/PriceFilter/PriceFilterWithButton/PriceFilterWithButton';
 import { ThemeProvider } from 'emotion-theming';
 import theme from '$Style/theme';
@@ -9,9 +9,11 @@ export default {
 };
 
 export const priceFilterWithButton = () => {
+  const [focus, setFocus] = useState({ price: false, guest: false });
+  const setRefTarget = (a: HTMLDivElement | null) => {};
   return (
     <ThemeProvider theme={theme}>
-      <PriceFilterWithButton />
+      <PriceFilterWithButton focus={focus} setFocus={setFocus} setRefTarget={setRefTarget} />
     </ThemeProvider>
   );
 };
