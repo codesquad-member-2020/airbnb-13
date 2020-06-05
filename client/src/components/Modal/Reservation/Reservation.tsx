@@ -7,6 +7,7 @@ import Date from './Date/Date';
 import Guest from './Guest/Guest';
 import Prices from './Prices/Prices';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
 import { RootState } from '@Reducer/index';
 import { useState } from 'react';
 import useFetch from '$Util/customHooks/useFetch';
@@ -36,19 +37,22 @@ const Reservation = () => {
     occupancyFee: 0,
     totalPrice: 0
   });
+  const history = useHistory();
+
   const reservationUrl = `${process.env.RESEVATION_MODAL_API}${id}?adults=${adult}&children=${child}&infants=${baby}&checkin=${startDate}&checkout=${endDate}`;
   useFetch(setReservationInfo, reservationUrl);
   const { price, checkIn, checkOut, guestCount, cleaningFee, serviceFee, occupancyFee, totalPrice } = reservationInfo;
   const resultReservationData = {
-    adult,
-    child,
-    infant: baby,
+    adults: adult,
+    children: child,
+    infants: baby,
     checkin: startDate,
     checkout: endDate
   };
-  const resultReservationHandle = () => {
-    const res = axios.post(`${process.env.RESEVATION_MODAL_API}${id}`, resultReservationData);
-    console.log(res);
+
+  const resultReservationHandle = async () => {
+    const res = await axios.post(`${process.env.RESEVATION_MODAL_API}${id}`, resultReservationData);
+    history.push('/mypage');
   };
   return (
     <FlexLayout direction="column" align="left" gap={'10px'}>
