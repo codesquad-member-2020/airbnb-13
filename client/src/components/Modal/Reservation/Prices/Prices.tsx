@@ -5,6 +5,8 @@ import PriceRow from './PriceRow/PriceRow';
 import moment from 'moment';
 import { useSelector } from 'react-redux';
 import { RootState } from '@Reducer/index';
+import theme from '@/style/theme';
+
 type PricesProp = {
   price: number;
   cleaningFee: number;
@@ -31,11 +33,14 @@ const Prices = ({ price, cleaningFee, serviceFee, occupancyFee, totalPrice }: Pr
 };
 
 const wrapperStyle = css({
+  color: theme.colors.darkGray,
+  fontSize: '13px',
   '> *:not(:first-of-type)': {
-    borderTop: '1px solid red'
+    borderTop: `1px solid ${theme.colors.lightGray}`
   },
   '> *:last-of-type': {
-    marginBottom: '20px'
+    marginBottom: '20px',
+    fontWeight: 'bold'
   }
 });
 
