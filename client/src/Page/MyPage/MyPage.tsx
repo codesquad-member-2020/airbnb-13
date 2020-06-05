@@ -9,13 +9,19 @@ import useFetch from '$Util/customHooks/useFetch';
 import MyReservation from './MyReservation';
 import theme from '@/style/theme';
 
+type GuestCount = {
+  adult: number;
+  child: number;
+  infant: number;
+};
+
 export type MypageState = {
   title: string;
   location: string;
   thumbnail: string;
   checkIn: string;
   checkOut: string;
-  guestCount: object;
+  guestCount: GuestCount;
   totalPrice: number;
 };
 
