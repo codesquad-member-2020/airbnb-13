@@ -1,6 +1,7 @@
 package com.codesquad.airbnb.repository.mapper;
 
 import com.codesquad.airbnb.dto.Room;
+import com.codesquad.airbnb.utils.PriceCalculator;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
@@ -16,7 +17,7 @@ public class RoomMapper implements RowMapper<Room> {
                 .superHost(superHost)
                 .location(rs.getString("location"))
                 .title(rs.getString("title"))
-                .price(rs.getInt("price"))
+                .price(rs.getInt("price") * PriceCalculator.EXCHANGE_RATES)
                 .reviewScore(rs.getFloat("review_score"))
                 .thumbnail(rs.getString("thumbnail"))
                 .build();

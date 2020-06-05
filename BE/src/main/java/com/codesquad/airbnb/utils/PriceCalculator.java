@@ -9,6 +9,8 @@ public class PriceCalculator {
         return (int) Math.floor(price * 0.9);
     }
 
+    public final static int EXCHANGE_RATES = 1216;
+
     public static int calcTotalPrice(String checkIn, String checkOut, int price, boolean superHost) {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         try {
