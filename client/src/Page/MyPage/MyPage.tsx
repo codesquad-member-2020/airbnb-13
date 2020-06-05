@@ -33,6 +33,7 @@ const MyPage = () => {
   useEffect(() => {
     !login && dispatch(turnOnModal('Login'));
   }, []);
+  console.log('userInfo is', userInfo);
   return (
     <div css={myPageWrap}>
       {userInfo.length ? (
