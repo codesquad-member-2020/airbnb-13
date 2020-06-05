@@ -32,7 +32,11 @@ export const isLogin = (key: string) => {
 
 export const login = () => {
   if (process.env.NODE_ENV === 'development') {
-    setCookie('jwt', 'asdlkfjadslkfj', 1);
+    setCookie(
+      'jwt',
+      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyRW1haWwiOm51bGx9.KsyqtOdi-TIZyIyb_N3fWFiQOboiBlVLPIG5BGDauKE',
+      1
+    );
     window.location.href = 'http://localhost:3000/';
   } else {
     window.location.href = process.env.LOGIN_API!;

@@ -14,7 +14,7 @@ const Date = ({ checkIn, checkOut }: DateProp) => {
     <div>
       <span css={theme => ({ fontSize: theme.fontSizes.micro, color: theme.colors.darkGray })}>날짜</span>
       <Box width="100%">
-        <FlexLayout direction="row" align="spaceAround">
+        <FlexLayout direction="row" align="spaceAround" alignItemCenter={true} customCSS={dateStyle}>
           <span>{checkIn}</span>
           <Icon icon="arrow" />
           <span>{checkOut}</span>
@@ -25,3 +25,7 @@ const Date = ({ checkIn, checkOut }: DateProp) => {
 };
 
 export default Date;
+
+const dateStyle = css`
+  height: 100%;
+`;

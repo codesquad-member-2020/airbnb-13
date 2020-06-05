@@ -52,7 +52,7 @@ const handleGuestFilter = (type: GuestType, count: number) => {
   }
 };
 
-const modalReducer = (state: FilterState = initialState, action: FilterAction) => {
+const filterReducer = (state: FilterState = initialState, action: FilterAction) => {
   switch (action.type) {
     case SET_DATE_FILTER:
       const { startDate, endDate } = action as ReturnType<typeof setDateFilter>;
@@ -80,4 +80,4 @@ const modalReducer = (state: FilterState = initialState, action: FilterAction) =
   }
 };
 
-export default modalReducer;
+export default filterReducer;
