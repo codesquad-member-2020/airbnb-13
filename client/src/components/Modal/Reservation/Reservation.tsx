@@ -6,12 +6,13 @@ import Header from './Header/Header';
 import Date from './Date/Date';
 import Guest from './Guest/Guest';
 import Prices from './Prices/Prices';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import { RootState } from '@Reducer/index';
 import { useState } from 'react';
 import useFetch from '$Util/customHooks/useFetch';
 import axios from 'axios';
+import { turnOffModal } from '@Action/modalAction';
 
 type ReservationInfo = {
   price: number;
@@ -27,6 +28,7 @@ type ReservationInfo = {
 const Reservation = () => {
   const { id } = useSelector((state: RootState) => state.modalReducer);
   const { startDate, endDate, adult, child, baby } = useSelector((state: RootState) => state.filterReducer);
+  const dispatch = useDispatch();
   const [reservationInfo, setReservationInfo] = useState<ReservationInfo>({
     price: 0,
     checkIn: '',
@@ -52,6 +54,7 @@ const Reservation = () => {
 
   const resultReservationHandle = async () => {
     const res = await axios.post(`${process.env.RESEVATION_MODAL_API}${id}`, resultReservationData);
+    dispatch(turnOffModal());
     history.push('/mypage');
   };
 
