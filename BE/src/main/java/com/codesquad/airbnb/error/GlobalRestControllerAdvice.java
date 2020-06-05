@@ -1,6 +1,7 @@
 package com.codesquad.airbnb.error;
 
 import com.codesquad.airbnb.error.exception.AlreadyBookedException;
+import com.codesquad.airbnb.error.exception.JWTNotContainException;
 import com.codesquad.airbnb.error.exception.ReservationInvalidFormException;
 import com.codesquad.airbnb.error.exception.UserNotFoundException;
 import lombok.extern.slf4j.Slf4j;
@@ -29,5 +30,11 @@ public class GlobalRestControllerAdvice {
     ResponseEntity<String> AlreadyBookedExceptionHandler(AlreadyBookedException e) {
         log.error("Handle AlreadyBookedException:", e);
         return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(JWTNotContainException.class)
+    protected ResponseEntity<String> jwtNotContainExceptionHandler(JWTNotContainException e) {
+        log.error("Handle JWTNotContainException:", e);
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
     }
 }

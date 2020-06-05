@@ -4,6 +4,7 @@ import com.codesquad.airbnb.dto.ReservationPreviewResponse;
 import com.codesquad.airbnb.dto.ReservationRequest;
 import com.codesquad.airbnb.dto.RoomResponse;
 import com.codesquad.airbnb.dto.User;
+import com.codesquad.airbnb.error.exception.JWTNotContainException;
 import com.codesquad.airbnb.service.LoginService;
 import com.codesquad.airbnb.service.RoomService;
 import com.codesquad.airbnb.utils.JwtUtils;
@@ -60,10 +61,14 @@ public class RoomController {
                                                                          @RequestParam(value = "checkin", required = false) String checkIn,
                                                                          @RequestParam(value = "checkout", required = false) String checkOut,
                                                                          @CookieValue(value = "jwt", required = false) String cookie) {
-        String email = JwtUtils.jwtParsing(cookie);
-        User user = loginService.findUserByEmail(email);
-        ReservationPreviewResponse previewResponse = roomService.previewResponse(id, adults, children, infants,
-                checkIn, checkOut);
-        return new ResponseEntity<>(previewResponse, HttpStatus.OK);
+        try {
+            String email = JwtUtils.jwtParsing(cookie);
+            loginService.findUserByEmail(email);
+            ReservationPreviewResponse previewResponse = roomService.previewResponse(id, adults, children, infants,
+                    checkIn, checkOut);
+            return new ResponseEntity<>(previewResponse, HttpStatus.OK);
+        } catch (JWTNotContainException e) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
     }
 }

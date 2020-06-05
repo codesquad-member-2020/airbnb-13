@@ -38,7 +38,6 @@ public class LoginController {
     public ResponseEntity<String> login(@RequestParam("code") String code, HttpServletResponse response) {
         UserResponse loginUser = loginService.responseUser(code);
         String jwt = JwtUtils.jwtCreate(loginUser);
-
         Cookie cookie = new Cookie("jwt", jwt);
         cookie.setMaxAge(24 * 60 * 60);
         cookie.setPath("/");
