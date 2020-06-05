@@ -46,14 +46,15 @@ const Reservation = () => {
     adults: adult,
     children: child,
     infants: baby,
-    checkin: startDate,
-    checkout: endDate
+    checkIn: startDate,
+    checkOut: endDate
   };
 
   const resultReservationHandle = async () => {
     const res = await axios.post(`${process.env.RESEVATION_MODAL_API}${id}`, resultReservationData);
     history.push('/mypage');
   };
+
   return (
     <FlexLayout direction="column" align="left" gap={'10px'}>
       <Header price={price}></Header>
