@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 @Getter
 @ToString
-public class ReservationForm {
+public class ReservationRequest {
 
     private final Integer adults;
 
@@ -21,7 +21,7 @@ public class ReservationForm {
     private final LocalDate checkOut;
 
     @Builder
-    public ReservationForm(Integer adults, Integer children, Integer infants, LocalDate checkIn, LocalDate checkOut) {
+    public ReservationRequest(Integer adults, Integer children, Integer infants, LocalDate checkIn, LocalDate checkOut) {
         this.adults = adults;
         this.children = children;
         this.infants = infants;

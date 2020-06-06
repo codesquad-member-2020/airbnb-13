@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
 
-class RoomResponseTest {
+class RoomInfoTest {
 
     @Test
     public void RoomResponse_확인테스트() {
@@ -18,7 +18,7 @@ class RoomResponseTest {
                 .thumbnail("http://naver.com")
                 .build();
 
-        RoomResponse roomResponse = new RoomResponse(room, "2020-05-01", "2020-05-05");
+        RoomInfo roomResponse = new RoomInfo(room, "2020-05-01", "2020-05-05");
         assertThat(roomResponse.getTotalPrice()).isEqualTo(40000);
         assertThat(roomResponse.getDiscountPrice()).isEqualTo(null);
     }

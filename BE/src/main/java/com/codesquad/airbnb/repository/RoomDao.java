@@ -1,8 +1,11 @@
 package com.codesquad.airbnb.repository;
 
-import com.codesquad.airbnb.dto.ReservationForm;
-import com.codesquad.airbnb.dto.Room;
-import com.codesquad.airbnb.dto.RoomResponse;
+import com.codesquad.airbnb.dto.*;
+import com.codesquad.airbnb.repository.mapper.RoomPriceMapper;
+import com.codesquad.airbnb.repository.mapper.PriceMapper;
+import com.codesquad.airbnb.repository.mapper.ReservationIdMapper;
+import com.codesquad.airbnb.repository.mapper.RoomMapper;
+import com.codesquad.airbnb.utils.DayCalculator;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -12,7 +15,6 @@ import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -27,10 +29,10 @@ public class RoomDao {
         this.namedJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
     }
 
-    public List<RoomResponse> findByCondition(int offset, int limit,
-                                              int adults, int children, int infants,
-                                              String checkIn, String checkOut,
-                                              int minPrice, int maxPrice) {
+    public List<RoomInfo> findByCondition(int offset, int limit,
+                                          int adults, int children, int infants,
+                                          String checkIn, String checkOut,
+                                          int minPrice, int maxPrice) {
         int totalGuest = adults + children + infants;
 
         String roomsSql = "SELECT id, title, thumbnail, super_host, address, location, accommodates, " +
@@ -58,12 +60,38 @@ public class RoomDao {
                 .addValue("offset", offset);
 
         List<Room> rooms = namedJdbcTemplate.query(roomsSql, parameters, roomMapper);
-        return rooms.stream().map(room -> new RoomResponse(room, checkIn, checkOut)).collect(Collectors.toList());
+        return rooms.stream().map(room -> new RoomInfo(room, checkIn, checkOut)).collect(Collectors.toList());
     }
 
-    public Long addReservation(Long roomId, ReservationForm reservationForm) {
-        // todo
-        // user_id 작업하기
+    public List<Integer> findPriceByCondition(int adults, int children, int infants,
+                                              String checkIn, String checkOut,
+                                              int minPrice, int maxPrice) {
+        int totalGuest = adults + children + infants;
+
+        String roomsSql = "SELECT price , super_host " +
+                "FROM room " +
+                "WHERE id NOT IN ( SELECT DISTINCT (r.room_id) " +
+                "FROM reservation_date rd LEFT JOIN reservation r ON rd.reservation_id = r.id " +
+                "WHERE rd.reservation_date BETWEEN :checkIn AND :checkOut) " +
+                "AND room.accommodates >= :totalGuest " +
+                "AND room.price >= :minPrice ";
+
+        SqlParameterSource parameters = new MapSqlParameterSource()
+                .addValue("totalGuest", totalGuest)
+                .addValue("minPrice", minPrice)
+                .addValue("maxPrice", maxPrice)
+                .addValue("checkIn", checkIn)
+                .addValue("checkOut", checkOut);
+
+        if (maxPrice != 0) {
+            roomsSql += "and price <= :maxPrice ";
+        }
+
+        return namedJdbcTemplate.query(roomsSql, parameters, new PriceMapper());
+    }
+
+    public Long addReservation(Long roomId, Long userId, ReservationRequest reservationForm) {
+
         String sql = "INSERT INTO reservation (adult, child, infant, user_id, room_id) " +
                 "VALUES (:adult, :child, :infant, :userId, :roomId)";
 
@@ -71,7 +99,7 @@ public class RoomDao {
                 .addValue("adult", reservationForm.getAdults())
                 .addValue("child", reservationForm.getChildren())
                 .addValue("infant", reservationForm.getInfants())
-                .addValue("userId", 1L)
+                .addValue("userId", userId)
                 .addValue("roomId", roomId);
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -90,4 +118,24 @@ public class RoomDao {
         namedJdbcTemplate.update(sql, parameters);
     }
 
+    public List<Long> findReservation(Long roomId, LocalDate checkIn, LocalDate checkOut) {
+        String findSql = "SELECT DISTINCT (r.id) From reservation r INNER JOIN reservation_date rd " +
+                "ON r.room_id = :roomId " +
+                "AND rd.reservation_date " +
+                "BETWEEN :checkIn AND :checkOut";
+
+        SqlParameterSource parameters = new MapSqlParameterSource()
+                .addValue("roomId", roomId)
+                .addValue("checkIn", checkIn)
+                .addValue("checkOut", checkOut);
+
+        return namedJdbcTemplate.query(findSql, parameters, new ReservationIdMapper());
+    }
+
+    public RoomPrice findRoomByRoomId(Long id) {
+        String findSql = "SELECT r.price, r.cleaning_fee, r.super_host FROM room r WHERE r.id = :id";
+        SqlParameterSource parameters = new MapSqlParameterSource("id", id);
+
+        return namedJdbcTemplate.queryForObject(findSql, parameters, new RoomPriceMapper());
+    }
 }
